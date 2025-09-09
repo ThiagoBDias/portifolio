@@ -8,9 +8,53 @@ const latestPosts = posts.slice(0, 3); // Show only 3 most recent posts
 
 const projects = await getAllPublishedProjects();
 const featuredProjects = projects.slice(0, 3); // Show only 3 most recent projects
+
+// Dados da formação (você pode substituir por dados reais ou buscar de uma API/DB)
+const formacao = [
+  {
+    titulo: "Ciência da Computação",
+    instituicao: "Universidade Federal de Alagoas",
+    periodo: "2020 - 2024",
+    descricao: "Bacharelado em Ciência da Computação com foco em desenvolvimento web e sistemas distribuídos."
+  },
+  {
+    titulo: "Tecnólogo em Análise e Desenvolvimento de Sistemas",
+    instituicao: "Instituto Federal de Alagoas",
+    periodo: "2017 - 2019",
+    descricao: "Formação técnica com ênfase em desenvolvimento de software e banco de dados."
+  }
+];
+
+// Dados das certificações (você pode substituir por dados reais)
+const certificacoes = [
+  {
+    nome: "AWS Certified Cloud Practitioner",
+    emissor: "Amazon Web Services",
+    ano: "2023",
+    descricao: "Fundamentos em serviços de nuvem da AWS, incluindo arquitetura, segurança e modelos de preços."
+  },
+  {
+    nome: "Meta Front-End Developer Professional Certificate",
+    emissor: "Coursera",
+    ano: "2022",
+    descricao: "Desenvolvimento front-end avançado utilizando React, HTML, CSS e JavaScript."
+  },
+  {
+    nome: "Docker Certified Associate",
+    emissor: "Docker Inc.",
+    ano: "2022",
+    descricao: "Conhecimentos em conteinerização, orquestração e implantação de aplicações com Docker."
+  },
+  {
+    nome: "JavaScript Algorithms and Data Structures",
+    emissor: "freeCodeCamp",
+    ano: "2021",
+    descricao: "Implementação de estruturas de dados e algoritmos eficientes em JavaScript."
+  }
+];
 ---
 
-<Layout title="Ítalo Antonio - Desenvolvedor Full Stack">
+<Layout title="Thiago Dias - Desenvolvedor Full Stack">
 	<!-- Hero Section -->
 	<section class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 overflow-hidden">
 		<!-- Background Pattern -->
@@ -23,10 +67,10 @@ const featuredProjects = projects.slice(0, 3); // Show only 3 most recent projec
 		<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 			<div class="animate-fade-in">
 				<h1 class="text-5xl md:text-7xl font-bold mb-6">
-					Olá, eu sou <span class="bg-gradient-to-r from-primary-400 via-accent-cyan to-accent-blue bg-clip-text text-transparent">Ítalo Antonio</span>
+					Olá, eu sou <span class="bg-gradient-to-r from-primary-400 via-accent-cyan to-accent-blue bg-clip-text text-transparent">Thiago Dias</span>
 				</h1>
 				<h2 class="text-xl md:text-2xl text-gray-300 mb-8 font-light">
-					Desenvolvedor Frontend
+					Desenvolvedor Full Stack
 				</h2>
 				<p class="text-lg md:text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
 					Criando experiências digitais excepcionais com tecnologias modernas e melhores práticas de desenvolvimento.
@@ -236,6 +280,64 @@ const featuredProjects = projects.slice(0, 3); // Show only 3 most recent projec
 		</section>
 	)}
 
+	<!-- Formação Acadêmica e Profissional -->
+	<section class="py-20 bg-gradient-to-br from-gray-900 via-gray-950 to-gray-900">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="text-center mb-16">
+				<h2 class="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary-400 to-accent-cyan bg-clip-text text-transparent">
+					Formação & Certificações
+				</h2>
+				<p class="text-gray-400 text-lg max-w-2xl mx-auto">
+					Minha jornada educacional e certificações profissionais
+				</p>
+			</div>
+			
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+				<!-- Formação Acadêmica -->
+				<div class="bg-gray-800/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/50 hover:border-primary-500/30 transition-all duration-300">
+					<h3 class="text-2xl font-semibold text-white mb-6 flex items-center">
+						<svg class="w-6 h-6 mr-2 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+						</svg>
+						Formação Acadêmica
+					</h3>
+					
+					<div class="space-y-8">
+						{formacao.map((item, index) => (
+							<div class={`relative pl-8 border-l-2 border-primary-500/30 ${index < formacao.length - 1 ? "pb-8" : ""}`}>
+								<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary-500"></div>
+								<h4 class="text-xl font-medium text-primary-400">{item.titulo}</h4>
+								<p class="text-gray-300 font-medium">{item.instituicao}</p>
+								<p class="text-gray-400">{item.periodo}</p>
+								<p class="mt-2 text-gray-400">{item.descricao}</p>
+							</div>
+						))}
+					</div>
+				</div>
+				
+				<!-- Certificações -->
+				<div class="bg-gray-800/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/50 hover:border-accent-cyan/30 transition-all duration-300">
+					<h3 class="text-2xl font-semibold text-white mb-6 flex items-center">
+						<svg class="w-6 h-6 mr-2 text-accent-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+						</svg>
+						Certificações & Cursos
+					</h3>
+					
+					<div class="space-y-6">
+						{certificacoes.map((cert) => (
+							<div class="group p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-all duration-300">
+								<h4 class="text-accent-cyan font-medium">{cert.nome}</h4>
+								<p class="text-gray-300 text-sm">{cert.emissor} | {cert.ano}</p>
+								<p class="mt-2 text-gray-400 text-sm">{cert.descricao}</p>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<!-- CTA Section -->
 	<section class="py-20 bg-gradient-to-r from-primary-900/20 to-accent-blue/20">
 		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -257,420 +359,47 @@ const featuredProjects = projects.slice(0, 3); // Show only 3 most recent projec
 		</div>
 	</section>
 </Layout>
-										</div>
-									)}
-								</div>
-							</div>
-						</article>
-					))}
-				</div>
-				<div class="view-all">
-					<a href="/blog" class="btn btn-outline">Ver Todos os Posts</a>
-				</div>
-			</section>
-		)}
-
-		<!-- Featured Projects Section -->
-		{featuredProjects.length > 0 && (
-			<section class="featured-projects">
-				<h2>Projetos em Destaque</h2>
-				<div class="projects-grid">
-					{featuredProjects.map((project) => (
-						<article class="project-card">
-							{project.image && (
-								<div class="project-image">
-									<img src={project.image} alt={project.title} loading="lazy" />
-								</div>
-							)}
-							<div class="project-content">
-								<h3>{project.title}</h3>
-								<p>{project.description}</p>
-								{project.technologies && project.technologies.length > 0 && (
-									<div class="technologies">
-										{project.technologies.slice(0, 3).map((tech) => (
-											<span class="tech-tag">{tech}</span>
-										))}
-									</div>
-								)}
-								<div class="project-links">
-									{project.demoLink && (
-										<a href={project.demoLink} class="btn btn-small btn-primary" target="_blank" rel="noopener noreferrer">
-											Demo
-										</a>
-									)}
-									{project.githubLink && (
-										<a href={project.githubLink} class="btn btn-small btn-secondary" target="_blank" rel="noopener noreferrer">
-											GitHub
-										</a>
-									)}
-								</div>
-							</div>
-						</article>
-					))}
-				</div>
-				<div class="view-all">
-					<a href="/projetos" class="btn btn-outline">Ver Todos os Projetos</a>
-				</div>
-			</section>
-		)}
-
-		<!-- Skills Section -->
-		<section class="skills">
-			<h2>Tecnologias que Uso</h2>
-			<div class="skills-grid">
-				<div class="skill-item">
-					<h3>Frontend</h3>
-					<p>React, Vue.js, Astro, TypeScript, HTML5, CSS3</p>
-				</div>
-				<div class="skill-item">
-					<h3>Backend</h3>
-					<p>Node.js, Python, Supabase, PostgreSQL, MongoDB</p>
-				</div>
-				<div class="skill-item">
-					<h3>DevOps</h3>
-					<p>Docker, GitHub Actions, Vercel, AWS</p>
-				</div>
-			</div>
-		</section>
-	</div>
-</Layout>
 
 <style>
-	/* Hero Section */
-	.hero {
-		text-align: center;
-		padding: 4rem 0 6rem;
+	@keyframes bounce-subtle {
+		0%, 100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-10px);
+		}
 	}
 
-	.hero h1 {
-		font-size: 3.5rem;
-		margin-bottom: 1rem;
-		font-weight: 800;
+	@keyframes fade-in {
+		0% {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
-	.hero h2 {
-		font-size: 1.8rem;
-		margin-bottom: 1.5rem;
-		color: rgba(255, 255, 255, 0.8);
-		font-weight: 400;
+	.animate-bounce-subtle {
+		animation: bounce-subtle 6s ease-in-out infinite;
 	}
 
-	.hero p {
-		font-size: 1.2rem;
-		margin-bottom: 2.5rem;
-		color: rgba(255, 255, 255, 0.7);
-		max-width: 600px;
-		margin-left: auto;
-		margin-right: auto;
+	.animate-fade-in {
+		animation: fade-in 1s ease-out forwards;
 	}
 
-	.highlight {
-		background: linear-gradient(45deg, #af40ff, #5b42f3, #00ddeb);
-		background-size: 400% 400%;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-		animation: gradient 3s ease infinite;
-	}
-
-	.hero-buttons {
-		display: flex;
-		gap: 1rem;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-
-	/* Buttons */
-	.btn {
-		display: inline-block;
-		padding: 1rem 2rem;
-		border-radius: 8px;
-		text-decoration: none;
-		font-weight: 600;
-		transition: all 0.3s ease;
-		border: 2px solid transparent;
-	}
-
-	.btn-primary {
-		background: linear-gradient(45deg, #af40ff, #5b42f3);
-		color: white;
-	}
-
-	.btn-primary:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 10px 30px rgba(175, 64, 255, 0.3);
-	}
-
-	.btn-secondary {
-		background: rgba(255, 255, 255, 0.1);
-		color: white;
-		border: 2px solid rgba(255, 255, 255, 0.2);
-	}
-
-	.btn-secondary:hover {
-		background: rgba(255, 255, 255, 0.2);
-		transform: translateY(-2px);
-	}
-
-	.btn-outline {
-		background: transparent;
-		color: #af40ff;
-		border: 2px solid #af40ff;
-	}
-
-	.btn-outline:hover {
-		background: #af40ff;
-		color: white;
-	}
-
-	/* Latest Posts Section */
-	.latest-posts {
-		margin: 6rem 0;
-	}
-
-	.latest-posts h2 {
-		text-align: center;
-		margin-bottom: 3rem;
-		font-size: 2.5rem;
-	}
-
-	.posts-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 2rem;
-		margin-bottom: 3rem;
-	}
-
-	.post-card {
-		background: rgba(255, 255, 255, 0.05);
-		border-radius: 12px;
-		overflow: hidden;
-		transition: transform 0.3s ease, box-shadow 0.3s ease;
-		border: 1px solid rgba(255, 255, 255, 0.1);
-	}
-
-	.post-card:hover {
-		transform: translateY(-5px);
-		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-	}
-
-	.post-image {
-		width: 100%;
-		height: 200px;
-		overflow: hidden;
-	}
-
-	.post-image img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		transition: transform 0.3s ease;
-	}
-
-	.post-card:hover .post-image img {
-		transform: scale(1.05);
-	}
-
-	.post-content {
-		padding: 1.5rem;
-	}
-
-	.post-content h3 {
-		margin-bottom: 1rem;
-		font-size: 1.3rem;
-	}
-
-	.post-content h3 a {
-		color: white;
-		text-decoration: none;
-		transition: color 0.3s ease;
-	}
-
-	.post-content h3 a:hover {
-		color: #af40ff;
-	}
-
-	.post-content p {
-		color: rgba(255, 255, 255, 0.7);
-		margin-bottom: 1rem;
-		line-height: 1.6;
-	}
-
-	.tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-	}
-
-	.tag {
-		background: rgba(175, 64, 255, 0.2);
-		color: #af40ff;
-		padding: 0.25rem 0.75rem;
-		border-radius: 15px;
-		font-size: 0.85rem;
-		font-weight: 500;
-	}
-
-	.view-all {
-		text-align: center;
-	}
-
-	/* Featured Projects Section */
-	.featured-projects {
-		margin: 6rem 0;
-	}
-
-	.featured-projects h2 {
-		text-align: center;
-		margin-bottom: 3rem;
-		font-size: 2.5rem;
-	}
-
-	.projects-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-		gap: 2rem;
-		margin-bottom: 3rem;
-	}
-
-	.project-card {
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		border-radius: 16px;
-		overflow: hidden;
-		transition: transform 0.3s ease, box-shadow 0.3s ease;
-	}
-
-	.project-card:hover {
-		transform: translateY(-5px);
-		box-shadow: 0 20px 40px rgba(175, 64, 255, 0.1);
-	}
-
-	.project-image {
-		width: 100%;
-		height: 200px;
-		overflow: hidden;
-	}
-
-	.project-image img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		transition: transform 0.3s ease;
-	}
-
-	.project-card:hover .project-image img {
-		transform: scale(1.05);
-	}
-
-	.project-content {
-		padding: 1.5rem;
-	}
-
-	.project-content h3 {
-		margin-bottom: 1rem;
-		font-size: 1.3rem;
-		color: white;
-	}
-
-	.project-content p {
-		color: rgba(255, 255, 255, 0.7);
-		margin-bottom: 1rem;
-		line-height: 1.6;
+	.line-clamp-2 {
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
 	}
 
-	.technologies {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		margin-bottom: 1.5rem;
-	}
-
-	.tech-tag {
-		background: rgba(175, 64, 255, 0.2);
-		color: #af40ff;
-		padding: 0.25rem 0.75rem;
-		border-radius: 15px;
-		font-size: 0.8rem;
-		font-weight: 500;
-	}
-
-	.project-links {
-		display: flex;
-		gap: 1rem;
-	}
-
-	.btn-small {
-		padding: 0.5rem 1rem;
-		font-size: 0.85rem;
-	}
-
-	/* Skills Section */
-	.skills {
-		margin: 6rem 0;
-	}
-
-	.skills h2 {
-		text-align: center;
-		margin-bottom: 3rem;
-		font-size: 2.5rem;
-	}
-
-	.skills-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 2rem;
-	}
-
-	.skill-item {
-		text-align: center;
-		padding: 2rem;
-		background: rgba(255, 255, 255, 0.05);
-		border-radius: 12px;
-		border: 1px solid rgba(255, 255, 255, 0.1);
-	}
-
-	.skill-item h3 {
-		margin-bottom: 1rem;
-		color: #af40ff;
-		font-size: 1.3rem;
-	}
-
-	.skill-item p {
-		color: rgba(255, 255, 255, 0.7);
-		line-height: 1.6;
-	}
-
-	/* Responsive */
-	@media (max-width: 768px) {
-		.hero h1 {
-			font-size: 2.5rem;
-		}
-
-		.hero h2 {
-			font-size: 1.4rem;
-		}
-
-		.hero p {
-			font-size: 1rem;
-		}
-
-		.hero-buttons {
-			flex-direction: column;
-			align-items: center;
-		}
-
-		.hero-buttons .btn {
-			width: 250px;
-		}
-
-		.posts-grid,
-		.projects-grid {
-			grid-template-columns: 1fr;
-		}
+	.line-clamp-3 {
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 </style>
