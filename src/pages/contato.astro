@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getAboutData } from '../lib/supabase.js';
+import ContactFAQ from '../components/ContactFAQ.astro';
 
 const aboutData = await getAboutData();
 
@@ -15,7 +16,7 @@ const defaultData = {
 const data = aboutData || defaultData;
 ---
 
-<Layout title="Contato - Ítalo Antonio" description="Entre em contato com Ítalo Antonio para projetos e oportunidades de desenvolvimento">
+<Layout title="Contato - Thiago Dias" description="Entre em contato com Thiago Dias para projetos e oportunidades de desenvolvimento">
 	<!-- Hero Section -->
 	<section class="pt-32 pb-20 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
 		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -112,8 +113,8 @@ const data = aboutData || defaultData;
 								</div>
 								<div>
 									<h3 class="text-lg font-semibold text-white mb-1">Email</h3>
-									<a href="mailto:contato@italoantonio.dev" class="text-primary-400 hover:text-primary-300 transition-colors duration-200">
-										contato@italoantonio.dev
+									<a href="mailto:contato@thiagodias.dev" class="text-primary-400 hover:text-primary-300 transition-colors duration-200">
+										contato@thiagodias.dev
 									</a>
 									<p class="text-gray-400 text-sm mt-1">Resposta em até 24 horas</p>
 								</div>
@@ -142,8 +143,8 @@ const data = aboutData || defaultData;
 								</div>
 								<div>
 									<h3 class="text-lg font-semibold text-white mb-1">GitHub</h3>
-									<a href="https://github.com/italoantonio" target="_blank" rel="noopener" class="text-primary-400 hover:text-primary-300 transition-colors duration-200">
-										github.com/italoantonio
+									<a href="https://github.com/ThiagoBDias" target="_blank" rel="noopener" class="text-primary-400 hover:text-primary-300 transition-colors duration-200">
+										github.com/ThiagoBDias
 									</a>
 									<p class="text-gray-400 text-sm mt-1">Veja meus projetos open source</p>
 								</div>
@@ -302,6 +303,13 @@ const data = aboutData || defaultData;
 			<div class="cta-buttons">
 				<a href="/blog" class="btn btn-outline">Ver Meus Posts</a>
 				<a href="/sobre" class="btn btn-secondary">Sobre Mim</a>
+			</div>
+		</section>
+		
+		<!-- FAQ Section -->
+		<section class="py-20 bg-gray-900/50">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<ContactFAQ />
 			</div>
 		</section>
 	</div>

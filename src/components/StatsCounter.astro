@@ -1,0 +1,33 @@
+---
+// Componente para mostrar estatísticas e números destacados
+// Este componente pode ser usado em várias páginas para mostrar números importantes
+
+const stats = [
+  { number: '5+', label: 'Anos de Experiência' },
+  { number: '20+', label: 'Projetos Concluídos' },
+  { number: '10+', label: 'Tecnologias Dominadas' },
+  { number: '99%', label: 'Clientes Satisfeitos' }
+];
+---
+
+<div class="py-12 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      {stats.map((stat) => (
+        <div class="group hover:scale-110 transition-all duration-300 ease-in-out p-6 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 hover:border-primary-500/30">
+          <div class="relative">
+            <div class="absolute -inset-1 bg-gradient-to-r from-primary-500/20 to-accent-cyan/20 rounded-xl blur opacity-30 group-hover:opacity-100 transition duration-500"></div>
+            <div class="relative">
+              <p class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-400 to-accent-cyan bg-clip-text text-transparent">
+                {stat.number}
+              </p>
+              <p class="mt-2 text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                {stat.label}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

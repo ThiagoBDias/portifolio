@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getAllPublishedProjects, getAboutData } from '../lib/supabase.js';
+import SkillsHighlight from '../components/SkillsHighlight.astro';
 
 // Fetch all published projects
 const projects = await getAllPublishedProjects();
@@ -25,7 +26,7 @@ const mockProjects = [
 		technologies: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'Tailwind CSS'],
 		image: '/project-placeholder.jpg',
 		demoLink: 'https://demo-ecommerce.vercel.app',
-		githubLink: 'https://github.com/italoantonio/ecommerce-platform',
+		githubLink: 'https://github.com/ThiagoBDias/ecommerce-platform',
 		category: 'Full Stack'
 	},
 	{
@@ -35,7 +36,7 @@ const mockProjects = [
 		technologies: ['Vue.js', 'Firebase', 'Tailwind CSS', 'Vuex', 'PWA'],
 		image: '/project-placeholder.jpg',
 		demoLink: 'https://taskmanager-demo.vercel.app',
-		githubLink: 'https://github.com/italoantonio/task-manager',
+		githubLink: 'https://github.com/ThiagoBDias/task-manager',
 		category: 'Frontend'
 	},
 	{
@@ -45,7 +46,7 @@ const mockProjects = [
 		technologies: ['JavaScript', 'Chart.js', 'OpenWeather API', 'CSS3', 'LocalStorage'],
 		image: '/project-placeholder.jpg',
 		demoLink: 'https://weather-dashboard-demo.vercel.app',
-		githubLink: 'https://github.com/italoantonio/weather-dashboard',
+		githubLink: 'https://github.com/ThiagoBDias/weather-dashboard',
 		category: 'Frontend'
 	},
 	{
@@ -95,6 +96,13 @@ const displayProjects = projects && projects.length > 0 ? projects : mockProject
 				Uma coleção dos meus trabalhos mais recentes e desafiadores.
 				Cada projeto representa uma solução única para problemas reais.
 			</p>
+		</div>
+	</section>
+	
+	<!-- Skills Highlight Section -->
+	<section class="py-16 bg-gray-900">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<SkillsHighlight />
 		</div>
 	</section>
 
