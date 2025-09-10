@@ -1,28 +1,26 @@
-# Site Astro com Supabase
+# Portfolio Astro com Supabase
 
-Este é um site estático construído com Astro, utilizando Supabase como backend para autenticação e banco de dados.
+Este é um site de portfolio construído com Astro, utilizando Supabase como backend para gerenciamento de conteúdo.
 
 ## 🚀 Tecnologias Utilizadas
 
 - **Astro**: Framework para sites estáticos
-- **Supabase**: Backend-as-a-Service (autenticação, banco de dados)
-- **Vercel**: Plataforma de deploy
-- **Vitest**: Framework de testes
-- **GitHub Actions**: CI/CD
+- **Supabase**: Backend-as-a-Service (banco de dados)
+- **Tailwind CSS**: Framework CSS utilitário
+- **Vercel/Netlify**: Plataformas de deploy
 
 ## 📋 Pré-requisitos
 
 - Node.js >= 18.0.0
 - Conta no Supabase
-- Conta no Vercel (opcional)
 
 ## ⚙️ Configuração do Ambiente
 
 ### 1. Clonagem e Instalação
 
 ```bash
-git clone <seu-repositorio>
-cd site
+git clone https://github.com/ThiagoBDias/portifolio.git
+cd portifolio
 npm install
 ```
 
@@ -153,10 +151,19 @@ O script `check-env.js` é executado automaticamente antes do build e verifica a
 - [Documentação Supabase](https://supabase.com/docs)
 - [Guia de Deploy Vercel](https://vercel.com/docs)
 
-## 🤝 Contribuição
+## 📚 Documentação para Estudo
 
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
-3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
-4. Push para a branch (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
+Para facilitar o entendimento e desenvolvimento do projeto, foram criados guias detalhados:
+
+1. **[GUIA_DE_ESTUDO.md](./GUIA_DE_ESTUDO.md)** - Explicação completa da estrutura do projeto
+2. **[GUIA_SUPABASE.md](./GUIA_SUPABASE.md)** - Detalhes sobre integração com Supabase
+3. **[ARQUIVOS_PARA_LIMPAR.md](./ARQUIVOS_PARA_LIMPAR.md)** - Arquivos que podem ser removidos para simplificar
+
+## ⚡ Início Rápido
+
+Depois de configurar o ambiente:
+
+1. Execute `npm run dev` para iniciar o servidor de desenvolvimento
+2. Acesse `http://localhost:4321` no navegador
+3. Explore os arquivos em `src/pages` para começar a editar o conteúdo
+4. Consulte os guias para entender como personalizar seu portfólio
