@@ -1,304 +1,188 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getAllPublishedProjects, getProjectById } from '../../lib/supabase.js';
+import Button from '../../components/Button.astro';
 
 export async function getStaticPaths() {
     const projects = await getAllPublishedProjects();
 
-    return projects.map((project) => ({
+    return projects.map((project: any) => ({
         params: { id: project.id.toString() },
         props: { project },
     }));
 }
 
 const { project } = Astro.props;
+
+if (!project) {
+    return Astro.redirect('/projetos');
+}
 ---
 
 <Layout title={`${project.title} - Projetos - Ítalo Antonio`}>
-    <div class="container">
-        <article class="project-detail">
-            {project.image && (
-                <div class="project-hero">
-                    <img src={project.image} alt={project.title} />
-                </div>
-            )}
+    <!-- Page Header -->
+    <section class="pt-32 pb-12 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <!-- Category Badge -->
+                {project.category && (
+                    <span class="inline-block px-4 py-2 bg-gradient-to-r from-primary-500/20 to-accent-orange/20 text-primary-300 text-sm font-medium rounded-full border border-primary-500/30 mb-6">
+                        {project.category}
+                    </span>
+                )}
 
-            <header class="project-header">
-                <h1>{project.title}</h1>
-                <p class="project-description">{project.description}</p>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary-400 to-accent-cyan bg-clip-text text-transparent">
+                    {project.title}
+                </h1>
+                
+                <p class="text-xl text-gray-400 mb-8 leading-relaxed max-w-3xl mx-auto">
+                    {project.description}
+                </p>
 
+                <!-- Technologies -->
                 {project.technologies && project.technologies.length > 0 && (
-                    <div class="technologies">
-                        {project.technologies.map((tech) => (
-                            <span class="tech-tag">{tech}</span>
+                    <div class="flex flex-wrap gap-3 justify-center mb-8">
+                        {project.technologies.map((tech: string) => (
+                            <span class="px-4 py-2 bg-gradient-to-r from-primary-500/20 to-accent-orange/20 text-primary-300 text-sm font-medium rounded-full border border-primary-500/30">
+                                {tech}
+                            </span>
                         ))}
                     </div>
                 )}
-            </header>
 
-            <div class="project-content">
-                {project.content && (
-                    <div class="project-text" set:html={project.content}></div>
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    {project.demoLink && (
+                        <Button href={project.demoLink} variant="primary" target="_blank">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                            Ver Demonstração
+                        </Button>
+                    )}
+
+                    {project.githubLink && (
+                        <Button href={project.githubLink} variant="secondary" target="_blank">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            Ver Código
+                        </Button>
+                    )}
+
+                    {project.downloadLink && (
+                        <Button href={project.downloadLink} variant="outline" target="_blank">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Download
+                        </Button>
+                    )}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Image -->
+    {project.image && (
+        <section class="py-12 bg-gray-900">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                    <img 
+                        src={project.image} 
+                        alt={project.title}
+                        class="w-full h-96 object-cover"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent"></div>
+                </div>
+            </div>
+        </section>
+    )}
+
+    <!-- Project Content -->
+    <section class="py-20 bg-gray-950">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="prose prose-lg prose-invert max-w-none">
+                {project.content ? (
+                    <div set:html={project.content}></div>
+                ) : (
+                    <div class="text-center py-12">
+                        <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <p class="text-gray-400">Detalhes do projeto em breve.</p>
+                    </div>
                 )}
             </div>
+        </div>
+    </section>
 
-            <div class="project-links">
-                {project.demoLink && (
-                    <a href={project.demoLink} class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
-                            <path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
-                        </svg>
-                        Ver Demo
-                    </a>
-                )}
-
-                {project.githubLink && (
-                    <a href={project.githubLink} class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                        </svg>
-                        Ver no GitHub
-                    </a>
-                )}
-
-                {project.downloadLink && (
-                    <a href={project.downloadLink} class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                        </svg>
-                        Download
-                    </a>
-                )}
-            </div>
-
-            <div class="back-link">
-                <a href="/projetos" class="btn btn-ghost">
-                    ← Voltar para Projetos
-                </a>
-            </div>
-        </article>
-    </div>
+    <!-- Back Navigation -->
+    <section class="py-12 bg-gray-900 border-t border-gray-700">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <Button href="/projetos" variant="secondary">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Voltar aos Projetos
+            </Button>
+        </div>
+    </section>
 </Layout>
 
 <style>
-    .project-detail {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 2rem 1rem;
+    /* Custom prose styles for project content */
+    .prose {
+        color: #e5e7eb;
     }
 
-    .project-hero {
-        margin-bottom: 2rem;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .project-hero img {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-
-    .project-header {
-        margin-bottom: 2rem;
-        text-align: center;
-    }
-
-    .project-header h1 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
+    .prose h1,
+    .prose h2,
+    .prose h3,
+    .prose h4 {
         color: white;
     }
 
-    .project-description {
-        font-size: 1.2rem;
-        color: rgba(255, 255, 255, 0.8);
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
+    .prose h2 {
+        @apply text-2xl font-bold mt-8 mb-4 text-primary-400;
     }
 
-    .technologies {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        justify-content: center;
-        margin-bottom: 2rem;
+    .prose h3 {
+        @apply text-xl font-semibold mt-6 mb-3 text-primary-300;
     }
 
-    .tech-tag {
-        background: rgba(175, 64, 255, 0.2);
-        color: #af40ff;
-        padding: 0.25rem 0.75rem;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        border: 1px solid rgba(175, 64, 255, 0.3);
+    .prose p {
+        @apply mb-4 leading-relaxed;
     }
 
-    .project-content {
-        margin-bottom: 3rem;
+    .prose ul,
+    .prose ol {
+        @apply my-4 pl-6;
     }
 
-    .project-text {
-        color: rgba(255, 255, 255, 0.9);
-        line-height: 1.8;
-        font-size: 1.1rem;
+    .prose li {
+        @apply mb-2;
     }
 
-    .project-text h2 {
-        color: white;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-        font-size: 1.8rem;
+    .prose code {
+        @apply bg-gray-800 px-2 py-1 rounded text-primary-300 font-mono text-sm;
     }
 
-    .project-text h3 {
-        color: white;
-        margin-top: 1.5rem;
-        margin-bottom: 0.75rem;
-        font-size: 1.4rem;
+    .prose pre {
+        @apply bg-gray-800 p-4 rounded-lg overflow-x-auto border border-gray-700 my-6;
     }
 
-    .project-text p {
-        margin-bottom: 1rem;
+    .prose pre code {
+        @apply bg-transparent p-0;
     }
 
-    .project-text ul, .project-text ol {
-        margin-bottom: 1rem;
-        padding-left: 2rem;
+    .prose a {
+        @apply text-primary-400 hover:text-primary-300 transition-colors duration-200;
     }
 
-    .project-text li {
-        margin-bottom: 0.5rem;
-    }
-
-    .project-text code {
-        background: rgba(255, 255, 255, 0.1);
-        padding: 0.2rem 0.4rem;
-        border-radius: 4px;
-        font-family: 'Courier New', monospace;
-        font-size: 0.9em;
-    }
-
-    .project-text pre {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 1rem;
-        border-radius: 8px;
-        overflow-x: auto;
-        margin: 1rem 0;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .project-text pre code {
-        background: none;
-        padding: 0;
-    }
-
-    .project-links {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-bottom: 3rem;
-    }
-
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.75rem 1.5rem;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        border: none;
-        cursor: pointer;
-        font-size: 1rem;
-    }
-
-    .btn-primary {
-        background: linear-gradient(135deg, #af40ff, #7b2cbf);
-        color: white;
-    }
-
-    .btn-primary:hover {
-        background: linear-gradient(135deg, #7b2cbf, #5a189a);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(175, 64, 255, 0.3);
-    }
-
-    .btn-secondary {
-        background: rgba(255, 255, 255, 0.1);
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.3);
-        transform: translateY(-2px);
-    }
-
-    .btn-outline {
-        background: transparent;
-        color: #af40ff;
-        border: 1px solid #af40ff;
-    }
-
-    .btn-outline:hover {
-        background: #af40ff;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(175, 64, 255, 0.3);
-    }
-
-    .btn-ghost {
-        background: transparent;
-        color: rgba(255, 255, 255, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .btn-ghost:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: white;
-        transform: translateY(-2px);
-    }
-
-    .back-link {
-        text-align: center;
-        margin-top: 3rem;
-        padding-top: 2rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-        .project-detail {
-            padding: 1rem;
-        }
-
-        .project-header h1 {
-            font-size: 2rem;
-        }
-
-        .project-description {
-            font-size: 1rem;
-        }
-
-        .project-links {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .btn {
-            width: 100%;
-            justify-content: center;
-        }
-
-        .technologies {
-            justify-content: center;
-        }
+    .prose blockquote {
+        @apply border-l-4 border-primary-500 pl-4 italic text-gray-300 my-6;
     }
 </style>

@@ -1,0 +1,101 @@
+---
+export interface Skill {
+  name: string;
+  level: number; // 0-100
+  icon?: string;
+  description?: string;
+}
+
+export interface Props {
+  title: string;
+  skills: Skill[];
+  color?: 'primary' | 'secondary' | 'accent';
+}
+
+const { title, skills, color = 'primary' } = Astro.props;
+
+const colorClasses = {
+  primary: {
+    bg: 'from-primary-900/20 to-primary-800/20',
+    border: 'border-primary-700/30 hover:border-primary-500/50',
+    icon: 'from-primary-500 to-primary-400',
+    progress: 'from-primary-500 to-primary-400',
+    text: 'text-primary-300'
+  },
+  secondary: {
+    bg: 'from-secondary-900/20 to-secondary-800/20',
+    border: 'border-secondary-700/30 hover:border-secondary-500/50',
+    icon: 'from-secondary-500 to-secondary-400',
+    progress: 'from-secondary-500 to-secondary-400',
+    text: 'text-secondary-300'
+  },
+  accent: {
+    bg: 'from-accent-gold/20 to-accent-orange/20',
+    border: 'border-accent-gold/30 hover:border-accent-gold/50',
+    icon: 'from-accent-gold to-accent-orange',
+    progress: 'from-accent-gold to-accent-orange',
+    text: 'text-accent-gold'
+  }
+};
+
+const theme = colorClasses[color];
+---
+
+<div class={`bg-gradient-to-br ${theme.bg} p-8 rounded-xl border ${theme.border} transition-all duration-300`}>
+  <div class={`w-12 h-12 bg-gradient-to-r ${theme.icon} rounded-lg flex items-center justify-center mb-6`}>
+    <slot name="icon">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+      </svg>
+    </slot>
+  </div>
+  
+  <h3 class="text-xl font-semibold text-white mb-6">{title}</h3>
+  
+  <div class="space-y-4">
+    {skills.map((skill) => (
+      <div class="group">
+        <div class="flex justify-between items-center mb-2">
+          <span class="font-medium text-gray-200">{skill.name}</span>
+          <span class={`text-sm ${theme.text} font-medium`}>{skill.level}%</span>
+        </div>
+        
+        <div class="w-full bg-gray-700/50 rounded-full h-2 overflow-hidden">
+          <div 
+            class={`h-full bg-gradient-to-r ${theme.progress} rounded-full transition-all duration-1000 ease-out skill-bar`}
+            data-width={skill.level}
+            style={`width: 0%`}
+          ></div>
+        </div>
+        
+        {skill.description && (
+          <p class="text-gray-400 text-sm mt-1">{skill.description}</p>
+        )}
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  // Animate skill bars on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const skillBars = entry.target.querySelectorAll('.skill-bar');
+        skillBars.forEach((bar) => {
+          const htmlBar = bar as HTMLElement;
+          const width = htmlBar.getAttribute('data-width');
+          setTimeout(() => {
+            htmlBar.style.width = `${width}%`;
+          }, 100);
+        });
+      }
+    });
+  }, {
+    threshold: 0.5
+  });
+
+  document.querySelectorAll('[class*="from-primary-900/20"], [class*="from-secondary-900/20"], [class*="from-accent-gold/20"]').forEach((el) => {
+    observer.observe(el);
+  });
+</script>

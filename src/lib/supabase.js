@@ -1,5 +1,10 @@
 // Supabase configuration for Astro build process
 import { createClient } from '@supabase/supabase-js';
+import { 
+  getAllGitHubProjects, 
+  getFeaturedGitHubProjects, 
+  getGitHubProjectById 
+} from './github-integration.js';
 
 // Supabase config - These will be set as environment variables during build
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || import.meta.env.SUPABASE_URL || process.env.SUPABASE_URL || 'https://nattvkjaecceirxthizc.supabase.co';
@@ -175,8 +180,23 @@ export async function updateAboutData(data) {
     }
 }
 
-// Projects Management Functions
+// Projects Management Functions with GitHub Integration
 export async function getAllPublishedProjects() {
+    console.log('🔄 Buscando projetos de todas as fontes...');
+    
+    // 1. Primeira tentativa: GitHub (fonte principal)
+    try {
+        const githubProjects = await getAllGitHubProjects();
+        
+        if (githubProjects && githubProjects.length > 0) {
+            console.log(`✅ Encontrados ${githubProjects.length} projetos do GitHub`);
+            return githubProjects;
+        }
+    } catch (error) {
+        console.error('❌ Erro ao buscar projetos do GitHub:', error);
+    }
+    
+    // 2. Segunda tentativa: Supabase
     try {
         const { data: projects, error } = await supabase
             .from('projects')
@@ -184,31 +204,113 @@ export async function getAllPublishedProjects() {
             .eq('status', 'published')
             .order('published_at', { ascending: false });
 
-        if (error) {
-            console.error('Error fetching published projects:', error);
-            return [];
+        if (!error && projects && projects.length > 0) {
+            console.log(`✅ Encontrados ${projects.length} projetos no Supabase`);
+            return projects.map(project => ({
+                id: project.id,
+                title: project.title,
+                description: project.description,
+                image: project.image,
+                demoLink: project.demo_link,
+                githubLink: project.github_link,
+                downloadLink: project.download_link,
+                technologies: project.technologies || [],
+                category: project.category,
+                featured: project.featured || false,
+                status: project.status,
+                publishedAt: project.published_at,
+                createdAt: project.created_at
+            }));
         }
-
-        return projects.map(project => ({
-            id: project.id,
-            title: project.title,
-            description: project.description,
-            image: project.image,
-            demoLink: project.demo_link,
-            githubLink: project.github_link,
-            downloadLink: project.download_link,
-            technologies: project.technologies || [],
-            status: project.status,
-            publishedAt: project.published_at,
-            createdAt: project.created_at
-        }));
     } catch (error) {
-        console.error('Error fetching published projects:', error);
+        console.error('❌ Erro ao buscar projetos do Supabase:', error);
+    }
+
+    // 3. Terceira tentativa: Dados Mock (fallback)
+    try {
+        console.log('📝 Usando dados mock como fallback');
+        const { getAllPublishedProjectsMock } = await import('./projects-data.js');
+        return getAllPublishedProjectsMock();
+    } catch (error) {
+        console.error('❌ Erro ao carregar dados mock:', error);
+        return [];
+    }
+}
+
+export async function getFeaturedProjects(limit = 3) {
+    console.log('🌟 Buscando projetos em destaque...');
+    
+    // 1. Primeira tentativa: GitHub (fonte principal)
+    try {
+        const featuredProjects = await getFeaturedGitHubProjects(limit);
+        
+        if (featuredProjects && featuredProjects.length > 0) {
+            console.log(`✅ Encontrados ${featuredProjects.length} projetos em destaque do GitHub`);
+            return featuredProjects;
+        }
+    } catch (error) {
+        console.error('❌ Erro ao buscar projetos em destaque do GitHub:', error);
+    }
+    
+    // 2. Segunda tentativa: Supabase
+    try {
+        const { data: projects, error } = await supabase
+            .from('projects')
+            .select('*')
+            .eq('status', 'published')
+            .eq('featured', true)
+            .order('published_at', { ascending: false })
+            .limit(limit);
+
+        if (!error && projects && projects.length > 0) {
+            console.log(`✅ Encontrados ${projects.length} projetos em destaque no Supabase`);
+            return projects.map(project => ({
+                id: project.id,
+                title: project.title,
+                description: project.description,
+                image: project.image,
+                demoLink: project.demo_link,
+                githubLink: project.github_link,
+                downloadLink: project.download_link,
+                technologies: project.technologies || [],
+                category: project.category,
+                featured: project.featured || false,
+                status: project.status,
+                publishedAt: project.published_at,
+                createdAt: project.created_at
+            }));
+        }
+    } catch (error) {
+        console.error('❌ Erro ao buscar projetos em destaque do Supabase:', error);
+    }
+
+    // 3. Terceira tentativa: Dados Mock (fallback)
+    try {
+        console.log('📝 Usando dados mock como fallback para projetos em destaque');
+        const { getFeaturedProjectsMock } = await import('./projects-data.js');
+        return getFeaturedProjectsMock(limit);
+    } catch (error) {
+        console.error('❌ Erro ao carregar dados mock:', error);
         return [];
     }
 }
 
 export async function getProjectById(projectId) {
+    console.log(`🔍 Buscando projeto com ID: ${projectId}`);
+    
+    // 1. Primeira tentativa: GitHub (fonte principal)
+    try {
+        const githubProject = await getGitHubProjectById(projectId);
+        
+        if (githubProject) {
+            console.log(`✅ Projeto encontrado no GitHub: ${githubProject.title}`);
+            return githubProject;
+        }
+    } catch (error) {
+        console.error('❌ Erro ao buscar projeto no GitHub:', error);
+    }
+    
+    // 2. Segunda tentativa: Supabase
     try {
         const { data: project, error } = await supabase
             .from('projects')
@@ -216,25 +318,35 @@ export async function getProjectById(projectId) {
             .eq('id', projectId)
             .single();
 
-        if (error || !project) {
-            return null;
+        if (!error && project) {
+            console.log(`✅ Projeto encontrado no Supabase: ${project.title}`);
+            return {
+                id: project.id,
+                title: project.title,
+                description: project.description,
+                image: project.image,
+                demoLink: project.demo_link,
+                githubLink: project.github_link,
+                downloadLink: project.download_link,
+                technologies: project.technologies || [],
+                category: project.category,
+                featured: project.featured || false,
+                status: project.status,
+                publishedAt: project.published_at,
+                createdAt: project.created_at
+            };
         }
-
-        return {
-            id: project.id,
-            title: project.title,
-            description: project.description,
-            image: project.image,
-            demoLink: project.demo_link,
-            githubLink: project.github_link,
-            downloadLink: project.download_link,
-            technologies: project.technologies || [],
-            status: project.status,
-            publishedAt: project.published_at,
-            createdAt: project.created_at
-        };
     } catch (error) {
-        console.error('Error fetching project by ID:', error);
+        console.error('❌ Erro ao buscar projeto no Supabase:', error);
+    }
+
+    // 3. Terceira tentativa: Dados Mock (fallback)
+    try {
+        console.log('📝 Buscando em dados mock como fallback');
+        const { getProjectByIdMock } = await import('./projects-data.js');
+        return getProjectByIdMock(projectId);
+    } catch (error) {
+        console.error('❌ Erro ao buscar em dados mock:', error);
         return null;
     }
 }
