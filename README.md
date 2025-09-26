@@ -24,7 +24,6 @@ cd portifolio
 npm install
 ```
 
-### 2. Configuração das Variáveis de Ambiente
 
 Copie o arquivo de exemplo e configure suas credenciais:
 
