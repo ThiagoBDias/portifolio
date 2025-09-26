@@ -1,4 +1,4 @@
-# Portfolio Astro com Supabase
+# Portfolio Astro com Supabase 🌟
 
 Este é um site de portfolio construído com Astro, utilizando Supabase como backend para gerenciamento de conteúdo.
 
