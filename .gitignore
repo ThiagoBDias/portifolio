@@ -70,3 +70,4 @@ test_*.js
 diagnose_*.js
 final_test.js
 create_bucket_api.js
+test-supabase.js

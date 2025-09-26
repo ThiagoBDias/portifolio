@@ -1,0 +1,18 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "astro",
+  "installCommand": "npm install",
+  "devCommand": "npm run dev",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "build": {
+    "env": {
+      "SUPABASE_URL": "@supabase_url",
+      "SUPABASE_ANON_KEY": "@supabase_anon_key",
+      "PUBLIC_SUPABASE_URL": "@public_supabase_url",
+      "PUBLIC_SUPABASE_ANON_KEY": "@public_supabase_anon_key"
+    }
+  }
+}
