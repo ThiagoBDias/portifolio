@@ -1,0 +1,5 @@
+# Vercel ignore file
+# Força rebuild limpo
+.env
+node_modules/
+.git/
