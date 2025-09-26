@@ -131,7 +131,3 @@ export function getProjectsByCategory(category) {
     .filter(project => project.status === 'published' && project.category === category)
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 }
-
-export function getProjectByIdMock(projectId) {
-  return mockProjects.find(project => project.id === projectId) || null;
-}

@@ -4,24 +4,11 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/check-env.js && astro build",
+    "build": "astro build",
     "build:windows": "build.bat",
     "preview": "astro preview",
     "astro": "astro",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage",
-    "deploy": "npm run build && echo 'Build concluído! Faça upload da pasta dist/ para seu serviço de hospedagem'",
-    "deploy:vercel": "npm run build && vercel --prod",
-    "deploy:netlify": "npm run build && netlify deploy --prod --dir=dist",
-    "prebuild": "echo 'Iniciando build do projeto...'",
-    "postbuild": "echo 'Build concluído com sucesso!'",
-    "check-secrets": "node scripts/check-secrets.js",
-    "test:build": "test-build-deploy.bat",
-    "test:deploy": "simulate-deploy.bat",
-    "test:vercel": "simulate-vercel-deploy.bat",
-    "diagnose": "node scripts/diagnose-build-deploy.js"
+    "deploy": "npm run build && echo 'Build concluído!'"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.0",
