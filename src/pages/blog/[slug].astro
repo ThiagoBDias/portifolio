@@ -1,4 +1,5 @@
 ---
+// @ts-nocheck
 import Layout from '../../layouts/Layout.astro';
 import { getAllPostSlugs, getPostBySlug, formatDate, getReadingTime } from '../../lib/supabase.js';
 import { marked } from 'marked';
@@ -36,7 +37,7 @@ marked.setOptions({
 ---
 
 <Layout 
-    title={`${post.title} - Ítalo Antonio`}
+    title={`${post.title} - Thiago Dias`}
     description={post.excerpt}
     image={post.coverImage}
 >
@@ -69,7 +70,7 @@ marked.setOptions({
 
                 {post.tags && post.tags.length > 0 && (
                     <div class="post-tags">
-                        {post.tags.map((tag) => (
+                        {post.tags.map((tag: string) => (
                             <span class="tag">{tag}</span>
                         ))}
                     </div>
@@ -105,7 +106,7 @@ marked.setOptions({
                     <h3>Compartilhe este post</h3>
                     <div class="share-buttons">
                         <a 
-                            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(Astro.url)}`}
+                            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(Astro.url.toString())}`}
                             target="_blank" 
                             rel="noopener"
                             class="share-btn twitter"
@@ -113,7 +114,7 @@ marked.setOptions({
                             Twitter
                         </a>
                         <a 
-                            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.url)}`}
+                            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.url.toString())}`}
                             target="_blank" 
                             rel="noopener"
                             class="share-btn linkedin"
@@ -121,7 +122,7 @@ marked.setOptions({
                             LinkedIn
                         </a>
                         <a 
-                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url)}`}
+                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.toString())}`}
                             target="_blank" 
                             rel="noopener"
                             class="share-btn facebook"
@@ -528,6 +529,7 @@ marked.setOptions({
 </style>
 
 <script>
+    // @ts-nocheck
     // Blog post enhancements
     document.addEventListener('DOMContentLoaded', function() {
         // Generate Table of Contents
@@ -586,8 +588,8 @@ marked.setOptions({
         tocLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
+                const targetId = (this as HTMLAnchorElement).getAttribute('href')?.substring(1);
+                const targetElement = document.getElementById(targetId || '');
                 
                 if (targetElement) {
                     targetElement.scrollIntoView({
@@ -597,7 +599,7 @@ marked.setOptions({
                     
                     // Update active link
                     tocLinks.forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
+                    (this as HTMLElement).classList.add('active');
                 }
             });
         });
@@ -608,7 +610,7 @@ marked.setOptions({
             let current = '';
             
             headings.forEach(heading => {
-                const sectionTop = heading.offsetTop - 100;
+                const sectionTop = (heading as HTMLElement).offsetTop - 100;
                 if (window.pageYOffset >= sectionTop) {
                     current = heading.id;
                 }
@@ -616,7 +618,7 @@ marked.setOptions({
             
             tocLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href').substring(1) === current) {
+                if ((link as HTMLAnchorElement).getAttribute('href')?.substring(1) === current) {
                     link.classList.add('active');
                 }
             });

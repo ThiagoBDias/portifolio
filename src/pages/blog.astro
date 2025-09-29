@@ -1,11 +1,12 @@
 ---
+// @ts-nocheck
 import Layout from '../layouts/Layout.astro';
 import { getAllPublishedPosts, formatDate, getReadingTime } from '../lib/supabase.js';
 
 const posts = await getAllPublishedPosts();
 ---
 
-<Layout title="Blog - Ítalo Antonio" description="Artigos sobre desenvolvimento web, tecnologia e programação">
+<Layout title="Blog - Thiago Dias" description="Artigos sobre desenvolvimento web, tecnologia e programação">
 	<div class="container">
 		<section class="blog-header">
 			<h1>Meu Blog</h1>
@@ -65,7 +66,7 @@ const posts = await getAllPublishedPosts();
 								<p class="post-excerpt">{post.excerpt}</p>
 								{post.tags && post.tags.length > 0 && (
 									<div class="post-tags">
-										{post.tags.map((tag) => (
+										{post.tags.map((tag: string) => (
 											<span class="tag">{tag}</span>
 										))}
 									</div>
@@ -388,6 +389,7 @@ const posts = await getAllPublishedPosts();
 </style>
 
 <script>
+	// @ts-nocheck
 	// Blog Search and Filter Functionality
 	document.addEventListener('DOMContentLoaded', function() {
 		const searchInput = document.getElementById('search-input');

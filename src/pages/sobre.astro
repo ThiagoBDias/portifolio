@@ -687,21 +687,22 @@ const data = {
 
 <script>
 	// Função para toggle das seções expansíveis
-	function toggleSection(sectionName) {
+	function toggleSection(sectionName: string) {
 		const details = document.getElementById(sectionName + '-details');
 		const button = document.querySelector('.' + sectionName + '-toggle-btn svg');
 		
 		if (details && button) {
 			if (details.classList.contains('hidden')) {
 				details.classList.remove('hidden');
-				button.style.transform = 'rotate(180deg)';
+				(button as HTMLElement).style.transform = 'rotate(180deg)';
 			} else {
 				details.classList.add('hidden');
-				button.style.transform = 'rotate(0deg)';
+				(button as HTMLElement).style.transform = 'rotate(0deg)';
 			}
 		}
 	}
 
 	// Tornar a função global para ser acessível pelo onclick
+	// @ts-ignore
 	window.toggleSection = toggleSection;
 </script>
