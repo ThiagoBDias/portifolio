@@ -144,7 +144,7 @@ export async function getAboutData() {
                     github: 'https://github.com/Ganjamanbr',
                     linkedin: '',
                     twitter: '',
-                    email: 'italo.antonio@exemplo.com'
+                    email: 'thiagobatistadiasss@gmail.com'
                 }
             };
         }

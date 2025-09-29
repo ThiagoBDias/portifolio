@@ -14,9 +14,9 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
 
 // Buscar dados do painel administrativo
 const aboutData = await getAboutData();
-const defaultEmail = 'contato@exemplo.com';
-const defaultCity = 'São Paulo, SP';
-const defaultPhone = '+55 (11) 99999-9999';
+const defaultEmail = 'thiagobatistadiasss@gmail.com';
+const defaultCity = 'Patrocínio, MG';
+const defaultPhone = '+55 (34) 99999-9999';
 const contactEmail = aboutData?.socialLinks?.email || defaultEmail;
 const contactCity = aboutData?.socialLinks?.city || defaultCity;
 const contactPhone = aboutData?.socialLinks?.phone || defaultPhone;

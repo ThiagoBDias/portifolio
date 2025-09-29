@@ -49,9 +49,9 @@ const defaultData = {
 		github: 'https://github.com/seu-usuario',
 		linkedin: '',
 		twitter: '',
-		email: 'contato@exemplo.com',
-		city: 'São Paulo, SP',
-		phone: '+55 (11) 99999-9999'
+		email: 'thiagobatistadiasss@gmail.com',
+		city: 'Patrocínio, MG',
+		phone: '+55 (34) 99999-9999'
 	}
 };
 
@@ -82,7 +82,7 @@ const data = aboutData || defaultData;
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
 							</svg>
-							<span>{data.socialLinks?.city || 'São Paulo, SP'}</span>
+							<span>{data.socialLinks?.city || 'Patrocínio, MG'}</span>
 						</div>
 						{data.socialLinks?.email && (
 							<div class="flex items-center gap-2 text-primary-400">
@@ -154,7 +154,7 @@ const data = aboutData || defaultData;
 					</div>
 					<h3 class="text-xl font-semibold text-white mb-6">Frontend</h3>
 					<div class="space-y-3">
-						{(data.skills?.frontend || []).map((skill) => (
+						{(data.skills?.frontend || []).map((skill: string) => (
 							<div class="flex items-center justify-between">
 								<span class="text-gray-300">{skill}</span>
 								<div class="flex gap-1">
@@ -176,7 +176,7 @@ const data = aboutData || defaultData;
 					</div>
 					<h3 class="text-xl font-semibold text-white mb-6">Backend</h3>
 					<div class="space-y-3">
-						{(data.skills?.backend || []).map((skill) => (
+						{(data.skills?.backend || []).map((skill: string) => (
 							<div class="flex items-center justify-between">
 								<span class="text-gray-300">{skill}</span>
 								<div class="flex gap-1">
@@ -198,7 +198,7 @@ const data = aboutData || defaultData;
 					</div>
 					<h3 class="text-xl font-semibold text-white mb-6">Ferramentas</h3>
 					<div class="space-y-3">
-						{(data.skills?.tools || []).map((skill) => (
+						{(data.skills?.tools || []).map((skill: string) => (
 							<div class="flex items-center justify-between">
 								<span class="text-gray-300">{skill}</span>
 								<div class="flex gap-1">
@@ -230,9 +230,9 @@ const data = aboutData || defaultData;
 				<div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 to-accent-cyan"></div>
 
 				<div class="space-y-12">
-					{(data.experience || []).map((experience, index) => {
+					{(data.experience || []).map((experience: any, index: number) => {
 						// Função para extrair ano de entrada do trabalho
-						const getStartYear = (exp) => {
+						const getStartYear = (exp: any) => {
 							// Primeiro tenta usar o campo year se existir
 							if (exp.year) return exp.year;
 							
@@ -281,7 +281,7 @@ const data = aboutData || defaultData;
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{(data.certifications || []).length > 0 ? (
-					data.certifications.map((cert) => (
+					data.certifications.map((cert: any) => (
 						<div class="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-primary-500/50 transition-all duration-300 group">
 							<div class="flex items-start gap-4">
 								<div class="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-500 to-accent-cyan rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -350,7 +350,7 @@ const data = aboutData || defaultData;
 			</div>
 
 			<div class="space-y-8">
-				{(data.education || []).map((edu, index) => (
+				{(data.education || []).map((edu: any, index: number) => (
 					<div class="bg-gradient-to-r from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
 						<div class="flex items-start gap-4">
 							<div class="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-accent-cyan to-accent-blue rounded-lg flex items-center justify-center">
@@ -429,7 +429,7 @@ const data = aboutData || defaultData;
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{(data.gallery || []).length > 0 ? (
-					data.gallery.map((item, index) => (
+					data.gallery.map((item: any, index: number) => (
 						<div class="group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 hover:border-primary-500/50 transition-all duration-300">
 							<div class="aspect-square overflow-hidden">
 								{item.image ? (

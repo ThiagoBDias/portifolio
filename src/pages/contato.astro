@@ -8,7 +8,7 @@ const aboutData = await getAboutData();
 // Dados padrão caso não haja dados no Supabase
 const defaultData = {
 	socialLinks: {
-		city: 'São Paulo, SP'
+		city: 'Patrocínio, MG'
 	}
 };
 
@@ -159,7 +159,7 @@ const data = aboutData || defaultData;
 								</div>
 								<div>
 									<h3 class="text-lg font-semibold text-white mb-1">Localização</h3>
-									<p class="text-gray-300">{data.socialLinks?.city || 'São Paulo, SP'} - Brasil</p>
+									<p class="text-gray-300">{data.socialLinks?.city || 'Patrocínio, MG'} - Brasil</p>
 									<p class="text-gray-400 text-sm mt-1">Disponível para projetos remotos</p>
 								</div>
 							</div>

@@ -118,7 +118,7 @@ VALUES (
             "github": "https://github.com/ThiagoBDias",
             "linkedin": "",
             "twitter": "",
-            "email": "contato@exemplo.com"
+            "email": "thiagobatistadiasss@gmail.com"
         }
     }'::jsonb
 )
