@@ -15,82 +15,21 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Helper functions for fetching data during build
 export async function getAllPublishedPosts() {
-    try {
-        const { data: posts, error } = await supabase
-            .from('posts')
-            .select('*')
-            .eq('status', 'published')
-            .order('published_at', { ascending: false });
-
-        if (error) {
-            console.error('Error fetching published posts:', error);
-            return [];
-        }
-
-        return posts.map(post => ({
-            id: post.id,
-            title: post.title,
-            slug: post.slug,
-            excerpt: post.excerpt,
-            contentMarkdown: post.content_markdown,
-            coverImage: post.cover_image,
-            tags: post.tags || [],
-            publishedAt: post.published_at,
-            createdAt: post.created_at
-        }));
-    } catch (error) {
-        console.error('Error fetching published posts:', error);
-        return [];
-    }
+    // Blog foi removido do portfolio, retorna array vazio
+    console.log('Blog foi removido - retornando array vazio para posts');
+    return [];
 }
 
 export async function getPostBySlug(slug) {
-    try {
-        const { data: posts, error } = await supabase
-            .from('posts')
-            .select('*')
-            .eq('slug', slug)
-            .eq('status', 'published')
-            .single();
-
-        if (error || !posts) {
-            return null;
-        }
-
-        return {
-            id: posts.id,
-            title: posts.title,
-            slug: posts.slug,
-            excerpt: posts.excerpt,
-            contentMarkdown: posts.content_markdown,
-            coverImage: posts.cover_image,
-            tags: posts.tags || [],
-            publishedAt: posts.published_at,
-            createdAt: posts.created_at
-        };
-    } catch (error) {
-        console.error('Error fetching post by slug:', error);
-        return null;
-    }
+    // Blog foi removido do portfolio, retorna null
+    console.log('Blog foi removido - retornando null para post:', slug);
+    return null;
 }
 
 export async function getAllPostSlugs() {
-    try {
-        const { data: posts, error } = await supabase
-            .from('posts')
-            .select('slug')
-            .eq('status', 'published');
-
-        if (error) {
-            console.error('Error fetching post slugs:', error);
-            return [];
-        }
-
-        return posts.map(post => post.slug).filter(Boolean);
-    } catch (error) {
-        console.error('Error fetching post slugs:', error);
-        return [];
-    }
+    // Blog foi removido do portfolio, retorna array vazio
+    console.log('Blog foi removido - retornando array vazio para slugs');
+    return [];
 }
 
 // Helper function to format dates
