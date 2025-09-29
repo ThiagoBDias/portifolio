@@ -403,105 +403,145 @@ const data = {
 		</div>
 	</section>
 
-	<!-- Certifications Section -->
+	<!-- Education & Certifications Combined Section -->
 	<section class="py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="text-center mb-16">
 				<h2 class="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary-400 to-accent-cyan bg-clip-text text-transparent">
-					Certificações
+					Formação & Certificações
 				</h2>
 				<p class="text-gray-400 text-lg max-w-2xl mx-auto">
-					Certificações e qualificações que validam minhas competências técnicas
+					Minha jornada educacional e certificações profissionais
 				</p>
 			</div>
 
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-				{(data.certifications || []).length > 0 ? (
-					data.certifications.map((cert: any) => (
-						<div class="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-primary-500/50 transition-all duration-300 group">
-							<div class="flex items-start gap-4">
-								<div class="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-500 to-accent-cyan rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+				
+				<!-- Formação Acadêmica -->
+				<div class="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-700/50">
+					<div class="p-6">
+						<div class="flex items-center justify-between mb-4">
+							<div class="flex items-center gap-4">
+								<div class="w-12 h-12 bg-gradient-to-r from-accent-cyan to-accent-blue rounded-lg flex items-center justify-center">
+									<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+									</svg>
+								</div>
+								<h3 class="text-xl font-semibold text-white">Formação Acadêmica</h3>
+							</div>
+							<button class="education-toggle-btn p-2 text-gray-400 hover:text-primary-400 transition-colors duration-200" onclick="toggleSection('education')">
+								<svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+								</svg>
+							</button>
+						</div>
+
+						<!-- Resumo sempre visível -->
+						<div class="space-y-2 mb-4">
+							<div class="flex items-center justify-between">
+								<span class="text-primary-400 font-medium">Tecnólogo em Análise e Desenvolvimento de Sistemas</span>
+								<span class="text-gray-400 text-sm">2020 - 2024</span>
+							</div>
+							<div class="flex items-center justify-between">
+								<span class="text-accent-cyan font-medium">Ensino Médio</span>
+								<span class="text-gray-400 text-sm">2017 - 2019</span>
+							</div>
+						</div>
+
+						<!-- Detalhes expansíveis -->
+						<div id="education-details" class="hidden space-y-4">
+							{(data.education || []).map((edu: any) => (
+								<div class="bg-gray-700/30 rounded-lg p-4 border-l-4 border-accent-cyan">
+									<h4 class="text-lg font-semibold text-white mb-2">{edu.course || 'Curso'}</h4>
+									<p class="text-accent-cyan mb-2 font-medium">{edu.institution || 'Instituição'}</p>
+									<p class="text-gray-400 text-sm">{edu.period || 'Período'}</p>
+									{edu.course === 'Tecnólogo em Análise e Desenvolvimento de Sistemas' && (
+										<p class="text-gray-300 text-sm mt-2">
+											Formação técnica superior com foco em desenvolvimento de software, análise de sistemas e banco de dados.
+										</p>
+									)}
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+
+				<!-- Certificações & Cursos -->
+				<div class="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-700/50">
+					<div class="p-6">
+						<div class="flex items-center justify-between mb-4">
+							<div class="flex items-center gap-4">
+								<div class="w-12 h-12 bg-gradient-to-r from-primary-500 to-accent-cyan rounded-lg flex items-center justify-center">
 									<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 									</svg>
 								</div>
-								<div class="flex-grow">
-									<h3 class="text-xl font-semibold text-white mb-2 group-hover:text-primary-400 transition-colors duration-300">
-										{cert.name || cert.title || 'Certificação'}
-									</h3>
-									<p class="text-primary-400 mb-2 font-medium">
-										{cert.issuer || 'Emissor'}
-									</p>
-									{(cert.date || cert.year) && (
-										<p class="text-gray-400 text-sm mb-2">
-											{cert.date || cert.year}
-										</p>
-									)}
-									{(cert.description || cert.desc) && (
-										<p class="text-gray-400 text-sm leading-relaxed">
-											{cert.description || cert.desc}
-										</p>
-									)}
-									{cert.image && (
-										<div class="mt-4">
-											<img
-												src={cert.image}
-												alt={`Certificado ${cert.name || cert.title}`}
-												class="w-full h-48 object-contain rounded-lg border border-gray-600/50 bg-gray-800/30 p-2"
-												loading="lazy"
-											/>
-										</div>
-									)}
-								</div>
+								<h3 class="text-xl font-semibold text-white">Certificações & Cursos</h3>
 							</div>
-						</div>
-					))
-				) : (
-					<div class="col-span-full text-center py-12">
-						<div class="w-16 h-16 bg-gradient-to-r from-primary-500/20 to-accent-cyan/20 rounded-full flex items-center justify-center mx-auto mb-4">
-							<svg class="w-8 h-8 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-							</svg>
-						</div>
-						<h3 class="text-xl font-semibold text-white mb-2">Certificações em Breve</h3>
-						<p class="text-gray-400">
-							Configure suas certificações através do painel administrativo (/admin)
-						</p>
-					</div>
-				)}
-			</div>
-		</div>
-	</section>
-
-	<!-- Education Section -->
-	<section class="py-20 bg-gray-900/50">
-		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="text-center mb-16">
-				<h2 class="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary-400 to-accent-cyan bg-clip-text text-transparent">
-					Formação Acadêmica
-				</h2>
-				<p class="text-gray-400 text-lg">
-					Minha formação e qualificações educacionais
-				</p>
-			</div>
-
-			<div class="space-y-8">
-				{(data.education || []).map((edu: any, index: number) => (
-					<div class="bg-gradient-to-r from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
-						<div class="flex items-start gap-4">
-							<div class="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-accent-cyan to-accent-blue rounded-lg flex items-center justify-center">
-								<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+							<button class="certifications-toggle-btn p-2 text-gray-400 hover:text-primary-400 transition-colors duration-200" onclick="toggleSection('certifications')">
+								<svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 								</svg>
+							</button>
+						</div>
+
+						<!-- Resumo sempre visível -->
+						<div class="grid grid-cols-2 gap-4 mb-4">
+							<div class="text-center p-3 bg-primary-900/20 rounded-lg border border-primary-500/20">
+								<div class="text-2xl font-bold text-primary-400">17</div>
+								<div class="text-sm text-gray-400">Certificações</div>
 							</div>
-							<div class="flex-grow">
-								<h3 class="text-xl font-semibold text-white mb-2">{edu.course || 'Curso'}</h3>
-								<p class="text-accent-cyan mb-2 font-medium">{edu.institution || 'Instituição'}</p>
-								<p class="text-gray-400">{edu.period || 'Período'}</p>
+							<div class="text-center p-3 bg-accent-orange/20 rounded-lg border border-accent-orange/20">
+								<div class="text-2xl font-bold text-accent-orange">2025</div>
+								<div class="text-sm text-gray-400">Mais Recentes</div>
+							</div>
+						</div>
+
+						<!-- Principais certificações sempre visíveis -->
+						<div class="space-y-2 mb-4">
+							<div class="flex items-center gap-2">
+								<span class="w-2 h-2 bg-primary-400 rounded-full"></span>
+								<span class="text-gray-300 text-sm">Contribuindo em um Projeto Open Source no GitHub</span>
+								<span class="text-primary-400 text-xs">DIO | 2025</span>
+							</div>
+							<div class="flex items-center gap-2">
+								<span class="w-2 h-2 bg-accent-orange rounded-full"></span>
+								<span class="text-gray-300 text-sm">Introdução a Versionamento com Git & GitHub</span>
+								<span class="text-accent-orange text-xs">DIO | 2025</span>
+							</div>
+							<div class="flex items-center gap-2">
+								<span class="w-2 h-2 bg-accent-blue rounded-full"></span>
+								<span class="text-gray-300 text-sm">Conhecer criar com o Power BI</span>
+								<span class="text-accent-blue text-xs">Microsoft Azure | 2025</span>
+							</div>
+							<div class="flex items-center gap-2">
+								<span class="w-2 h-2 bg-accent-cyan rounded-full"></span>
+								<span class="text-gray-300 text-sm">Introdução aos conceitos de IA generativa</span>
+								<span class="text-accent-cyan text-xs">Microsoft Azure | 2025</span>
+							</div>
+						</div>
+
+						<!-- Detalhes expansíveis -->
+						<div id="certifications-details" class="hidden">
+							<div class="max-h-96 overflow-y-auto space-y-3">
+								{(data.certifications || []).map((cert: any, index: number) => (
+									<div class="bg-gray-700/30 rounded-lg p-3 border-l-4 border-primary-500/50">
+										<h4 class="text-sm font-semibold text-white mb-1">{cert.name || cert.title || 'Certificação'}</h4>
+										<div class="flex items-center justify-between mb-1">
+											<span class="text-primary-400 text-xs font-medium">{cert.issuer || 'Emissor'}</span>
+											<span class="text-gray-400 text-xs">{cert.date || cert.year}</span>
+										</div>
+										{(cert.description || cert.desc) && (
+											<p class="text-gray-400 text-xs leading-relaxed">
+												{(cert.description || cert.desc).substring(0, 100)}...
+											</p>
+										)}
+									</div>
+								))}
 							</div>
 						</div>
 					</div>
-				))}
+				</div>
 			</div>
 		</div>
 	</section>
@@ -644,3 +684,24 @@ const data = {
 		</div>
 	</section>
 </Layout>
+
+<script>
+	// Função para toggle das seções expansíveis
+	function toggleSection(sectionName) {
+		const details = document.getElementById(sectionName + '-details');
+		const button = document.querySelector('.' + sectionName + '-toggle-btn svg');
+		
+		if (details && button) {
+			if (details.classList.contains('hidden')) {
+				details.classList.remove('hidden');
+				button.style.transform = 'rotate(180deg)';
+			} else {
+				details.classList.add('hidden');
+				button.style.transform = 'rotate(0deg)';
+			}
+		}
+	}
+
+	// Tornar a função global para ser acessível pelo onclick
+	window.toggleSection = toggleSection;
+</script>
