@@ -1,10 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import RealtimeTechSection from '../components/RealtimeTechSection.astro';
-import { getFeaturedProjects } from '../lib/supabase.js';
+import { getFeaturedGitHubProjects } from '../lib/github-integration.js';
 
-// Fetch featured projects for homepage
-const featuredProjects = await getFeaturedProjects(3); // Get 3 featured projects
+// Buscar projetos em destaque diretamente do GitHub
+let featuredProjects = [];
+try {
+  console.log('🌟 Buscando projetos em destaque do GitHub...');
+  featuredProjects = await getFeaturedGitHubProjects(3); // 3 projetos em destaque
+  console.log(`✅ Encontrados ${featuredProjects.length} projetos em destaque`);
+} catch (error) {
+  console.error('❌ Erro ao buscar projetos em destaque:', error);
+  featuredProjects = [];
+}
 
 // Dados da formação (você pode substituir por dados reais ou buscar de uma API/DB)
 const formacao = [

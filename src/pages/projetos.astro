@@ -1,22 +1,28 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getAllPublishedProjects, getAboutData } from '../lib/supabase.js';
+import { getAllGitHubProjects } from '../lib/github-integration.js';
 import ProjectCard from '../components/ProjectCard.astro';
 import RealtimeTechSection from '../components/RealtimeTechSection.astro';
 
-// Fetch all published projects (will fallback to mock data if Supabase fails)
-const projects = await getAllPublishedProjects();
-const aboutData = await getAboutData();
+// Buscar projetos diretamente do GitHub
+let projects = [];
+try {
+  console.log('🔄 Buscando projetos do GitHub...');
+  projects = await getAllGitHubProjects();
+  console.log(`✅ Encontrados ${projects.length} projetos do GitHub`);
+} catch (error) {
+  console.error('❌ Erro ao buscar projetos do GitHub:', error);
+  projects = [];
+}
 
-// Dados padrão caso não haja dados no Supabase
+// Dados padrão
 const defaultData = {
 	socialLinks: {
 		email: 'thiagobatistadiasss@gmail.com'
 	}
 };
 
-// Usar dados do Supabase ou dados padrão
-const data = aboutData || defaultData;
+const data = defaultData;
 
 // Organize projects by category
 const categories = ['Todos', 'Full Stack', 'Frontend', 'Backend', 'Mobile'];
