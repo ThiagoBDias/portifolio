@@ -1,0 +1,318 @@
+---
+// Componente de Analytics avançado para Portfolio
+// Suporta Google Analytics 4, eventos customizados e monitoramento
+
+export interface Props {
+  googleAnalyticsId?: string;
+  enableDebug?: boolean;
+}
+
+const { 
+  googleAnalyticsId = "G-XXXXXXXXXX", // SUBSTITUA PELO SEU ID REAL
+  enableDebug = false 
+} = Astro.props;
+
+const isProduction = import.meta.env.PROD;
+---
+
+<!-- Google Analytics 4 -->
+{isProduction && googleAnalyticsId && (
+  <>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}></script>
+    <script define:vars={{ googleAnalyticsId, enableDebug }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      
+      gtag('config', googleAnalyticsId, {
+        page_title: document.title,
+        page_location: window.location.href,
+        debug_mode: enableDebug,
+        // Enhanced ecommerce events
+        send_page_view: true,
+        // Custom parameters for portfolio
+        custom_map: {
+          'dimension1': 'page_category',
+          'dimension2': 'project_type',
+          'dimension3': 'contact_method'
+        }
+      });
+
+      // Enhanced Analytics Functions
+      window.trackEvent = function(eventName, parameters = {}) {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', eventName, {
+            event_category: parameters.category || 'Portfolio',
+            event_label: parameters.label || '',
+            value: parameters.value || 0,
+            custom_parameters: parameters.custom || {},
+            ...parameters
+          });
+          
+          if (enableDebug) {
+            console.log('Analytics Event:', eventName, parameters);
+          }
+        }
+      };
+
+      // Track page category based on URL
+      window.trackPageCategory = function() {
+        const path = window.location.pathname;
+        let category = 'home';
+        
+        if (path.includes('/sobre')) category = 'about';
+        else if (path.includes('/projetos')) category = 'projects';
+        else if (path.includes('/contato')) category = 'contact';
+        else if (path.includes('/blog')) category = 'blog';
+        
+        gtag('event', 'page_view', {
+          page_category: category,
+          page_path: path
+        });
+      };
+
+      // Auto track page category on load
+      window.trackPageCategory();
+    </script>
+  </>
+)}
+
+<!-- Performance Monitoring Script -->
+<script>
+  // Core Web Vitals Tracking
+  function trackWebVitals() {
+    if ('PerformanceObserver' in window) {
+      // Largest Contentful Paint (LCP)
+      new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        const lastEntry = entries[entries.length - 1];
+        
+        if (window.trackEvent) {
+          window.trackEvent('web_vital', {
+            category: 'Performance',
+            label: 'LCP',
+            value: Math.round(lastEntry.startTime),
+            metric_name: 'largest_contentful_paint',
+            metric_value: lastEntry.startTime
+          });
+        }
+      }).observe({ entryTypes: ['largest-contentful-paint'] });
+
+      // First Input Delay (FID)
+      new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        entries.forEach((entry) => {
+          if (window.trackEvent) {
+            window.trackEvent('web_vital', {
+              category: 'Performance', 
+              label: 'FID',
+              value: Math.round(entry.processingStart - entry.startTime),
+              metric_name: 'first_input_delay',
+              metric_value: entry.processingStart - entry.startTime
+            });
+          }
+        });
+      }).observe({ entryTypes: ['first-input'] });
+
+      // Cumulative Layout Shift (CLS)
+      let clsValue = 0;
+      new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          if (!entry.hadRecentInput) {
+            clsValue += entry.value;
+          }
+        }
+        
+        if (window.trackEvent) {
+          window.trackEvent('web_vital', {
+            category: 'Performance',
+            label: 'CLS', 
+            value: Math.round(clsValue * 1000),
+            metric_name: 'cumulative_layout_shift',
+            metric_value: clsValue
+          });
+        }
+      }).observe({ entryTypes: ['layout-shift'] });
+    }
+  }
+
+  // Track page load performance
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const navigation = performance.getEntriesByType('navigation')[0];
+      
+      if (window.trackEvent && navigation) {
+        window.trackEvent('page_load_time', {
+          category: 'Performance',
+          value: Math.round(navigation.loadEventEnd - navigation.fetchStart),
+          dom_load_time: Math.round(navigation.domContentLoadedEventEnd - navigation.fetchStart),
+          page_load_time: Math.round(navigation.loadEventEnd - navigation.fetchStart)
+        });
+      }
+      
+      // Track Web Vitals
+      trackWebVitals();
+    }, 1000);
+  });
+
+  // Portfolio-specific event tracking
+  document.addEventListener('DOMContentLoaded', () => {
+    // Track project clicks
+    document.querySelectorAll('[data-project-id]').forEach(element => {
+      element.addEventListener('click', (e) => {
+        const projectId = e.currentTarget.getAttribute('data-project-id');
+        const projectName = e.currentTarget.getAttribute('data-project-name') || 'Unknown';
+        
+        if (window.trackEvent) {
+          window.trackEvent('project_click', {
+            category: 'Projects',
+            label: projectName,
+            project_id: projectId,
+            project_name: projectName
+          });
+        }
+      });
+    });
+
+    // Track social media clicks
+    document.querySelectorAll('[data-social]').forEach(element => {
+      element.addEventListener('click', (e) => {
+        const platform = e.currentTarget.getAttribute('data-social');
+        
+        if (window.trackEvent) {
+          window.trackEvent('social_click', {
+            category: 'Social',
+            label: platform,
+            social_platform: platform
+          });
+        }
+      });
+    });
+
+    // Track contact form interactions
+    const contactForm = document.querySelector('[data-contact-form]');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        if (window.trackEvent) {
+          window.trackEvent('form_submit', {
+            category: 'Contact',
+            label: 'Contact Form',
+            form_type: 'contact'
+          });
+        }
+      });
+    }
+
+    // Track CV download
+    document.querySelectorAll('[data-cv-download]').forEach(element => {
+      element.addEventListener('click', (e) => {
+        if (window.trackEvent) {
+          window.trackEvent('cv_download', {
+            category: 'Downloads',
+            label: 'CV PDF',
+            download_type: 'cv'
+          });
+        }
+      });
+    });
+
+    // Track scroll depth
+    let maxScrollDepth = 0;
+    let scrollTimeout;
+    
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const scrollPercent = Math.round(
+          (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+        );
+        
+        if (scrollPercent > maxScrollDepth && scrollPercent % 25 === 0) {
+          maxScrollDepth = scrollPercent;
+          
+          if (window.trackEvent) {
+            window.trackEvent('scroll_depth', {
+              category: 'Engagement',
+              label: `${scrollPercent}%`,
+              value: scrollPercent,
+              scroll_depth: scrollPercent
+            });
+          }
+        }
+      }, 300);
+    });
+
+    // Track time on page
+    const startTime = Date.now();
+    
+    // Track before page unload
+    window.addEventListener('beforeunload', () => {
+      const timeOnPage = Math.round((Date.now() - startTime) / 1000);
+      
+      if (window.trackEvent && timeOnPage > 10) { // Only track if more than 10 seconds
+        window.trackEvent('time_on_page', {
+          category: 'Engagement',
+          label: window.location.pathname,
+          value: timeOnPage,
+          time_on_page: timeOnPage
+        });
+      }
+    });
+  });
+
+  // Error tracking
+  window.addEventListener('error', (e) => {
+    if (window.trackEvent) {
+      window.trackEvent('javascript_error', {
+        category: 'Errors',
+        label: e.message,
+        error_message: e.message,
+        error_filename: e.filename,
+        error_line: e.lineno,
+        error_column: e.colno
+      });
+    }
+  });
+
+  // Unhandled promise rejection tracking
+  window.addEventListener('unhandledrejection', (e) => {
+    if (window.trackEvent) {
+      window.trackEvent('promise_rejection', {
+        category: 'Errors',
+        label: e.reason?.message || 'Unknown Promise Rejection',
+        error_message: e.reason?.message,
+        error_stack: e.reason?.stack
+      });
+    }
+  });
+</script>
+
+<!-- Hotjar or similar heatmap tool (opcional) -->
+{isProduction && (
+  <script>
+    // Hotjar Tracking Code - SUBSTITUA PELO SEU ID
+    // (function(h,o,t,j,a,r){
+    //     h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+    //     h._hjSettings={hjid:YOUR_HOTJAR_ID,hjsv:6};
+    //     a=o.getElementsByTagName('head')[0];
+    //     r=o.createElement('script');r.async=1;
+    //     r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+    //     a.appendChild(r);
+    // })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+)}
+
+<style>
+  /* Hide analytics in development */
+  :global(.analytics-debug) {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    z-index: 9999;
+  }
+</style>

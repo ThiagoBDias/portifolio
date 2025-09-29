@@ -1,0 +1,16 @@
+---
+// Health check endpoint para monitoramento de uptime
+const healthData = {
+  status: 'healthy',
+  timestamp: new Date().toISOString(),
+  version: '1.0.0',
+  environment: import.meta.env.PROD ? 'production' : 'development'
+};
+
+// Configurar headers JSON
+if (Astro.response) {
+  Astro.response.headers.set('Content-Type', 'application/json');
+  Astro.response.headers.set('Cache-Control', 'no-cache');
+}
+---
+{JSON.stringify(healthData, null, 2)}
