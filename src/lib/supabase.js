@@ -383,3 +383,100 @@ export function getImageUrl(path, bucket = 'images') {
 
     return data.publicUrl;
 }
+
+// Real-time GitHub Technologies Analysis
+export async function getRealtimeGitHubTechnologies() {
+    try {
+        console.log('🔄 Carregando tecnologias em tempo real do GitHub...');
+        
+        // Import the GitHub analyzer
+        const { GitHubTechAnalyzer } = await import('./github-tech-analyzer.js');
+        
+        // Create analyzer instance
+        const analyzer = new GitHubTechAnalyzer('ThiagoBDias');
+        
+        // Get complete tech analysis
+        const analysis = await analyzer.getCompleteTechAnalysis();
+        
+        if (!analysis || !analysis.technologies || analysis.technologies.length === 0) {
+            console.log('⚠️ Análise retornou dados vazios ou sem tecnologias, usando fallback');
+            return getStaticTechnologies();
+        }
+        
+        // Organize technologies by category
+        const techsByCategory = {
+            frontend: analysis.technologies.filter(tech => tech.category === 'frontend'),
+            backend: analysis.technologies.filter(tech => tech.category === 'backend'),
+            devops: analysis.technologies.filter(tech => tech.category === 'devops')
+        };
+        
+        const metadata = {
+            source: 'github_realtime',
+            totalTechs: analysis.technologies.length,
+            categories: analysis.categories,
+            lastUpdated: new Date().toISOString()
+        };
+        
+        console.log(`📊 Dados de tecnologias carregados:`, {
+            source: metadata.source,
+            totalTechs: metadata.totalTechs,
+            categories: metadata.categories
+        });
+        
+        return { techsByCategory, metadata };
+        
+    } catch (error) {
+        console.error('❌ Erro ao carregar tecnologias do GitHub:', error);
+        return getStaticTechnologies();
+    }
+}
+
+// Static fallback data for technologies
+function getStaticTechnologies() {
+    console.log('📊 Carregando dados estáticos de tecnologias...');
+    
+    const technologies = [
+        // Frontend
+        { name: 'React', category: 'frontend', percentage: 85, color: '#61dafb' },
+        { name: 'JavaScript', category: 'frontend', percentage: 90, color: '#f7df1e' },
+        { name: 'TypeScript', category: 'frontend', percentage: 80, color: '#3178c6' },
+        { name: 'Vue.js', category: 'frontend', percentage: 75, color: '#4fc08d' },
+        { name: 'Astro', category: 'frontend', percentage: 70, color: '#ff5d01' },
+        
+        // Backend
+        { name: 'Node.js', category: 'backend', percentage: 85, color: '#339933' },
+        { name: 'Python', category: 'backend', percentage: 80, color: '#3776ab' },
+        { name: 'Express.js', category: 'backend', percentage: 75, color: '#000000' },
+        { name: 'FastAPI', category: 'backend', percentage: 70, color: '#009688' },
+        { name: 'PostgreSQL', category: 'backend', percentage: 80, color: '#336791' },
+        
+        // DevOps
+        { name: 'Docker', category: 'devops', percentage: 75, color: '#2496ed' },
+        { name: 'Git', category: 'devops', percentage: 90, color: '#f05032' },
+        { name: 'AWS', category: 'devops', percentage: 70, color: '#ff9900' },
+        { name: 'Vercel', category: 'devops', percentage: 80, color: '#000000' },
+        { name: 'Linux', category: 'devops', percentage: 75, color: '#fcc624' }
+    ];
+    
+    // Organize technologies by category
+    const techsByCategory = {
+        frontend: technologies.filter(tech => tech.category === 'frontend'),
+        backend: technologies.filter(tech => tech.category === 'backend'),
+        devops: technologies.filter(tech => tech.category === 'devops')
+    };
+    
+    const metadata = {
+        source: 'static_fallback',
+        totalTechs: technologies.length,
+        categories: ['frontend', 'backend', 'devops'],
+        lastUpdated: new Date().toISOString()
+    };
+    
+    console.log(`📊 Dados de tecnologias carregados:`, {
+        source: metadata.source,
+        totalTechs: metadata.totalTechs,
+        categories: metadata.categories
+    });
+    
+    return { techsByCategory, metadata };
+}

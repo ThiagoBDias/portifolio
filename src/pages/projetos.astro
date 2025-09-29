@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { getAllPublishedProjects, getAboutData } from '../lib/supabase.js';
 import ProjectCard from '../components/ProjectCard.astro';
-import SkillsHighlight from '../components/SkillsHighlight.astro';
+import RealtimeTechSection from '../components/RealtimeTechSection.astro';
 
 // Fetch all published projects (will fallback to mock data if Supabase fails)
 const projects = await getAllPublishedProjects();
@@ -44,12 +44,8 @@ const projectsByCategory: Record<string, any[]> = categories.reduce((acc: Record
 		</div>
 	</section>
 	
-	<!-- Skills Highlight Section -->
-	<section class="py-16 bg-gray-900">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<SkillsHighlight />
-		</div>
-	</section>
+	<!-- Real-time Technologies Section -->
+	<RealtimeTechSection />
 
 	<!-- Projects Filter Tabs -->
 	<section class="py-8 bg-gray-900 border-b border-gray-700">
