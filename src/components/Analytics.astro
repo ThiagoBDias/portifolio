@@ -7,9 +7,19 @@ export interface Props {
   enableDebug?: boolean;
 }
 
+// Extend Window interface for TypeScript
+declare global {
+  interface Window {
+    trackEvent: (eventName: string, parameters?: Record<string, any>) => void;
+    trackPageCategory: () => void;
+    dataLayer: any[];
+    gtag: (...args: any[]) => void;
+  }
+}
+
 const { 
-  googleAnalyticsId = "G-XXXXXXXXXX", // SUBSTITUA PELO SEU ID REAL
-  enableDebug = false 
+  googleAnalyticsId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID || "G-XXXXXXXXXX", 
+  enableDebug = import.meta.env.DEV || false 
 } = Astro.props;
 
 const isProduction = import.meta.env.PROD;
@@ -101,7 +111,7 @@ const isProduction = import.meta.env.PROD;
       // First Input Delay (FID)
       new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        entries.forEach((entry) => {
+        entries.forEach((entry: any) => {
           if (window.trackEvent) {
             window.trackEvent('web_vital', {
               category: 'Performance', 
@@ -117,7 +127,7 @@ const isProduction = import.meta.env.PROD;
       // Cumulative Layout Shift (CLS)
       let clsValue = 0;
       new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
+        for (const entry of list.getEntries() as any[]) {
           if (!entry.hadRecentInput) {
             clsValue += entry.value;
           }
@@ -139,7 +149,7 @@ const isProduction = import.meta.env.PROD;
   // Track page load performance
   window.addEventListener('load', () => {
     setTimeout(() => {
-      const navigation = performance.getEntriesByType('navigation')[0];
+      const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
       
       if (window.trackEvent && navigation) {
         window.trackEvent('page_load_time', {
@@ -157,18 +167,21 @@ const isProduction = import.meta.env.PROD;
 
   // Portfolio-specific event tracking
   document.addEventListener('DOMContentLoaded', () => {
-    // Track project clicks
-    document.querySelectorAll('[data-project-id]').forEach(element => {
+    // Track project demo/github clicks specifically
+    document.querySelectorAll('[data-track="demo"], [data-track="github"]').forEach(element => {
       element.addEventListener('click', (e) => {
-        const projectId = e.currentTarget.getAttribute('data-project-id');
-        const projectName = e.currentTarget.getAttribute('data-project-name') || 'Unknown';
+        const target = e.currentTarget as HTMLElement;
+        const trackType = target?.getAttribute('data-track');
+        const projectId = target?.closest('[data-project-id]')?.getAttribute('data-project-id');
+        const projectName = target?.closest('[data-project-name]')?.getAttribute('data-project-name') || 'Unknown';
         
         if (window.trackEvent) {
-          window.trackEvent('project_click', {
+          window.trackEvent(`project_${trackType}`, {
             category: 'Projects',
-            label: projectName,
+            label: `${projectName} - ${trackType}`,
             project_id: projectId,
-            project_name: projectName
+            project_name: projectName,
+            action_type: trackType
           });
         }
       });
@@ -177,7 +190,8 @@ const isProduction = import.meta.env.PROD;
     // Track social media clicks
     document.querySelectorAll('[data-social]').forEach(element => {
       element.addEventListener('click', (e) => {
-        const platform = e.currentTarget.getAttribute('data-social');
+        const target = e.currentTarget as HTMLElement;
+        const platform = target?.getAttribute('data-social');
         
         if (window.trackEvent) {
           window.trackEvent('social_click', {
@@ -218,7 +232,7 @@ const isProduction = import.meta.env.PROD;
 
     // Track scroll depth
     let maxScrollDepth = 0;
-    let scrollTimeout;
+    let scrollTimeout: ReturnType<typeof setTimeout>;
     
     window.addEventListener('scroll', () => {
       clearTimeout(scrollTimeout);
