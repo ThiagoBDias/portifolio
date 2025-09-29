@@ -1,0 +1,150 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  url?: string;
+  type?: 'website' | 'article' | 'profile';
+  keywords?: string[];
+  author?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  noindex?: boolean;
+  canonical?: string;
+}
+
+const {
+  title,
+  description,
+  image = '/favicon.svg',
+  url = Astro.url.toString(),
+  type = 'website',
+  keywords = [],
+  author = 'Thiago Dias',
+  publishedTime,
+  modifiedTime,
+  noindex = false,
+  canonical = url
+} = Astro.props;
+
+// Site configuration
+const siteName = 'Thiago Dias - Portfolio';
+const siteUrl = 'https://thiagodias.dev'; // ALTERE PARA SUA URL REAL
+const twitterHandle = '@thiagobdias'; // ALTERE PARA SEU HANDLE REAL
+const defaultImage = `${siteUrl}/og-image.jpg`; // Imagem padrão para compartilhamento
+
+// Ensure image is absolute URL
+const absoluteImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
+
+// Generate keywords string
+const keywordsString = keywords.length > 0 ? keywords.join(', ') : 
+  'desenvolvedor, programador, full stack, JavaScript, TypeScript, React, Node.js, Astro, portfolio';
+
+// Page-specific title
+const fullTitle = title === siteName ? title : `${title} - ${siteName}`;
+---
+
+<!-- Basic Meta Tags -->
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywordsString} />
+<meta name="author" content={author} />
+<link rel="canonical" href={canonical} />
+
+<!-- Robots -->
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+{!noindex && <meta name="robots" content="index, follow" />}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={absoluteImage} />
+<meta property="og:url" content={url} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="pt_BR" />
+
+<!-- Article specific (for blog posts) -->
+{type === 'article' && publishedTime && (
+  <meta property="article:published_time" content={publishedTime} />
+)}
+{type === 'article' && modifiedTime && (
+  <meta property="article:modified_time" content={modifiedTime} />
+)}
+{type === 'article' && (
+  <meta property="article:author" content={author} />
+)}
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={twitterHandle} />
+<meta name="twitter:creator" content={twitterHandle} />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={absoluteImage} />
+
+<!-- Additional Meta Tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#af40ff" />
+<meta name="msapplication-TileColor" content="#af40ff" />
+
+<!-- Preconnect to external domains for performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://images.unsplash.com" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+<!-- JSON-LD Schema.org -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Thiago Dias",
+  "jobTitle": "Desenvolvedor Full Stack",
+  "description": description,
+  "url": siteUrl,
+  "image": absoluteImage,
+  "sameAs": [
+    "https://github.com/ThiagoBDias",
+    "https://linkedin.com/in/thiago-dias", // Substitua pelo seu LinkedIn
+    "https://twitter.com/thiagobdias" // Substitua pelo seu Twitter
+  ],
+  "knowsAbout": [
+    "JavaScript",
+    "TypeScript", 
+    "React",
+    "Node.js",
+    "Astro",
+    "Power BI",
+    "ERP Sankhya",
+    "Desenvolvimento Web",
+    "Full Stack Development"
+  ],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Freelancer"
+  }
+})} />
+
+{type === 'website' && (
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": siteName,
+    "description": description,
+    "url": siteUrl,
+    "author": {
+      "@type": "Person",
+      "name": author
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": `${siteUrl}/projetos?q={search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
+  })} />
+)}

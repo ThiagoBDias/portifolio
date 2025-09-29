@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 
 // Carregar variáveis de ambiente para garantir que estejam disponíveis
 import dotenv from 'dotenv';
@@ -18,11 +19,25 @@ export default defineConfig({
   // Configuração otimizada para Vercel
   output: 'static',
 
-  // Base URL configuration
-  site: 'https://portifolio-seu-dev-br.vercel.app',
+  // Base URL configuration - ALTERE AQUI PARA SUA URL REAL
+  site: 'https://thiagodias.dev', // Substitua pela sua URL real
 
   // Configurações de integração
-  integrations: [tailwind()],
+  integrations: [
+    tailwind(),
+    sitemap({
+      changefreq: 'weekly',
+      priority: 0.8,
+      lastmod: new Date(),
+      // Customize sitemap entries
+      customPages: [
+        'https://thiagodias.dev/', // Homepage
+        'https://thiagodias.dev/sobre',
+        'https://thiagodias.dev/projetos',
+        'https://thiagodias.dev/contato'
+      ]
+    })
+  ],
 
   // Configurações de build otimizadas
   build: {

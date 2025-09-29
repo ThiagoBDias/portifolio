@@ -1,0 +1,29 @@
+# Robots.txt para Thiago Dias - Portfolio
+# https://thiagodias.dev/robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://thiagodias.dev/sitemap-index.xml
+Sitemap: https://thiagodias.dev/sitemap-0.xml
+
+# Disallow specific paths (if any)
+# Disallow: /admin
+# Disallow: /private
+
+# Crawl-delay for all bots (optional)
+Crawl-delay: 1
+
+# Specific rules for search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
