@@ -2,16 +2,26 @@
 import Layout from '../layouts/Layout.astro';
 import RealtimeTechSection from '../components/RealtimeTechSection.astro';
 import { getFeaturedGitHubProjects } from '../lib/github-integration.js';
+import { getAllPublishedProjectsMock } from '../lib/projects-data.js';
 
-// Buscar projetos em destaque diretamente do GitHub
+// Buscar projetos em destaque diretamente do GitHub com fallback
 let featuredProjects = [];
 try {
   console.log('🌟 Buscando projetos em destaque do GitHub...');
   featuredProjects = await getFeaturedGitHubProjects(3); // 3 projetos em destaque
   console.log(`✅ Encontrados ${featuredProjects.length} projetos em destaque`);
+  
+  // Se não há projetos do GitHub, usa dados mock
+  if (!featuredProjects || featuredProjects.length === 0) {
+    console.log('📝 Usando dados mock como fallback para projetos em destaque');
+    const mockProjects = getAllPublishedProjectsMock();
+    featuredProjects = mockProjects.filter(p => p.featured).slice(0, 3);
+  }
 } catch (error) {
   console.error('❌ Erro ao buscar projetos em destaque:', error);
-  featuredProjects = [];
+  console.log('📝 Usando dados mock como fallback');
+  const mockProjects = getAllPublishedProjectsMock();
+  featuredProjects = mockProjects.filter(p => p.featured).slice(0, 3);
 }
 
 // Dados da formação (você pode substituir por dados reais ou buscar de uma API/DB)

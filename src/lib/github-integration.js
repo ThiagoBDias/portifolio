@@ -11,7 +11,7 @@ const GITHUB_API_BASE = 'https://api.github.com';
 // Cache simples para evitar rate limiting
 let repositoriesCache = null;
 let cacheTimestamp = null;
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutos
+const CACHE_DURATION = 30 * 60 * 1000; // 30 minutos (aumentado para evitar rate limiting)
 
 // Mapping de linguagens para tecnologias mais amigáveis (usando config)
 const TECH_MAPPING = Object.keys(PORTFOLIO_CONFIG.techMapping).reduce((acc, key) => {
@@ -66,17 +66,27 @@ export async function fetchGitHubRepositories() {
 
     console.log('🔄 Buscando repositórios do GitHub...');
     
+    const headers = {
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'Portfolio-App'
+    };
+
+    // Adiciona token se disponível (para evitar rate limiting)
+    const githubToken = import.meta.env.GITHUB_TOKEN || process.env.GITHUB_TOKEN;
+    if (githubToken) {
+      headers['Authorization'] = `token ${githubToken}`;
+    }
+    
     const response = await fetch(
       `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`,
-      {
-        headers: {
-          'Accept': 'application/vnd.github.v3+json',
-          'User-Agent': 'Portfolio-App'
-        }
-      }
+      { headers }
     );
 
     if (!response.ok) {
+      if (response.status === 403) {
+        console.warn('⚠️ Rate limiting do GitHub atingido. Usando dados em cache ou fallback.');
+        throw new Error('GitHub rate limit exceeded');
+      }
       throw new Error(`GitHub API error: ${response.status}`);
     }
 
