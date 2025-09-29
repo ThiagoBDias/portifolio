@@ -1,12 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getAboutData } from '../lib/supabase.js';
 import StatsCounter from '../components/StatsCounter.astro';
 
-const aboutData = await getAboutData();
+// Usando dados locais diretamente para garantir que apareçam
 
-// Dados padrão caso não haja dados no Supabase
-const defaultData = {
+// Dados completos e atualizados
+const data = {
 	bio: 'Olá! Sou Thiago Dias, desenvolvedor Full Stack e Analista de Sistemas formado pelo Instituto Federal do Triângulo Mineiro (IFTM), com uma sólida trajetória na área de tecnologia desde 2020. Atualmente, trabalho como Assistente de TI no Grupo Lidon, onde contribuo com suporte técnico e desenvolvimento de sistemas, aplicando minha experiência tanto em desenvolvimento de aplicações web quanto em análise de sistemas ERP Sankhya. Minha jornada profissional inclui experiências diversificadas: 3 anos prestando suporte técnico na OnNet Telecom (2020-2023), onde desenvolvi expertise em telecomunicações e resolução de problemas, e uma passagem pelo setor educacional no Colégio Berlaar Nossa Senhora Do Patrocínio (2023). Essa trajetória me proporcionou uma visão abrangente da tecnologia, unindo desenvolvimento de software com suporte técnico e análise de negócios. Sou apaixonado por aprendizado contínuo, evidenciado pelas 17 certificações que obtive em 2025, incluindo especializações em Git/GitHub (DIO), Microsoft Azure (Cloud Computing, IA Generativa, Power BI) e análise de dados. No desenvolvimento, trabalho com tecnologias modernas como JavaScript, React, Node.js, HTML, CSS e bancos de dados, sempre buscando criar soluções escaláveis e eficientes que agreguem valor real aos negócios.',
 	profileImage: '',
 	skills: {
@@ -184,7 +183,7 @@ const defaultData = {
 		}
 	],
 	socialLinks: {
-		github: 'https://github.com/seu-usuario',
+		github: 'https://github.com/ThiagoBDias',
 		linkedin: '',
 		twitter: '',
 		email: 'thiagobatistadiasss@gmail.com',
@@ -193,8 +192,7 @@ const defaultData = {
 	}
 };
 
-// Usar dados do Supabase ou dados padrão
-const data = aboutData || defaultData;
+// Usar dados locais diretamente
 ---
 
 <Layout title="Sobre - Thiago Dias" description="Conheça mais sobre Thiago Dias, desenvolvedor Full Stack apaixonado por tecnologia e inovação">
