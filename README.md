@@ -1,171 +1,37 @@
-# Portfolio Astro com Supabase 🌟✨
+# 💻 Thiago Dias | Engenheiro de Software & Analista de Sistemas
 
-Este é um site de portfolio construído com Astro, utilizando Supabase como backend para gerenciamento de conteúdo.
+> Portfólio focado em performance, entrega estática otimizada e arquitetura limpa. Disponível em: [www.thiagodias.dev](https://www.thiagodias.dev)
 
-> **Status:** ✅ Pronto para produção - v1.0.1
+Este repositório contém o código-fonte da minha aplicação de apresentação técnica. O objetivo aqui não é o espetáculo visual, mas a demonstração de pragmatismo. Como profissional focado em ecossistemas densos (C#, .NET, Java e integrações ERP), construí esta interface para ser um catálogo rápido, direto e de alta disponibilidade para os meus projetos.
 
-## 🚀 Tecnologias Utilizadas
+## 🏗️ Arquitetura e Decisões Técnicas
 
-- **Astro**: Framework para sites estáticos
-- **Supabase**: Backend-as-a-Service (banco de dados)
-- **Tailwind CSS**: Framework CSS utilitário
-- **Vercel/Netlify**: Plataformas de deploy
+A stack foi escolhida com foco em baixo overhead e entrega rápida de conteúdo estático:
 
-## 📋 Pré-requisitos
+* **Framework Core:** Astro (SSG - Static Site Generation para zero JavaScript client-side desnecessário).
+* **Estilização:** Tailwind CSS (Arquitetura utilitária e eliminação de CSS não utilizado no build).
+* **BaaS (Backend as a Service):** Supabase (Utilizado estritamente para gestão serverless de estado/contatos).
+* **Infraestrutura / CI-CD:** Deploy automatizado via Vercel com GitHub Actions.
 
-- Node.js >= 18.0.0
-- Conta no Supabase
+## 🚀 Projetos em Destaque
 
-## ⚙️ Configuração do Ambiente
+Neste portfólio, detalho lógicas de negócio reais e ferramentas de gestão. Meu foco técnico orbita desenvolvimento backend, análise de dados e infraestrutura:
 
-### 1. Clonagem e Instalação
+1. **T-Control (App de Gestão):** Aplicação para gestão de tarefas e controle financeiro. Foco em regras de negócio consistentes e usabilidade.
+2. **Integrações e ERP Sankhya:** Experiência com suporte técnico, análise de negócios e operação de ERPs robustos no setor corporativo.
+3. **C# Fundamentals:** Repositório dedicado à consolidação técnica, algoritmos e boas práticas de orientação a objetos em .NET.
+
+## ⚙️ Execução Local
+
+Para auditar o código ou rodar a interface localmente:
 
 ```bash
-git clone https://github.com/ThiagoBDias/portifolio.git
+# Clone o repositório
+git clone [https://github.com/ThiagoBDias/portifolio.git](https://github.com/ThiagoBDias/portifolio.git)
+
+# Instale as dependências
 cd portifolio
 npm install
-```
 
-### 2. Configuração das Variáveis de Ambiente
-
-Copie o arquivo de exemplo e configure suas credenciais:
-
-```bash
-cp .env.example .env.local
-```
-
-Edite o arquivo `.env.local` com suas credenciais do Supabase:
-
-```bash
-SUPABASE_URL=https://[seu-project-ref].supabase.co
-SUPABASE_ANON_KEY=[sua-chave-anonima]
-```
-
-### 3. Configuração do Supabase
-
-1. Acesse [supabase.com](https://supabase.com) e crie um projeto
-2. Vá para Settings → API
-3. Copie a URL do projeto e a chave anônima
-4. Cole no arquivo `.env.local`
-
-## 🧞 Comandos Disponíveis
-
-| Comando                   | Descrição                                           |
-| :------------------------ | :-------------------------------------------------- |
-| `npm run dev`             | Inicia servidor de desenvolvimento                  |
-| `npm run build`           | Build para produção (verifica env automaticamente) |
-| `npm run preview`         | Preview do build local                              |
-| `npm run test`            | Executa testes                                      |
-| `npm run test:ui`         | Executa testes com interface gráfica                |
-| `npm run test:run`        | Executa todos os testes uma vez                     |
-| `npm run test:coverage`   | Executa testes com relatório de cobertura           |
-
-## 🚀 Deploy
-
-### Configuração Inicial (Obrigatório)
-
-Antes de fazer deploy, configure os secrets no GitHub:
-
-1. **Acesse seu repositório no GitHub**
-2. **Vá para Settings → Secrets and variables → Actions**
-3. **Adicione os seguintes secrets:**
-
-| Secret | Onde obter | Descrição |
-|--------|------------|-----------|
-| `VERCEL_TOKEN` | Vercel → Account Settings → Tokens | Token de autenticação |
-| `VERCEL_ORG_ID` | Vercel → Account Settings → Teams | ID da organização |
-| `VERCEL_PROJECT_ID` | Vercel → Project Settings → General | ID do projeto |
-| `SUPABASE_URL` | Supabase → Settings → API → Project URL | URL do Supabase |
-| `SUPABASE_ANON_KEY` | Supabase → Settings → API → anon/public | Chave anônima |
-
-### Verificação dos Secrets
-
-Execute este comando para verificar se todos os secrets estão configurados:
-
-```bash
-npm run check-secrets
-```
-
-### Deploy Automático
-
-Após configurar os secrets:
-
-1. **Faça push para a branch main:**
-   ```bash
-   git add .
-   git commit -m "feat: configurar deploy automático"
-   git push origin main
-   ```
-
-2. **Monitore o GitHub Actions:**
-   - Vá para a aba "Actions" no repositório
-   - O workflow fará deploy automático no Vercel
-
-### Deploy Manual (Opcional)
-
-```bash
-# Deploy no Vercel
-npm run deploy:vercel
-
-# Deploy no Netlify
-npm run deploy:netlify
-```
-
-## 📁 Estrutura do Projeto
-
-```
-/
-├── public/                 # Arquivos estáticos
-├── src/
-│   ├── components/         # Componentes Astro
-│   ├── layouts/            # Layouts das páginas
-│   ├── lib/                # Utilitários e configurações
-│   │   ├── supabase.js     # Cliente Supabase
-│   │   └── supabase-config.js # Configuração build-time
-│   └── pages/              # Páginas do site
-├── scripts/                # Scripts utilitários
-│   └── check-env.js        # Verificação de ambiente
-├── .github/workflows/      # CI/CD GitHub Actions
-└── admin/                  # Painel administrativo
-```
-
-## 🔧 Solução de Problemas
-
-### Erro "supabaseUrl is required"
-
-Este erro ocorre quando as variáveis de ambiente não estão configuradas:
-
-1. Verifique se o arquivo `.env.local` existe
-2. Confirme que as variáveis estão corretas
-3. No Vercel/GitHub Actions, verifique se os secrets estão configurados
-
-### Build falhando no CI/CD
-
-O script `check-env.js` é executado automaticamente antes do build e verifica as variáveis de ambiente. Se o build falhar:
-
-1. Verifique os logs do GitHub Actions
-2. Confirme que os secrets estão configurados corretamente
-3. Teste o build localmente: `npm run build`
-
-## 📚 Documentação Adicional
-
-- [Documentação Astro](https://docs.astro.build)
-- [Documentação Supabase](https://supabase.com/docs)
-- [Guia de Deploy Vercel](https://vercel.com/docs)
-
-## 📚 Documentação para Estudo
-
-Para facilitar o entendimento e desenvolvimento do projeto, foram criados guias detalhados:
-
-1. **[GUIA_DE_ESTUDO.md](./GUIA_DE_ESTUDO.md)** - Explicação completa da estrutura do projeto
-2. **[GUIA_SUPABASE.md](./GUIA_SUPABASE.md)** - Detalhes sobre integração com Supabase
-3. **[ARQUIVOS_PARA_LIMPAR.md](./ARQUIVOS_PARA_LIMPAR.md)** - Arquivos que podem ser removidos para simplificar
-
-## ⚡ Início Rápido
-
-Depois de configurar o ambiente:
-
-1. Execute `npm run dev` para iniciar o servidor de desenvolvimento
-2. Acesse `http://localhost:4321` no navegador
-3. Explore os arquivos em `src/pages` para começar a editar o conteúdo
-4. Consulte os guias para entender como personalizar seu portfólio
+# Execute o servidor de desenvolvimento local
+npm run dev
