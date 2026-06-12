@@ -21,6 +21,7 @@ Neste portfólio, detalho lógicas de negócio reais e ferramentas de gestão. M
 2. **Integrações e ERP Sankhya:** Experiência com suporte técnico, análise de negócios e operação de ERPs robustos no setor corporativo.
 3. **C# Fundamentals:** Repositório dedicado à consolidação técnica, algoritmos e boas práticas de orientação a objetos em .NET.
 
+
 ## ⚙️ Execução Local
 
 Para auditar o código ou rodar a interface localmente:
