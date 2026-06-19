@@ -61,21 +61,21 @@ const contactPhone = aboutData?.socialLinks?.phone || defaultPhone;
 		<!-- Vercel Speed Insights -->
 		<SpeedInsights />
 	</head>
-	<body class="bg-white text-gray-900 font-sans antialiased">
+	<body class="bg-gray-950 text-gray-100 font-sans antialiased">
 		<!-- Navbar -->
-		<header class="fixed top-0 w-full z-50 bg-white border-b border-gray-200">
+		<header class="fixed top-0 w-full z-50 bg-gray-900 border-b border-gray-800">
 			<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="flex justify-between items-center h-16">
 					<!-- Logo -->
-					<a href="/" class="text-xl font-bold text-gray-950 hover:text-secondary-500 transition-all duration-300">
+					<a href="/" class="text-xl font-bold text-white hover:text-secondary-400 transition-all duration-300">
 						Thiago Dias
 					</a>
 
 					<!-- Desktop Navigation -->
 					<div class="hidden md:flex items-center space-x-8">
-						<a href="/" class="text-gray-600 hover:text-gray-950 transition-colors duration-200 font-medium">Início</a>
-						<a href="/projetos" class="text-gray-600 hover:text-gray-950 transition-colors duration-200 font-medium">Projetos</a>
-						<a href="/sobre" class="text-gray-600 hover:text-gray-950 transition-colors duration-200 font-medium">Sobre</a>
+						<a href="/" class="text-gray-400 hover:text-white transition-colors duration-200 font-medium">Início</a>
+						<a href="/projetos" class="text-gray-400 hover:text-white transition-colors duration-200 font-medium">Projetos</a>
+						<a href="/sobre" class="text-gray-400 hover:text-white transition-colors duration-200 font-medium">Sobre</a>
 						<a href="/contato" class="bg-secondary-500 hover:bg-secondary-600 text-white px-4 py-2 rounded-lg transition-all duration-200 font-medium">
 							Contato
 						</a>
@@ -83,7 +83,7 @@ const contactPhone = aboutData?.socialLinks?.phone || defaultPhone;
 
 					<!-- Mobile menu button -->
 					<div class="md:hidden">
-						<button id="mobile-menu-button" class="text-gray-600 hover:text-gray-950 focus:outline-none">
+						<button id="mobile-menu-button" class="text-gray-400 hover:text-white focus:outline-none">
 							<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
 							</svg>
@@ -94,9 +94,9 @@ const contactPhone = aboutData?.socialLinks?.phone || defaultPhone;
 				<!-- Mobile Navigation -->
 				<div id="mobile-menu" class="hidden md:hidden pb-4">
 					<div class="flex flex-col space-y-4">
-						<a href="/" class="text-gray-600 hover:text-gray-950 transition-colors duration-200 font-medium">Início</a>
-						<a href="/projetos" class="text-gray-600 hover:text-gray-950 transition-colors duration-200 font-medium">Projetos</a>
-						<a href="/sobre" class="text-gray-600 hover:text-gray-950 transition-colors duration-200 font-medium">Sobre</a>
+						<a href="/" class="text-gray-400 hover:text-white transition-colors duration-200 font-medium">Início</a>
+						<a href="/projetos" class="text-gray-400 hover:text-white transition-colors duration-200 font-medium">Projetos</a>
+						<a href="/sobre" class="text-gray-400 hover:text-white transition-colors duration-200 font-medium">Sobre</a>
 						<a href="/contato" class="bg-secondary-500 hover:bg-secondary-600 text-white px-4 py-2 rounded-lg transition-all duration-200 font-medium text-center">
 							Contato
 						</a>
@@ -192,14 +192,14 @@ const contactPhone = aboutData?.socialLinks?.phone || defaultPhone;
 				width: 8px;
 			}
 			::-webkit-scrollbar-track {
-				background: #f3f3f3;
+				background: #1a1a1a;
 			}
 			::-webkit-scrollbar-thumb {
-				background: #cccccc;
+				background: #444444;
 				border-radius: 4px;
 			}
 			::-webkit-scrollbar-thumb:hover {
-				background: #999999;
+				background: #666666;
 			}
 		</style>
 	</body>

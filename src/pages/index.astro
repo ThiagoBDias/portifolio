@@ -114,18 +114,18 @@ const certificacoes = [
 	type="website"
 >
 	<!-- Hero Section -->
-	<section class="relative min-h-screen flex items-center justify-center bg-white overflow-hidden">
+	<section class="relative min-h-screen flex items-center justify-center bg-gray-950 overflow-hidden">
 		<!-- Background Pattern - Removido para minimalismo -->
 
 		<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 			<div class="animate-fade-in">
-				<h1 class="text-5xl md:text-7xl font-bold mb-6 text-gray-950">
+				<h1 class="text-5xl md:text-7xl font-bold mb-6 text-white">
 					Olá, eu sou Thiago Dias
 				</h1>
-				<h2 class="text-xl md:text-2xl text-gray-600 mb-8 font-light">
+				<h2 class="text-xl md:text-2xl text-gray-300 mb-8 font-light">
 					Desenvolvedor Full Stack e Analista de Sistemas
 				</h2>
-				<p class="text-lg md:text-xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed">
+				<p class="text-lg md:text-xl text-gray-400 mb-12 max-w-4xl mx-auto leading-relaxed">
 					Tecnólogo em Análise e Desenvolvimento de Sistemas formado pelo IFTM, atualmente Assistente de TI no Grupo Lidon.
 					Com mais de 5 anos de experiência na área de tecnologia, unindo desenvolvimento de aplicações web com expertise em sistemas ERP Sankhya, 
 					suporte técnico e análise de negócios.
@@ -140,7 +140,7 @@ const certificacoes = [
 					<a href="/projetos" class="bg-secondary-500 hover:bg-secondary-600 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300">
 						Ver Projetos
 					</a>
-					<a href="/contato" class="border-2 border-gray-300 hover:border-gray-500 text-gray-700 hover:text-gray-900 px-8 py-4 rounded-lg font-semibold transition-all duration-300">
+					<a href="/contato" class="border-2 border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300">
 						Entrar em Contato
 					</a>
 				</div>
@@ -149,7 +149,7 @@ const certificacoes = [
 
 		<!-- Scroll Indicator -->
 		<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-			<svg class="w-6 h-6 text-gray-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<svg class="w-6 h-6 text-gray-600 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
 			</svg>
 		</div>
@@ -157,36 +157,36 @@ const certificacoes = [
 
 	<!-- Featured Projects Section -->
 	{featuredProjects.length > 0 && (
-		<section class="py-20 bg-gray-50">
+		<section class="py-20 bg-gray-900">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="text-center mb-16">
-					<h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-950">
+					<h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">
 						Projetos em Destaque
 					</h2>
-					<p class="text-gray-600 text-lg max-w-2xl mx-auto">
+					<p class="text-gray-400 text-lg max-w-2xl mx-auto">
 						Alguns dos meus trabalhos mais recentes e desafiadores
 					</p>
 				</div>
 
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 					{featuredProjects.map((project) => (
-						<article class="bg-white rounded-lg p-6 border border-gray-200 hover:border-gray-400 transition-all duration-300 group hover:shadow-md">
+						<article class="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-gray-600 transition-all duration-300 group hover:shadow-lg hover:shadow-secondary-500/10">
 							{project.image && (
 								<div class="mb-4 overflow-hidden rounded-lg">
 									<img src={project.image} alt={project.title} class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
 								</div>
 							)}
 							<div class="space-y-4">
-								<h3 class="text-xl font-semibold text-gray-950 group-hover:text-secondary-500 transition-colors duration-200">
+								<h3 class="text-xl font-semibold text-white group-hover:text-secondary-400 transition-colors duration-200">
 									{project.title}
 								</h3>
-								<p class="text-gray-600 line-clamp-3">
+								<p class="text-gray-400 line-clamp-3">
 									{project.description}
 								</p>
 								{project.technologies && project.technologies.length > 0 && (
 									<div class="flex flex-wrap gap-2">
 										{project.technologies.slice(0, 3).map((tech: string) => (
-											<span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full border border-gray-300">
+											<span class="px-3 py-1 bg-gray-700 text-gray-300 text-sm rounded-full border border-gray-600">
 												{tech}
 											</span>
 										))}
@@ -199,7 +199,7 @@ const certificacoes = [
 										</a>
 									)}
 									{project.githubLink && (
-										<a href={project.githubLink} class="flex-1 border border-gray-300 hover:border-gray-500 text-gray-700 hover:text-gray-950 text-center py-2 px-4 rounded-lg transition-colors duration-200 font-medium" target="_blank" rel="noopener noreferrer">
+										<a href={project.githubLink} class="flex-1 border border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white text-center py-2 px-4 rounded-lg transition-colors duration-200 font-medium" target="_blank" rel="noopener noreferrer">
 											GitHub
 										</a>
 									)}
@@ -210,7 +210,7 @@ const certificacoes = [
 				</div>
 
 				<div class="text-center mt-12">
-					<a href="/projetos" class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 hover:text-gray-950 px-6 py-3 rounded-lg transition-all duration-200 border border-gray-300 hover:border-gray-500">
+					<a href="/projetos" class="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white px-6 py-3 rounded-lg transition-all duration-200 border border-gray-700 hover:border-gray-600">
 						Ver Todos os Projetos
 						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
