@@ -6,12 +6,12 @@ import StatsCounter from '../components/StatsCounter.astro';
 
 // Dados completos e atualizados
 const data = {
-	bio: 'Olá! Sou Thiago Dias, desenvolvedor Full Stack e Analista de Sistemas formado pelo Instituto Federal do Triângulo Mineiro (IFTM), com uma sólida trajetória na área de tecnologia desde 2020. Atualmente, trabalho como Assistente de TI no Grupo Lidon, onde contribuo com suporte técnico e desenvolvimento de sistemas, aplicando minha experiência tanto em desenvolvimento de aplicações web quanto em análise de sistemas ERP Sankhya. Minha jornada profissional inclui experiências diversificadas: 3 anos prestando suporte técnico na OnNet Telecom (2020-2023), onde desenvolvi expertise em telecomunicações e resolução de problemas, e uma passagem pelo setor educacional no Colégio Berlaar Nossa Senhora Do Patrocínio (2023). Essa trajetória me proporcionou uma visão abrangente da tecnologia, unindo desenvolvimento de software com suporte técnico e análise de negócios. Sou apaixonado por aprendizado contínuo, evidenciado pelas 17 certificações que obtive em 2025, incluindo especializações em Git/GitHub (DIO), Microsoft Azure (Cloud Computing, IA Generativa, Power BI) e análise de dados. No desenvolvimento, trabalho com tecnologias modernas como JavaScript, React, Node.js, HTML, CSS e bancos de dados, sempre buscando criar soluções escaláveis e eficientes que agreguem valor real aos negócios.',
+	bio: 'Sou um profissional de tecnologia guiado pela resolução de problemas reais. Minha base foi construída no "chão de fábrica" da TI: atuando diretamente com infraestrutura, gerenciamento de redes (Mikrotik) e análise de dados (SQL). Possuo experiência sólida com o ERP Sankhya, compreendendo não apenas a camada técnica de suporte, mas o impacto direto que a estabilidade do sistema possui no faturamento e na operação da empresa. Minha vivência em ambientes de alta criticidade e controle de operações me ensinou a lidar com pressão, priorizar incidentes com lógica e garantir que a operação nunca pare. Meu foco é atuar na linha de frente do suporte avançado e implantação de sistemas, unindo meu background técnico a um atendimento humano e resolutivo.',
 	profileImage: '',
 	skills: {
-		frontend: ['HTML5', 'CSS3', 'JavaScript', 'React', 'Vue.js', 'TypeScript', 'Power BI'],
-		backend: ['Node.js', 'Python', 'PHP', 'Express.js', 'PostgreSQL', 'MySQL', 'Análise de Dados'],
-		tools: ['Git', 'GitHub', 'VS Code', 'Sankhya ERP', 'Microsoft Azure', 'GitHub Copilot', 'Docker', 'Suporte Técnico', 'Redes', 'Telecomunicações', 'IA Generativa']
+		sistemas: ['Suporte a ERP (Sankhya)', 'Sustentação Operacional e Implantação', 'Análise de Dados e SQL', 'Regra de Negócio'],
+		infraestrutura: ['Resolução de Incidentes (Troubleshooting)', 'Gestão de Redes e Mikrotik', 'Manutenção de Hardware e Software', 'Telecomunicações'],
+		desenvolvimento: ['C# e Lógica Orientada a Objetos', 'JavaScript, Node.js e React', 'Power BI e Data Analysis', 'Microsoft Azure']
 	},
 	experience: [
 		{
@@ -21,7 +21,7 @@ const data = {
 			period: 'set 2023 - o momento',
 			location: 'Patrocínio, Minas Gerais, Brasil',
 			type: 'Tempo integral',
-			description: 'Contribuindo com o suporte técnico e desenvolvendo sistemas para a nossa empresa. Foco em desenvolvimento full stack e soluções tecnológicas.'
+			description: 'Suporte técnico avançado, sustentação de ERP Sankhya, resolução de incidentes críticos. Atuo na linha de frente garantindo estabilidade operacional, análise de dados com SQL e implantação de soluções que impactam diretamente o faturamento da empresa.'
 		},
 		{
 			year: '2023',
@@ -30,16 +30,16 @@ const data = {
 			period: 'mai 2023 - set 2023',
 			location: 'Patrocínio, Minas Gerais, Brasil',
 			type: 'Tempo integral',
-			description: 'Suporte técnico e manutenção de sistemas educacionais, gestão de infraestrutura de TI e apoio aos usuários.'
+			description: 'Suporte técnico especializado, manutenção de infraestrutura e sistemas educacionais. Resolução de problemas em ambientes críticos e gestão de usuários.'
 		},
 		{
 			year: '2020 - 2023',
-			position: 'Suporte Técnico',
+			position: 'Suporte Técnico Especializado',
 			company: 'OnNet Telecom',
 			period: 'mai 2020 - jul 2023',
 			location: 'Patrocínio, Minas Gerais, Brasil',
 			type: 'Terceirizado',
-			description: 'Prestação de suporte técnico especializado em tecnologia da informação, resolução de problemas e manutenção de sistemas de telecomunicações.'
+			description: 'Suporte técnico em telecomunicações, resolução de problemas de infraestrutura, gestão de redes (Mikrotik) e troubleshooting avançado. Experiência em ambientes de alta criticidade e atendimento resolutivo.'
 		}
 	],
 	education: [
@@ -197,20 +197,20 @@ const data = {
 
 <Layout 
 	title="Sobre - Thiago Dias" 
-	description="Conheça mais sobre Thiago Dias, desenvolvedor Full Stack com experiência em JavaScript, TypeScript, React, Node.js, Power BI e ERP Sankhya. Formação, certificações e trajetória profissional."
+	description="Thiago Dias - Analista de Suporte e Sustentação de Sistemas com experiência em ERP Sankhya, SQL, análise de dados, infraestrutura e redes. Especializado em resolução de incidentes e suporte técnico avançado."
 	keywords={[
 		'sobre thiago dias',
-		'desenvolvedor full stack',
-		'experiência profissional',
-		'formação acadêmica',
-		'certificações',
-		'trajetória profissional',
-		'habilidades técnicas',
-		'JavaScript especialista',
-		'React developer',
-		'Node.js developer',
-		'Power BI analista',
-		'ERP Sankhya consultor'
+		'analista de suporte',
+		'sustentação de sistemas',
+		'ERP Sankhya',
+		'suporte técnico',
+		'infraestrutura',
+		'redes mikrotik',
+		'SQL',
+		'análise de dados',
+		'resolução de incidentes',
+		'troubleshooting',
+		'suporte técnico especializado'
 	]}
 	type="profile"
 >
@@ -220,11 +220,11 @@ const data = {
 			<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 				<!-- Text Content -->
 				<div class="animate-fade-in">
-					<h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary-400 to-accent-cyan bg-clip-text text-transparent">
+					<h1 class="text-4xl md:text-6xl font-bold mb-6 text-white">
 						Sobre Mim
 					</h1>
 					<h2 class="text-2xl md:text-3xl text-gray-300 mb-6 font-light">
-						Thiago Dias - Desenvolvedor Full Stack e Analista de Sistemas
+						Thiago Dias - Analista de Suporte e Sustentação de Sistemas
 					</h2>
 					<div class="space-y-4 text-gray-400 text-lg leading-relaxed">
 						<p>{data.bio}</p>
@@ -299,70 +299,64 @@ const data = {
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-				<!-- Frontend -->
-				<div class="bg-gradient-to-br from-primary-900/20 to-primary-800/20 p-8 rounded-xl border border-primary-700/30 hover:border-primary-500/50 transition-all duration-300">
-					<div class="w-12 h-12 bg-gradient-to-r from-primary-500 to-primary-400 rounded-lg flex items-center justify-center mb-6">
-						<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+				<!-- Sistemas e Regra de Negócio -->
+				<div class="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-secondary-500/50 transition-all duration-300">
+					<div class="w-12 h-12 bg-secondary-500/20 rounded-lg flex items-center justify-center mb-6">
+						<svg class="w-6 h-6 text-secondary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 						</svg>
 					</div>
-					<h3 class="text-xl font-semibold text-white mb-6">Frontend</h3>
-					<div class="space-y-3">
-						{(data.skills?.frontend || []).map((skill: string) => (
-							<div class="flex items-center justify-between">
+					<h3 class="text-xl font-semibold text-white mb-6">Sistemas e Regra de Negócio</h3>
+					<ul class="space-y-3">
+						{(data.skills?.sistemas || []).map((skill: string) => (
+							<li class="flex items-start gap-3">
+								<svg class="w-5 h-5 text-secondary-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+								</svg>
 								<span class="text-gray-300">{skill}</span>
-								<div class="flex gap-1">
-									{[...Array(5)].map((_, i) => (
-										<div class={`w-2 h-2 rounded-full ${i < 4 ? 'bg-primary-400' : 'bg-gray-600'}`}></div>
-									))}
-								</div>
-							</div>
+							</li>
 						))}
-					</div>
+					</ul>
 				</div>
 
-				<!-- Backend -->
-				<div class="bg-gradient-to-br from-accent-cyan/20 to-accent-blue/20 p-8 rounded-xl border border-accent-cyan/30 hover:border-accent-cyan/50 transition-all duration-300">
-					<div class="w-12 h-12 bg-gradient-to-r from-accent-cyan to-accent-blue rounded-lg flex items-center justify-center mb-6">
-						<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+				<!-- Infraestrutura e Redes -->
+				<div class="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-secondary-500/50 transition-all duration-300">
+					<div class="w-12 h-12 bg-secondary-500/20 rounded-lg flex items-center justify-center mb-6">
+						<svg class="w-6 h-6 text-secondary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
 						</svg>
 					</div>
-					<h3 class="text-xl font-semibold text-white mb-6">Backend</h3>
-					<div class="space-y-3">
-						{(data.skills?.backend || []).map((skill: string) => (
-							<div class="flex items-center justify-between">
+					<h3 class="text-xl font-semibold text-white mb-6">Infraestrutura e Redes</h3>
+					<ul class="space-y-3">
+						{(data.skills?.infraestrutura || []).map((skill: string) => (
+							<li class="flex items-start gap-3">
+								<svg class="w-5 h-5 text-secondary-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+								</svg>
 								<span class="text-gray-300">{skill}</span>
-								<div class="flex gap-1">
-									{[...Array(5)].map((_, i) => (
-										<div class={`w-2 h-2 rounded-full ${i < 4 ? 'bg-accent-cyan' : 'bg-gray-600'}`}></div>
-									))}
-								</div>
-							</div>
+							</li>
 						))}
-					</div>
+					</ul>
 				</div>
 
-				<!-- DevOps & Tools -->
-				<div class="bg-gradient-to-br from-accent-indigo/20 to-accent-blue/20 p-8 rounded-xl border border-accent-indigo/30 hover:border-accent-indigo/50 transition-all duration-300">
-					<div class="w-12 h-12 bg-gradient-to-r from-accent-indigo to-accent-blue rounded-lg flex items-center justify-center mb-6">
-						<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+				<!-- Desenvolvimento e Lógica -->
+				<div class="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-secondary-500/50 transition-all duration-300">
+					<div class="w-12 h-12 bg-secondary-500/20 rounded-lg flex items-center justify-center mb-6">
+						<svg class="w-6 h-6 text-secondary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
 						</svg>
 					</div>
-					<h3 class="text-xl font-semibold text-white mb-6">Ferramentas</h3>
-					<div class="space-y-3">
-						{(data.skills?.tools || []).map((skill: string) => (
-							<div class="flex items-center justify-between">
+					<h3 class="text-xl font-semibold text-white mb-6">Desenvolvimento e Lógica</h3>
+					<ul class="space-y-3">
+						{(data.skills?.desenvolvimento || []).map((skill: string) => (
+							<li class="flex items-start gap-3">
+								<svg class="w-5 h-5 text-secondary-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+								</svg>
 								<span class="text-gray-300">{skill}</span>
-								<div class="flex gap-1">
-									{[...Array(5)].map((_, i) => (
-										<div class={`w-2 h-2 rounded-full ${i < 3 ? 'bg-accent-indigo' : 'bg-gray-600'}`}></div>
-									))}
-								</div>
-							</div>
+							</li>
 						))}
-					</div>
+					</ul>
 				</div>
 			</div>
 		</div>
