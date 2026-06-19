@@ -79,27 +79,18 @@ class GitHubTechAnalyzer {
    * Headers para requisições
    */
   getHeaders() {
-  const headers = {
-    'Accept': 'application/vnd.github.v3+json',
-    'User-Agent': 'Portfolio-Tech-Analyzer'
-  };
-  
-  // Captura o token de forma resiliente em 3 camadas:
-  // 1. Da própria classe (se passado no construtor)
-  // 2. Do ambiente Astro/Vite (import.meta.env)
-  // 3. Do ambiente Node.js / Vercel Edge (process.env)
-  const envToken = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.GITHUB_TOKEN) 
-                    || (typeof process !== 'undefined' && process.env && process.env.GITHUB_TOKEN);
-                   
-  const finalToken = this.token || envToken;
-  
-  if (finalToken) {
-    // Padrão de segurança recomendado atualmente pelo GitHub (Bearer)
-    headers['Authorization'] = `Bearer ${finalToken}`;
+    const headers = {
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'Portfolio-Tech-Analyzer'
+    };
+    
+    if (this.token) {
+      headers['Authorization'] = `token ${this.token}`;
+    }
+    
+    return headers;
   }
-  
-  return headers;
-}
+
   /**
    * Buscar repositórios do usuário
    */
