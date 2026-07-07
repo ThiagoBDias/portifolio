@@ -167,11 +167,12 @@ const isProduction = import.meta.env.PROD;
 
   // Portfolio-specific event tracking
   document.addEventListener('DOMContentLoaded', () => {
-    // Track project demo/github clicks specifically
-    document.querySelectorAll('[data-track="demo"], [data-track="github"]').forEach(element => {
+    // Track project-related clicks (supports data-track values like project_github, project_demo, github, demo)
+    document.querySelectorAll('[data-track^="project_"], [data-track="github"], [data-track="demo"]').forEach(element => {
       element.addEventListener('click', (e) => {
         const target = e.currentTarget as HTMLElement;
-        const trackType = target?.getAttribute('data-track');
+        const rawTrack = target?.getAttribute('data-track') || '';
+        const trackType = rawTrack.replace(/^project_/, '') || rawTrack;
         const projectId = target?.closest('[data-project-id]')?.getAttribute('data-project-id');
         const projectName = target?.closest('[data-project-name]')?.getAttribute('data-project-name') || 'Unknown';
         
