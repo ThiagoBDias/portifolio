@@ -1,0 +1,265 @@
+---
+// Dados da formação acadêmica
+const formacao = [
+  {
+    titulo: "Tecnólogo em Análise e Desenvolvimento de Sistemas",
+    instituicao: "Instituto Federal do Triângulo Mineiro (IFTM)",
+    periodo: "2020 - 2024",
+    descricao: "Formação técnica superior com foco em desenvolvimento de software, análise de sistemas e banco de dados."
+  },
+  {
+    titulo: "Ensino Médio",
+    instituicao: "Nely Amaral",
+    periodo: "2017 - 2019",
+    descricao: "Formação básica com base sólida para continuidade dos estudos."
+  }
+];
+
+// Dados das certificações reais
+const certificacoes = [
+  {
+    nome: "Contribuindo em um Projeto Open Source no GitHub",
+    emissor: "DIO - Digital Innovation One",
+    ano: "2025",
+    descricao: "Certificação em contribuições para projetos open source e boas práticas de colaboração no GitHub."
+  },
+  {
+    nome: "Introdução a Versionamento com Git & GitHub",
+    emissor: "DIO - Digital Innovation One",
+    ano: "2025",
+    descricao: "Fundamentos de controle de versão e comandos Git essenciais para desenvolvimento colaborativo."
+  },
+  {
+    nome: "Desafios de Projetos: Crie Um Portfólio Vencedor",
+    emissor: "DIO - Digital Innovation One",
+    ano: "2025",
+    descricao: "Desenvolvimento de portfólio profissional e técnicas de apresentação de projetos."
+  },
+  {
+    nome: "Introdução à Análise de Dados com a Randstad",
+    emissor: "DIO - Digital Innovation One",
+    ano: "2025",
+    descricao: "Fundamentos de análise de dados e ferramentas analíticas para cenários empresariais."
+  },
+  {
+    nome: "Conhecer criar com o Power BI",
+    emissor: "Microsoft Azure",
+    ano: "2025",
+    descricao: "Desenvolvimento de dashboards e relatórios interativos com Power BI para análise de dados."
+  },
+  {
+    nome: "Introdução aos conceitos de IA generativa",
+    emissor: "Microsoft Azure",
+    ano: "2025",
+    descricao: "Conceitos fundamentais de inteligência artificial generativa e suas aplicações no Azure."
+  },
+  {
+    nome: "Descrever as ferramentas de monitoramento no Azure",
+    emissor: "Microsoft Azure",
+    ano: "2025",
+    descricao: "Ferramentas de monitoramento e observabilidade no Microsoft Azure para infraestrutura em nuvem."
+  },
+  {
+    nome: "Introdução ao GitHub Copilot",
+    emissor: "Microsoft Azure",
+    ano: "2025",
+    descricao: "IA para desenvolvimento, assistente de código inteligente e produtividade em programação."
+  }
+];
+---
+
+<section class="py-20 bg-gradient-to-br from-gray-900 via-gray-950 to-gray-900">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="text-center mb-16">
+				<h2 class="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary-400 to-accent-orange bg-clip-text text-transparent">
+					Formação & Certificações
+				</h2>
+				<p class="text-gray-400 text-lg max-w-2xl mx-auto">
+					Minha jornada educacional e certificações profissionais
+				</p>
+			</div>
+			
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+				
+				<!-- Formação Acadêmica -->
+				<div class="bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-700/50 hover:border-primary-500/30 transition-all duration-300">
+					<div class="p-6">
+						<div class="flex items-center justify-between mb-4">
+							<div class="flex items-center gap-3">
+								<div class="w-10 h-10 bg-gradient-to-r from-accent-cyan to-accent-blue rounded-lg flex items-center justify-center">
+									<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+									</svg>
+								</div>
+								<h3 class="text-lg font-semibold text-white">Formação Acadêmica</h3>
+							</div>
+							<button class="home-education-toggle-btn p-2 text-gray-400 hover:text-primary-400 transition-colors duration-200" onclick="toggleHomeSection('home-education')">
+								<svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+								</svg>
+							</button>
+						</div>
+
+						<!-- Resumo sempre visível -->
+						<div class="space-y-2 mb-4">
+							<div class="flex items-center justify-between">
+								<span class="text-primary-400 font-medium text-sm">Tecnólogo em Análise e Desenvolvimento de Sistemas</span>
+								<span class="text-gray-400 text-xs">IFTM | 2020-2024</span>
+							</div>
+							<div class="flex items-center justify-between">
+								<span class="text-accent-cyan font-medium text-sm">Ensino Médio</span>
+								<span class="text-gray-400 text-xs">Nely Amaral | 2017-2019</span>
+							</div>
+						</div>
+
+						<!-- Detalhes expansíveis -->
+						<div id="home-education-details" class="hidden space-y-4">
+							{formacao.map((item, index) => (
+								<div class="bg-gray-700/30 rounded-lg p-3 border-l-4 border-accent-cyan">
+									<h4 class="text-white font-medium text-sm mb-1">{item.titulo}</h4>
+									<p class="text-accent-cyan text-xs font-medium mb-1">{item.instituicao}</p>
+									<p class="text-gray-400 text-xs mb-2">{item.periodo}</p>
+									<p class="text-gray-300 text-xs leading-relaxed">{item.descricao}</p>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+				
+				<!-- Certificações -->
+				<div class="bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-700/50 hover:border-accent-cyan/30 transition-all duration-300">
+					<div class="p-6">
+						<div class="flex items-center justify-between mb-4">
+							<div class="flex items-center gap-3">
+								<div class="w-10 h-10 bg-gradient-to-r from-primary-500 to-accent-cyan rounded-lg flex items-center justify-center">
+									<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+									</svg>
+								</div>
+								<h3 class="text-lg font-semibold text-white">Certificações & Cursos</h3>
+							</div>
+							<button class="home-certifications-toggle-btn p-2 text-gray-400 hover:text-primary-400 transition-colors duration-200" onclick="toggleHomeSection('home-certifications')">
+								<svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+								</svg>
+							</button>
+						</div>
+
+						<!-- Resumo sempre visível -->
+						<div class="grid grid-cols-2 gap-3 mb-4">
+							<div class="text-center p-2 bg-primary-900/20 rounded-lg border border-primary-500/20">
+								<div class="text-lg font-bold text-primary-400">17</div>
+								<div class="text-xs text-gray-400">Certificações</div>
+							</div>
+							<div class="text-center p-2 bg-accent-orange/20 rounded-lg border border-accent-orange/20">
+								<div class="text-lg font-bold text-accent-orange">2025</div>
+								<div class="text-xs text-gray-400">Mais Recentes</div>
+							</div>
+						</div>
+
+						<!-- Principais certificações sempre visíveis -->
+						<div class="space-y-1 mb-4">
+							<div class="flex items-center gap-2">
+								<span class="w-1.5 h-1.5 bg-primary-400 rounded-full"></span>
+								<span class="text-gray-300 text-xs">Git & GitHub Open Source</span>
+								<span class="text-primary-400 text-xs">DIO</span>
+							</div>
+							<div class="flex items-center gap-2">
+								<span class="w-1.5 h-1.5 bg-accent-orange rounded-full"></span>
+								<span class="text-gray-300 text-xs">Power BI Dashboard</span>
+								<span class="text-accent-orange text-xs">Azure</span>
+							</div>
+							<div class="flex items-center gap-2">
+								<span class="w-1.5 h-1.5 bg-accent-blue rounded-full"></span>
+								<span class="text-gray-300 text-xs">IA Generativa</span>
+								<span class="text-accent-blue text-xs">Azure</span>
+							</div>
+						</div>
+
+						<!-- Detalhes expansíveis -->
+						<div id="home-certifications-details" class="hidden">
+							<div class="max-h-60 overflow-y-auto space-y-2">
+								{certificacoes.map((cert) => (
+									<div class="bg-gray-700/30 rounded-lg p-3 border-l-4 border-primary-500/50">
+										<h4 class="text-xs font-semibold text-white mb-1">{cert.nome}</h4>
+										<div class="flex items-center justify-between mb-1">
+											<span class="text-primary-400 text-xs font-medium">{cert.emissor}</span>
+											<span class="text-gray-400 text-xs">{cert.ano}</span>
+										</div>
+										<p class="text-gray-400 text-xs leading-relaxed">
+											{cert.descricao.substring(0, 80)}...
+										</p>
+									</div>
+								))}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<style>
+	@keyframes bounce-subtle {
+		0%, 100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-10px);
+		}
+	}
+
+	@keyframes fade-in {
+		0% {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.animate-bounce-subtle {
+		animation: bounce-subtle 6s ease-in-out infinite;
+	}
+
+	.animate-fade-in {
+		animation: fade-in 1s ease-out forwards;
+	}
+
+	.line-clamp-2 {
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.line-clamp-3 {
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+</style>
+
+<script>
+	// Função para toggle das seções expansíveis na página inicial
+	function toggleHomeSection(sectionName: string) {
+		const details = document.getElementById(sectionName + '-details');
+		const button = document.querySelector('.' + sectionName + '-toggle-btn svg');
+		
+		if (details && button) {
+			if (details.classList.contains('hidden')) {
+				details.classList.remove('hidden');
+				(button as HTMLElement).style.transform = 'rotate(180deg)';
+			} else {
+				details.classList.add('hidden');
+				(button as HTMLElement).style.transform = 'rotate(0deg)';
+			}
+		}
+	}
+
+	// Tornar a função global para ser acessível pelo onclick
+	// @ts-ignore
+	window.toggleHomeSection = toggleHomeSection;
+</script>

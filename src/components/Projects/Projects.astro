@@ -1,0 +1,28 @@
+﻿---
+import FleetControlCaseStudy from './FleetControlCaseStudy.astro';
+import { ArrowUpRight } from '@lucide/astro';
+import { getFeaturedGitHubProjects } from '../../lib/github-integration.js';
+import { getAllPublishedProjectsMock } from '../../lib/projects-data.js';
+import './Projects.css';
+
+let featuredProjects = [];
+try {
+  featuredProjects = await getFeaturedGitHubProjects(3);
+  if (!featuredProjects?.length) featuredProjects = getAllPublishedProjectsMock().filter((project) => project.featured).slice(0, 3);
+} catch (error) {
+  console.error('Nao foi possivel carregar os projetos em destaque:', error);
+  featuredProjects = getAllPublishedProjectsMock().filter((project) => project.featured).slice(0, 3);
+}
+---
+
+<FleetControlCaseStudy />
+
+{featuredProjects.length > 0 && (
+  <section class="project-list-section" aria-labelledby="other-projects-title">
+    <div class="project-list-shell">
+      <header><p class="project-label"><span></span>Outros trabalhos</p><h2 id="other-projects-title">Projetos em destaque</h2><p>Reposit&oacute;rios e experi&ecirc;ncias que complementam minha trajet&oacute;ria t&eacute;cnica.</p></header>
+      <div class="project-card-grid">{featuredProjects.map((project) => <article class="project-card">{project.image && <img src={project.image} alt={project.title} loading="lazy" />}<div class="project-card-content"><h3>{project.title}</h3><p>{project.description}</p>{project.technologies?.length > 0 && <div class="project-card-tech">{project.technologies.slice(0, 3).map((tech: string) => <span>{tech}</span>)}</div>}{project.githubLink && <a href={project.githubLink} target="_blank" rel="noopener noreferrer" data-track="project_github" data-project-id={project.id} data-project-name={project.title}>Ver no GitHub <ArrowUpRight size={15} strokeWidth={1.8} /></a>}</div></article>)}</div>
+      <a class="all-projects-link" href="/projetos">Ver todos os projetos <ArrowUpRight size={16} strokeWidth={1.8} /></a>
+    </div>
+  </section>
+)}

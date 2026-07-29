@@ -1,0 +1,57 @@
+﻿---
+import { ArrowUpRight, Box, CheckCircle2, Code2, Database, Layers3, Route, Server, ShieldCheck } from '@lucide/astro';
+import './FleetControlCaseStudy.css';
+
+const badges = ['C#', '.NET 8', 'ASP.NET Core', 'SQL Server', 'Entity Framework', 'Docker', 'Swagger', 'JWT', 'REST API', 'Clean Architecture', 'Repository Pattern', 'Git'];
+const features = ['Gestao de veiculos e status operacional', 'Agenda de manutencao preventiva', 'Endpoints documentados com Swagger', 'Acesso protegido por autenticacao JWT'];
+const architecture = [
+  { name: 'Frontend', detail: 'Aplicacao cliente' },
+  { name: 'API .NET', detail: 'ASP.NET Core' },
+  { name: 'SQL Server', detail: 'Persistencia' },
+  { name: 'Dashboard', detail: 'Visao operacional' },
+  { name: 'Autenticacao JWT', detail: 'Acesso seguro' },
+  { name: 'Docker', detail: 'Ambiente reproduzivel' }
+];
+const challenges = [
+  ['Organizacao da arquitetura', 'Separar dominio, aplicacao e infraestrutura para manter regras de negocio independentes do framework.'],
+  ['Modelagem do banco', 'Estruturar entidades e relacionamentos para acompanhar veiculos, manutencoes e historico operacional.'],
+  ['Autenticacao', 'Aplicar JWT com contratos claros para proteger recursos sem contaminar as regras de dominio.'],
+  ['Performance', 'Planejar consultas objetivas, paginacao e acesso a dados com foco em previsibilidade.'],
+  ['Escalabilidade', 'Criar limites de responsabilidade que permitam evoluir modulos e integracoes com seguranca.']
+];
+const learnings = ['Decisoes de arquitetura precisam simplificar a evolucao, nao apenas organizar pastas.', 'Modelagem de dados melhora quando parte do fluxo operacional que o sistema precisa atender.', 'Contratos de API e documentacao reduzem ambiguidade entre backend, frontend e negocio.'];
+---
+
+<section class="fleet-case" aria-labelledby="fleet-case-title">
+  <div class="fleet-case-glow" aria-hidden="true"></div>
+  <div class="fleet-case-shell">
+    <div class="fleet-case-copy">
+      <p class="fleet-kicker"><span></span>Case study · Backend C#/.NET</p>
+      <div class="fleet-product"><span><Box size={21} strokeWidth={1.8} /></span>FleetControl API</div>
+      <h2 id="fleet-case-title">Software para transformar controle de frota em decisao operacional.</h2>
+      <p class="fleet-lead">Uma API pensada para centralizar veiculos, manutencoes e regras de operacao em uma base segura, documentada e preparada para evoluir.</p>
+
+      <div class="fleet-context">
+        <article><Route size={18} strokeWidth={1.8} /><div><h3>Problema resolvido</h3><p>Dados dispersos tornam o acompanhamento de frota reativo e dificultam priorizar manutencao e disponibilidade.</p></div></article>
+        <article><Layers3 size={18} strokeWidth={1.8} /><div><h3>Objetivo do sistema</h3><p>Oferecer uma camada backend clara para registrar, consultar e integrar dados operacionais com consistencia.</p></div></article>
+      </div>
+
+      <div class="fleet-feature-block"><p>Principais funcionalidades</p><ul>{features.map((feature) => <li><CheckCircle2 size={15} strokeWidth={2} />{feature}</li>)}</ul></div>
+      <div class="fleet-badges" aria-label="Tecnologias e padroes utilizados">{badges.map((badge) => <span>{badge}</span>)}</div>
+      <div class="fleet-case-actions"><a class="case-button case-button-primary" href="/projetos">Ver Projeto <ArrowUpRight size={16} strokeWidth={2} /></a><a class="case-button case-button-secondary" href="https://github.com/ThiagoBDias" target="_blank" rel="noopener noreferrer" data-track="project_github" data-project-name="FleetControl API">GitHub <Code2 size={16} strokeWidth={1.8} /></a><a class="case-button case-button-secondary" href="/projetos">Documentacao <ArrowUpRight size={16} strokeWidth={1.8} /></a></div>
+    </div>
+
+    <div class="fleet-case-visual" aria-label="Mockup e arquitetura do FleetControl API">
+      <div class="fleet-window">
+        <header><div class="fleet-dots" aria-hidden="true"><i></i><i></i><i></i></div><span><Server size={14} strokeWidth={1.8} />fleetcontrol.api</span><em><i></i>healthy</em></header>
+        <div class="fleet-window-body"><aside aria-hidden="true"><b>FC</b><i></i><i></i><i></i><i></i></aside><main><div class="fleet-window-title"><div><p>FleetControl</p><small>Operational overview</small></div><span>v1.0.0</span></div><div class="fleet-window-stats"><div><small>Frota ativa</small><strong>248</strong><em>+12 este mes</em></div><div><small>Manutencoes</small><strong>18</strong><em>6 agendadas</em></div></div><div class="fleet-routes"><div><span>API routes</span><small>Swagger</small></div><p><b>GET</b>/api/vehicles <em>200</em></p><p><b class="post">POST</b>/api/maintenance <em>201</em></p><p><b class="put">PUT</b>/api/vehicles/:id <em>204</em></p></div><footer><span><Database size={14} />SQL Server</span><span><ShieldCheck size={14} />JWT secured</span></footer></main></div>
+      </div>
+      <div class="architecture-flow"><div class="architecture-heading"><Layers3 size={16} strokeWidth={1.8} /><span>Arquitetura utilizada</span></div>{architecture.map((item, index) => <div class="architecture-step"><span class="architecture-node">{index + 1}</span><div><strong>{item.name}</strong><small>{item.detail}</small></div>{index < architecture.length - 1 && <i aria-hidden="true">↓</i>}</div>)}</div>
+    </div>
+  </div>
+
+  <div class="fleet-case-details">
+    <article class="case-detail case-detail-challenges"><p class="fleet-kicker"><span></span>Desafios do projeto</p><h3>Decisoes de engenharia que sustentam a API.</h3><div class="challenge-list">{challenges.map(([title, text], index) => <div><span>0{index + 1}</span><section><h4>{title}</h4><p>{text}</p></section></div>)}</div></article>
+    <article class="case-detail case-detail-learnings"><p class="fleet-kicker"><span></span>O que aprendi</p><h3>Conhecimento aplicado durante o desenvolvimento.</h3><ul>{learnings.map((learning) => <li><CheckCircle2 size={16} strokeWidth={2} />{learning}</li>)}</ul></article>
+  </div>
+</section>

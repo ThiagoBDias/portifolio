@@ -1,0 +1,45 @@
+﻿---
+import { BriefcaseBusiness, ChevronRight, Factory, ServerCog } from '@lucide/astro';
+import './Experience.css';
+---
+
+<section class="experience-section" aria-labelledby="experience-title">
+  <div class="experience-shell">
+    <header class="experience-header">
+      <p class="section-label"><span></span>Experiência aplicada</p>
+      <h2 id="experience-title">A operação ensinou o que o código precisa resolver.</h2>
+      <p>Uma trajetória construída entre suporte, sistemas corporativos e desenvolvimento — com atenção especial a confiabilidade, contexto e manutenção.</p>
+    </header>
+
+    <ol class="timeline">
+      <li class="timeline-item">
+        <div class="timeline-marker"><Factory size={18} strokeWidth={1.8} /></div>
+        <article class="timeline-card">
+          <div class="timeline-meta"><span>Base profissional</span><span>Operação e mineração</span></div>
+          <h3>Sistemas próximos de ambientes críticos</h3>
+          <p>Contato com rotinas operacionais evidenciou o valor de informação correta, continuidade de serviço e processos que dão suporte a decisões reais.</p>
+          <ul><li>Visão de processos</li><li>Prioridade para estabilidade</li><li>Comunicação com áreas de negócio</li></ul>
+        </article>
+      </li>
+      <li class="timeline-item">
+        <div class="timeline-marker"><ServerCog size={18} strokeWidth={1.8} /></div>
+        <article class="timeline-card">
+          <div class="timeline-meta"><span>Sistemas corporativos</span><span>ERP Sankhya</span></div>
+          <h3>Sustentação com leitura de negócio</h3>
+          <p>Atuação voltada à análise de incidentes, suporte a usuários e entendimento das dependências entre ERP, dados e operação.</p>
+          <ul><li>Análise de causa</li><li>Dados e regras de negócio</li><li>Resolução estruturada</li></ul>
+        </article>
+      </li>
+      <li class="timeline-item">
+        <div class="timeline-marker"><BriefcaseBusiness size={18} strokeWidth={1.8} /></div>
+        <article class="timeline-card timeline-card-current">
+          <div class="timeline-meta"><span>Próximo passo</span><span>Backend C#/.NET</span></div>
+          <h3>Construir software confiável de ponta a ponta</h3>
+          <p>Direcionamento para desenvolvimento backend, unindo C#, .NET, APIs e arquitetura limpa à experiência prática de sistemas que sustentam operações.</p>
+          <ul><li>APIs e integrações</li><li>Clean Architecture</li><li>Qualidade e evolução contínua</li></ul>
+          <a href="/contato">Vamos conversar <ChevronRight size={15} strokeWidth={1.8} /></a>
+        </article>
+      </li>
+    </ol>
+  </div>
+</section>

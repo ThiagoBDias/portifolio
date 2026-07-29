@@ -1,0 +1,55 @@
+﻿---
+import './Navbar.css';
+---
+
+<header class="site-header" data-navbar>
+  <nav class="site-nav" aria-label="Navegação principal">
+    <a class="brand" href="/" aria-label="Thiago Dias - página inicial">
+      <span class="brand-mark" aria-hidden="true">TD</span>
+      <span>Thiago Dias</span>
+    </a>
+
+    <div class="desktop-links" aria-label="Links principais">
+      <a href="/">Início</a>
+      <a href="/projetos">Projetos</a>
+      <a href="/sobre">Sobre</a>
+      <a class="nav-cta" href="/contato">Vamos conversar <span aria-hidden="true">↗</span></a>
+    </div>
+
+    <button class="menu-toggle" type="button" aria-label="Abrir menu de navegação" aria-controls="mobile-menu" aria-expanded="false" data-menu-toggle>
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="mobile-menu" data-mobile-menu hidden>
+    <div class="mobile-menu-inner">
+      <a href="/">Início</a>
+      <a href="/projetos">Projetos</a>
+      <a href="/sobre">Sobre</a>
+      <a href="/contato">Vamos conversar <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const navbar = document.querySelector<HTMLElement>('[data-navbar]');
+  const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const mobileMenu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+
+  const updateNavbar = () => navbar?.toggleAttribute('data-scrolled', window.scrollY > 12);
+  updateNavbar();
+  window.addEventListener('scroll', updateNavbar, { passive: true });
+
+  menuButton?.addEventListener('click', () => {
+    const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-expanded', String(!isOpen));
+    menuButton.setAttribute('aria-label', isOpen ? 'Abrir menu de navegação' : 'Fechar menu de navegação');
+    if (mobileMenu) mobileMenu.hidden = isOpen;
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+    mobileMenu.hidden = true;
+    menuButton?.setAttribute('aria-expanded', 'false');
+    menuButton?.setAttribute('aria-label', 'Abrir menu de navegação');
+  }));
+</script>

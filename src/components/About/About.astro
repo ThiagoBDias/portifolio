@@ -1,0 +1,67 @@
+﻿---
+import { ArrowUpRight, BriefcaseBusiness, Code2, Database, Factory, GraduationCap, Quote, Target } from '@lucide/astro';
+import './About.css';
+---
+
+<section class="about-section" aria-labelledby="about-title">
+  <div class="about-glow about-glow-top" aria-hidden="true"></div>
+  <div class="about-glow about-glow-bottom" aria-hidden="true"></div>
+
+  <div class="about-shell">
+    <div class="about-story">
+      <p class="section-label"><span></span>Trajetoria profissional</p>
+      <h2 id="about-title">Do Operacional<br />para o <em>Software</em></h2>
+      <p class="about-subtitle">Transformando experi&ecirc;ncia pr&aacute;tica em solu&ccedil;&otilde;es de software.</p>
+      <p class="about-intro">Minha transi&ccedil;&atilde;o para backend veio da proximidade com processos reais: opera&ccedil;&otilde;es que dependem de dados corretos, sistemas corporativos est&aacute;veis e respostas que precisam funcionar na primeira vez.</p>
+
+      <blockquote class="problem-quote"><Quote size={20} strokeWidth={1.8} aria-hidden="true" /><p>&ldquo;Software de qualidade come&ccedil;a quando entendemos o problema real que existe antes do c&oacute;digo.&rdquo;</p></blockquote>
+
+      <div class="about-timeline" aria-label="Evolucao profissional">
+        <article class="timeline-entry">
+          <span class="timeline-icon"><Factory size={17} strokeWidth={1.8} /></span>
+          <div><p>Base operacional</p><h3>Minera&ccedil;&atilde;o e processos cr&iacute;ticos</h3><span>Aprendizado pr&aacute;tico sobre continuidade, rastreabilidade e impacto de cada informa&ccedil;&atilde;o na opera&ccedil;&atilde;o.</span></div>
+        </article>
+        <article class="timeline-entry">
+          <span class="timeline-icon"><Database size={17} strokeWidth={1.8} /></span>
+          <div><p>Sistemas corporativos</p><h3>ERP Sankhya e regras de neg&oacute;cio</h3><span>Experi&ecirc;ncia com sustenta&ccedil;&atilde;o, incidentes e conex&atilde;o entre processos, dados e usu&aacute;rios.</span></div>
+        </article>
+        <article class="timeline-entry timeline-entry-current">
+          <span class="timeline-icon"><Code2 size={17} strokeWidth={1.8} /></span>
+          <div><p>Direcionamento atual</p><h3>Backend C#/.NET</h3><span>Constru&ccedil;&atilde;o de APIs e servi&ccedil;os com foco em arquitetura limpa, manutenibilidade e confiabilidade.</span></div>
+        </article>
+      </div>
+    </div>
+
+    <div class="about-profile" aria-label="Resumo de formacao e especialidades">
+      <article class="profile-card profile-card-education">
+        <span class="profile-icon"><GraduationCap size={21} strokeWidth={1.8} /></span>
+        <p class="card-label">Forma&ccedil;&atilde;o</p>
+        <h3>An&aacute;lise e Desenvolvimento de Sistemas</h3>
+        <p>Tecn&oacute;logo pelo IFTM, com fundamentos de engenharia de software, dados e an&aacute;lise de sistemas.</p>
+      </article>
+
+      <article class="profile-card">
+        <span class="profile-icon"><BriefcaseBusiness size={21} strokeWidth={1.8} /></span>
+        <p class="card-label">Experi&ecirc;ncia</p>
+        <h3>Opera&ccedil;&atilde;o, suporte e contexto de neg&oacute;cio</h3>
+        <p>Uma vis&atilde;o de software conectada &agrave;s necessidades de ambientes e equipes que dependem dele todos os dias.</p>
+      </article>
+
+      <article class="profile-card profile-card-specialties">
+        <span class="profile-icon"><Code2 size={21} strokeWidth={1.8} /></span>
+        <p class="card-label">Especialidades</p>
+        <h3>Backend orientado a clareza</h3>
+        <p>Do contexto do ERP Sankhya &agrave; implementa&ccedil;&atilde;o de APIs .NET, com aten&ccedil;&atilde;o a regras e integra&ccedil;&otilde;es.</p>
+        <div class="tech-badges"><span>C#</span><span>.NET</span><span>APIs</span><span>SQL</span><span>Sankhya</span></div>
+      </article>
+
+      <article class="profile-card profile-card-goal">
+        <span class="profile-icon"><Target size={21} strokeWidth={1.8} /></span>
+        <p class="card-label">Objetivo</p>
+        <h3>Resolver problemas reais com software</h3>
+        <p>Atuar em times Backend C#/.NET criando servi&ccedil;os confi&aacute;veis, sustent&aacute;veis e relevantes para o neg&oacute;cio.</p>
+        <a href="/contato">Conversar sobre oportunidades <ArrowUpRight size={15} strokeWidth={1.8} /></a>
+      </article>
+    </div>
+  </div>
+</section>
