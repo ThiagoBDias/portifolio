@@ -7,13 +7,6 @@ import sitemap from '@astrojs/sitemap';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// Imprimir valores para debug
-console.log('🔍 Variáveis de ambiente carregadas:');
-console.log('- SUPABASE_URL:', process.env.SUPABASE_URL ? 'definido ✅' : 'não definido ❌');
-console.log('- SUPABASE_ANON_KEY:', process.env.SUPABASE_ANON_KEY ? 'definido ✅' : 'não definido ❌');
-console.log('- PUBLIC_SUPABASE_URL:', process.env.PUBLIC_SUPABASE_URL ? 'definido ✅' : 'não definido ❌');
-console.log('- PUBLIC_SUPABASE_ANON_KEY:', process.env.PUBLIC_SUPABASE_ANON_KEY ? 'definido ✅' : 'não definido ❌');
-
 // https://astro.build/config
 export default defineConfig({
   // Configuração otimizada para Vercel

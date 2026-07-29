@@ -1,19 +1,8 @@
 ---
-import { getRealtimeGitHubTechnologies } from '../lib/supabase.js';
+import { getGitHubTechnologies } from '../services/github/github.service';
 
-// Carregar dados REAIS do GitHub API
-console.log('🔄 Carregando tecnologias em tempo real...');
-const techData = await getRealtimeGitHubTechnologies();
+const techData = await getGitHubTechnologies();
 const { techsByCategory, metadata } = techData;
-
-console.log('📊 Dados de tecnologias carregados:', {
-  source: metadata.source,
-  totalTechs: metadata.totalTechs,
-  categories: Object.keys(techsByCategory).filter((cat: string) => {
-    const categoryData = techsByCategory[cat as keyof typeof techsByCategory];
-    return categoryData && categoryData.length > 0;
-  })
-});
 
 // Garantir que temos as categorias necessárias
 const categories = {

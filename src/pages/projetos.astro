@@ -1,27 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getAllGitHubProjects } from '../lib/github-integration.js';
+import { getAllGitHubProjects } from '../services/github/github.service';
 import { getAllPublishedProjectsMock } from '../lib/projects-data.js';
 import ProjectCard from '../components/ProjectCard.astro';
 import RealtimeTechSection from '../components/RealtimeTechSection.astro';
 
 // Buscar projetos diretamente do GitHub com fallback para dados mock
-let projects = [];
-try {
-  console.log('🔄 Buscando projetos do GitHub...');
-  projects = await getAllGitHubProjects();
-  console.log(`✅ Encontrados ${projects.length} projetos do GitHub`);
-  
-  // Se não há projetos do GitHub, usa dados mock
-  if (!projects || projects.length === 0) {
-    console.log('📝 Usando dados mock como fallback');
-    projects = getAllPublishedProjectsMock();
-  }
-} catch (error) {
-  console.error('❌ Erro ao buscar projetos do GitHub:', error);
-  console.log('📝 Usando dados mock como fallback');
-  projects = getAllPublishedProjectsMock();
-}
+let projects = await getAllGitHubProjects();
+if (!projects.length) projects = getAllPublishedProjectsMock();
 
 // Dados padrão
 const defaultData = {
