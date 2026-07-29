@@ -1,0 +1,10 @@
+---
+export interface Props { variant?: 'default' | 'primary' | 'gradient'; class?: string; }
+const { variant = 'default', class: className = '' } = Astro.props;
+const variants = {
+  default: 'bg-gray-700/50 text-gray-300 border-gray-600/50',
+  primary: 'bg-primary-900/20 text-primary-300 border-primary-500/30',
+  gradient: 'bg-gradient-to-r from-primary-500/20 to-accent-orange/20 text-primary-300 border-primary-500/30'
+};
+---
+<span class={`inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium ${variants[variant]} ${className}`}><slot /></span>

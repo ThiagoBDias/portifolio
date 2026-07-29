@@ -1,0 +1,7 @@
+---
+export interface Props { level?: 'h1' | 'h2' | 'h3'; class?: string; align?: 'left' | 'center'; }
+const { level = 'h2', class: className = '', align = 'center' } = Astro.props;
+const Tag = level;
+const sizes = { h1: 'text-4xl md:text-6xl', h2: 'text-3xl md:text-4xl', h3: 'text-2xl md:text-3xl' };
+---
+<Tag class={`${sizes[level]} mb-4 font-bold bg-gradient-to-r from-primary-400 to-accent-cyan bg-clip-text text-transparent ${align === 'center' ? 'text-center' : ''} ${className}`}><slot /></Tag>

@@ -1,0 +1,6 @@
+---
+export interface Props { class?: string; color?: 'primary' | 'cyan'; }
+const { class: className = '', color = 'primary' } = Astro.props;
+const colors = { primary: 'from-primary-500/20 to-accent-cyan/20', cyan: 'from-accent-cyan/20 to-accent-blue/20' };
+---
+<div class={`relative ${className}`}><div class={`pointer-events-none absolute -inset-1 rounded-xl bg-gradient-to-r ${colors[color]} opacity-30 blur`}></div><div class="relative"><slot /></div></div>

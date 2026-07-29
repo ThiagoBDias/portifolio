@@ -1,5 +1,6 @@
 ---
-import Button from './Button.astro';
+import Button from './ui/Button.astro';
+import TechBadge from './ui/TechBadge.astro';
 
 export interface Props {
   title: string;
@@ -58,14 +59,10 @@ const {
     {technologies.length > 0 && (
       <div class="flex flex-wrap gap-2">
         {technologies.slice(0, 4).map((tech) => (
-          <span class="px-3 py-1 bg-gray-700/50 text-gray-300 text-sm rounded-full border border-gray-600/50 hover:border-primary-400/50 hover:text-primary-300 transition-colors duration-200">
-            {tech}
-          </span>
+          <TechBadge name={tech} />
         ))}
         {technologies.length > 4 && (
-          <span class="px-3 py-1 bg-gray-700/50 text-gray-400 text-sm rounded-full border border-gray-600/50">
-            +{technologies.length - 4}
-          </span>
+          <TechBadge name={`+${technologies.length - 4}`} muted />
         )}
       </div>
     )}

@@ -1,0 +1,8 @@
+---
+export interface Props { value: string; label: string; class?: string; }
+const { value, label, class: className = '' } = Astro.props;
+---
+<div class={`group relative rounded-xl border border-gray-700/50 bg-gray-800/50 p-6 text-center backdrop-blur-sm transition-all duration-300 ease-in-out hover:scale-110 hover:border-primary-500/30 ${className}`}>
+  <div class="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary-500/20 to-accent-cyan/20 opacity-30 blur transition duration-500 group-hover:opacity-100"></div>
+  <div class="relative"><p class="text-4xl font-bold bg-gradient-to-r from-primary-400 to-accent-cyan bg-clip-text text-transparent md:text-5xl">{value}</p><p class="mt-2 text-sm text-gray-400 transition-colors duration-300 group-hover:text-gray-300">{label}</p></div>
+</div>

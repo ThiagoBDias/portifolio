@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getAllPublishedProjects, getProjectById } from '../../lib/supabase.js';
-import Button from '../../components/Button.astro';
+import Button from '../../components/ui/Button.astro';
 
 export async function getStaticPaths() {
     const projects = await getAllPublishedProjects();
