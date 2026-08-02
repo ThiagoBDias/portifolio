@@ -30,7 +30,7 @@
 
   social: {
     github: "https://github.com/ThiagoBDias",
-    linkedin: "COLOQUE_AQUI_SEU_LINKEDIN"
+    linkedin: "https://www.linkedin.com/in/thiago-batista-dias/"
   }
 } as const;
 
