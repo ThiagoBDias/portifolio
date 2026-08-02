@@ -5,21 +5,22 @@ import SEOHead from '../components/SEOHead.astro';
 import CustomAnalytics from '../components/Analytics.astro';
 import Navbar from '../components/Navbar/Navbar.astro';
 import Footer from '../components/Footer/Footer.astro';
+import { site } from '../data/site';
 
 export interface Props {
-	title: string;
-	description?: string;
-	image?: string;
-	keywords?: string[];
-	type?: 'website' | 'article' | 'profile';
-	noindex?: boolean;
+    title?: string;
+    description?: string;
+    image?: string;
+    keywords?: string[];
+    type?: 'website' | 'article' | 'profile';
+    noindex?: boolean;
 }
 
-const { 
-	title, 
-	description = "PortfÃ³lio de Thiago Dias - Desenvolvedor Full Stack especializado em JavaScript, TypeScript, React, Node.js, Power BI e ERP Sankhya. Explore meus projetos e entre em contato.", 
+const {
+	title = site.title,
+	description = site.description,
 	image = "/og-image.png",
-	keywords = [],
+	keywords = site.keywords,
 	type = 'website',
 	noindex = false
 } = Astro.props;

@@ -1,25 +1,41 @@
 ﻿export const siteConfig = {
-  name: 'Thiago Dias',
-  title: 'Thiago Dias | Backend C#/.NET Developer',
-  description: 'Backend developer focused on C#/.NET, APIs, clean architecture and reliable systems.',
-  url: 'https://thiagodias.dev',
-  locale: 'pt_BR',
-  language: 'pt-BR',
-  author: 'Thiago Dias',
-  image: '/og-image.png',
-  social: {
-    github: 'https://github.com/ThiagoBDias',
-    linkedin: 'https://linkedin.com/in/thiago-dias'
-  },
+  name: "Thiago Dias",
+
+  role: "Desenvolvedor Backend C#/.NET",
+
+  title: "Thiago Dias | Desenvolvedor Backend C#/.NET",
+
+  description:
+    "Desenvolvedor Backend com foco em C#, .NET, APIs REST e SQL, aplicando boas práticas de arquitetura para construir soluções confiáveis.",
+
+  author: "Thiago Dias",
+
+  url: "https://www.thiagodias.dev",
+
+  image: "/og-image.png",
+
+  locale: "pt_BR",
+
   keywords: [
-    'Backend C#',
-    '.NET',
-    'ASP.NET Core',
-    'Web API',
-    'Clean Architecture',
-    'SQL Server',
-    'Software Architecture'
-  ]
+    "C#",
+    ".NET",
+    "ASP.NET Core",
+    "Backend",
+    "API REST",
+    "SQL",
+    "SQL Server",
+    "Entity Framework Core",
+    "Sankhya ERP"
+  ],
+
+  social: {
+    github: "https://github.com/ThiagoBDias",
+    linkedin: "COLOQUE_AQUI_SEU_LINKEDIN"
+  }
 } as const;
 
-export type SiteConfig = typeof siteConfig;
+/**
+ * Alias mantido para consumo simplificado
+ * em componentes e layouts.
+ */
+export const site = siteConfig;
