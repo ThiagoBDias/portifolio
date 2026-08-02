@@ -8,34 +8,133 @@ import './Hero.css';
   <div class="hero-grid" aria-hidden="true"></div>
 
   <div class="hero-container">
-    <div class="hero-content">
-      <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span>Disponível para oportunidades Backend</div>
-      <p class="hero-kicker">Olá, eu sou Thiago Dias.</p>
-      <h1 id="hero-title">Backend .NET para sistemas que <span>não podem parar.</span></h1>
-      <p class="hero-description">Desenvolvo APIs robustas e soluções escaláveis com C#, .NET, SQL e boas práticas de arquitetura — transformando regras complexas em software confiável.</p>
 
-      <div class="hero-actions">
-        <a class="button button-primary" href="/projetos">Conhecer projetos <span aria-hidden="true">→</span></a>
-        <a class="button button-secondary" href="/contato">Entrar em contato</a>
+    <!-- Conteúdo principal -->
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        <span class="status-dot" aria-hidden="true"></span>
+        Disponível para oportunidades Backend
       </div>
 
-      <dl class="stats" aria-label="Resumo profissional">
-        <div><dt>5+ anos</dt><dd>em tecnologia</dd></div>
-        <div><dt>.NET & APIs</dt><dd>foco principal</dd></div>
-        <div><dt>Clean Code</dt><dd>por padrão</dd></div>
+      <p class="hero-kicker">
+        Olá, eu sou Thiago Dias.
+      </p>
+
+      <h1 id="hero-title">
+        Backend .NET para sistemas que
+        <span>não podem parar.</span>
+      </h1>
+
+      <p class="hero-description">
+        Desenvolvo APIs e aplicações backend com C#, .NET e SQL,
+        aplicando boas práticas de arquitetura para transformar
+        regras de negócio em software organizado e confiável.
+      </p>
+
+      <!-- Ações -->
+      <div class="hero-actions">
+
+        <a
+          class="button button-primary"
+          href="/projetos"
+        >
+          Conhecer projetos
+          <span aria-hidden="true">→</span>
+        </a>
+
+        <a
+          class="button button-secondary"
+          href="/contato"
+        >
+          Entrar em contato
+        </a>
+
+      </div>
+
+      <!-- Competências principais -->
+      <dl class="stats" aria-label="Principais competências">
+
+        <div>
+          <dt>C# &amp; .NET</dt>
+          <dd>backend</dd>
+        </div>
+
+        <div>
+          <dt>REST APIs</dt>
+          <dd>integrações</dd>
+        </div>
+
+        <div>
+          <dt>SQL</dt>
+          <dd>dados e regras</dd>
+        </div>
+
       </dl>
+
     </div>
 
-    <div class="code-stage" aria-label="Exemplo de código C#">
-      <div class="code-glow" aria-hidden="true"></div>
+    <!-- Demonstração técnica -->
+    <div
+      class="code-stage"
+      aria-label="Exemplo de código C#"
+    >
+
+      <div
+        class="code-glow"
+        aria-hidden="true"
+      ></div>
+
       <div class="code-window">
+
+        <!-- Barra superior -->
         <div class="window-toolbar">
-          <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
-          <div class="file-tab"><span class="csharp-icon">C#</span><span>FleetService.cs</span></div>
-          <span class="toolbar-action" aria-hidden="true">•••</span>
+
+          <div
+            class="window-dots"
+            aria-hidden="true"
+          >
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+
+          <div class="file-tab">
+            <span class="csharp-icon">C#</span>
+            <span>FleetService.cs</span>
+          </div>
+
+          <span
+            class="toolbar-action"
+            aria-hidden="true"
+          >
+            •••
+          </span>
+
         </div>
+
+        <!-- Código -->
         <div class="code-body">
-          <div class="line-numbers" aria-hidden="true">1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13</div>
+
+          <div
+            class="line-numbers"
+            aria-hidden="true"
+          >
+            1<br />
+            2<br />
+            3<br />
+            4<br />
+            5<br />
+            6<br />
+            7<br />
+            8<br />
+            9<br />
+            10<br />
+            11<br />
+            12<br />
+            13
+          </div>
+
           <pre><code><span class="code-keyword">public sealed class</span> <span class="code-type">FleetService</span> : IFleetService
 &#123;
   <span class="code-keyword">private readonly</span> IFleetRepository _fleet;
@@ -43,19 +142,56 @@ import './Hero.css';
 
   <span class="code-keyword">public async</span> Task&lt;<span class="code-type">Result</span>&lt;Fleet&gt;&gt; <span class="code-method">GetByIdAsync</span>(Guid id)
   &#123;
-    <span class="code-keyword">var</span> vehicle = <span class="code-keyword">await</span> _fleet.<span class="code-method">FindAsync</span>(id);
+    <span class="code-keyword">var</span> fleet = <span class="code-keyword">await</span> _fleet.<span class="code-method">FindAsync</span>(id);
 
-    <span class="code-keyword">if</span> (vehicle <span class="code-operator">is</span> <span class="code-keyword">null</span>)
+    <span class="code-keyword">if</span> (fleet <span class="code-operator">is</span> <span class="code-keyword">null</span>)
       <span class="code-keyword">return</span> Result&lt;Fleet&gt;.<span class="code-method">NotFound</span>();
 
-    <span class="code-keyword">return</span> Result&lt;Fleet&gt;.<span class="code-method">Success</span>(vehicle);
+    <span class="code-keyword">return</span> Result&lt;Fleet&gt;.<span class="code-method">Success</span>(fleet);
   &#125;
 &#125;</code></pre>
+
         </div>
-        <div class="window-status"><span><i class="status-check" aria-hidden="true">✓</i> Build succeeded</span><span>.NET 8.0</span></div>
+
+        <!-- Status -->
+        <div class="window-status">
+
+          <span>
+            <i
+              class="status-check"
+              aria-hidden="true"
+            >
+              ✓
+            </i>
+            Build succeeded
+          </span>
+
+          <span>.NET 8.0</span>
+
+        </div>
+
       </div>
-      <div class="architecture-badge"><span class="badge-icon" aria-hidden="true">⌘</span><span><strong>Clean Architecture</strong><small>Domain · Application · Infrastructure</small></span></div>
+
+      <!-- Arquitetura -->
+      <div class="architecture-badge">
+
+        <span
+          class="badge-icon"
+          aria-hidden="true"
+        >
+          ⌘
+        </span>
+
+        <span>
+          <strong>Clean Architecture</strong>
+          <small>
+            Domain · Application · Infrastructure
+          </small>
+        </span>
+
+      </div>
+
     </div>
+
   </div>
 </section>
-
