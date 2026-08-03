@@ -1,1 +1,144 @@
-<!-- Reservado para conteúdo desta seção. -->
+---
+import {
+  Braces,
+  Database,
+  GitBranch,
+  Layers3,
+  ServerCog
+} from '@lucide/astro';
+
+import './Skills.css';
+
+const skillGroups = [
+  {
+    title: 'Backend & APIs',
+    description: 'Desenvolvimento de serviços, APIs e regras de aplicação.',
+    icon: Braces,
+    skills: [
+      'C#',
+      '.NET',
+      'ASP.NET Core',
+      'REST APIs',
+      'Entity Framework',
+      'JWT',
+      'Swagger'
+    ]
+  },
+  {
+    title: 'Dados & Persistência',
+    description: 'Modelagem, consultas e persistência de dados relacionais.',
+    icon: Database,
+    skills: [
+      'SQL',
+      'SQL Server',
+      'PostgreSQL',
+      'Modelagem de Dados',
+      'Consultas SQL'
+    ]
+  },
+  {
+    title: 'Arquitetura & Engenharia',
+    description: 'Práticas para construir software organizado e sustentável.',
+    icon: Layers3,
+    skills: [
+      'Clean Architecture',
+      'Clean Code',
+      'Git',
+      'GitHub',
+      'Docker'
+    ]
+  },
+  {
+    title: 'Sistemas & Negócio',
+    description: 'Experiência conectando tecnologia a processos corporativos.',
+    icon: ServerCog,
+    skills: [
+      'ERP Sankhya',
+      'Integrações',
+      'Regras de Negócio',
+      'Suporte a Sistemas'
+    ]
+  }
+];
+---
+
+<section class="skills-section" id="skills" aria-labelledby="skills-title">
+  <div class="skills-glow" aria-hidden="true"></div>
+
+  <div class="skills-shell">
+
+    <header class="skills-header">
+      <p class="section-label">
+        <span></span>
+        Stack & competências
+      </p>
+
+      <h2 id="skills-title">
+        Tecnologia como ferramenta.<br />
+        <em>Engenharia como base.</em>
+      </h2>
+
+      <p class="skills-intro">
+        Competências construídas entre desenvolvimento backend,
+        bancos de dados, sistemas corporativos e problemas reais
+        de negócio.
+      </p>
+    </header>
+
+    <div class="skills-grid">
+      {skillGroups.map((group, index) => {
+        const Icon = group.icon;
+
+        return (
+          <article
+            class:list={[
+              'skill-card',
+              index === 0 && 'skill-card-primary'
+            ]}
+          >
+            <div class="skill-card-top">
+              <span class="skill-icon">
+                <Icon size={21} strokeWidth={1.8} aria-hidden="true" />
+              </span>
+
+              <span class="skill-number">
+                0{index + 1}
+              </span>
+            </div>
+
+            <div class="skill-card-content">
+              <h3>{group.title}</h3>
+              <p>{group.description}</p>
+            </div>
+
+            <div
+              class="skill-tags"
+              aria-label={`Tecnologias de ${group.title}`}
+            >
+              {group.skills.map((skill) => (
+                <span>{skill}</span>
+              ))}
+            </div>
+          </article>
+        );
+      })}
+    </div>
+
+    <div class="skills-foundation">
+      <div class="foundation-icon">
+        <GitBranch size={19} strokeWidth={1.8} aria-hidden="true" />
+      </div>
+
+      <div>
+        <span>Direcionamento técnico</span>
+        <strong>Backend C#/.NET + Sistemas Corporativos</strong>
+      </div>
+
+      <p>
+        APIs, arquitetura, dados e regras de negócio trabalhando
+        como partes do mesmo sistema.
+      </p>
+    </div>
+
+  </div>
+</section>

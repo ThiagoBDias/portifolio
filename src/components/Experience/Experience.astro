@@ -1,45 +1,165 @@
 ﻿---
-import { BriefcaseBusiness, ChevronRight, Factory, ServerCog } from '@lucide/astro';
+import {
+  BriefcaseBusiness,
+  ChevronRight,
+  Factory,
+  ServerCog
+} from '@lucide/astro';
+
 import './Experience.css';
 ---
 
 <section class="experience-section" aria-labelledby="experience-title">
+
   <div class="experience-shell">
+
     <header class="experience-header">
-      <p class="section-label"><span></span>Experiência aplicada</p>
-      <h2 id="experience-title">A operação ensinou o que o código precisa resolver.</h2>
-      <p>Uma trajetória construída entre suporte, sistemas corporativos e desenvolvimento — com atenção especial a confiabilidade, contexto e manutenção.</p>
+
+      <p class="section-label">
+        <span></span>
+        Experiência aplicada
+      </p>
+
+      <h2 id="experience-title">
+        Experiência técnica conectada ao negócio.
+      </h2>
+
+      <p>
+        Minha trajetória passa por suporte de TI, sistemas corporativos
+        e operação na mineração. Hoje utilizo essa experiência como base
+        para evoluir no desenvolvimento Backend C#/.NET.
+      </p>
+
     </header>
 
     <ol class="timeline">
+
+      <!-- Operação -->
       <li class="timeline-item">
-        <div class="timeline-marker"><Factory size={18} strokeWidth={1.8} /></div>
+
+        <div class="timeline-marker">
+          <Factory
+            size={18}
+            strokeWidth={1.8}
+            aria-hidden="true"
+          />
+        </div>
+
         <article class="timeline-card">
-          <div class="timeline-meta"><span>Base profissional</span><span>Operação e mineração</span></div>
-          <h3>Sistemas próximos de ambientes críticos</h3>
-          <p>Contato com rotinas operacionais evidenciou o valor de informação correta, continuidade de serviço e processos que dão suporte a decisões reais.</p>
-          <ul><li>Visão de processos</li><li>Prioridade para estabilidade</li><li>Comunicação com áreas de negócio</li></ul>
+
+          <div class="timeline-meta">
+            <span>Experiência atual</span>
+            <span>Operação e mineração</span>
+          </div>
+
+          <h3>
+            Controle operacional e informação
+          </h3>
+
+          <p>
+            Atuação próxima à operação de equipamentos e processos
+            da mineração, acompanhando informações utilizadas no
+            controle e na tomada de decisão operacional.
+          </p>
+
+          <ul>
+            <li>Controle operacional</li>
+            <li>Equipamentos e processos</li>
+            <li>Qualidade da informação</li>
+          </ul>
+
         </article>
+
       </li>
+
+      <!-- Tecnologia -->
       <li class="timeline-item">
-        <div class="timeline-marker"><ServerCog size={18} strokeWidth={1.8} /></div>
+
+        <div class="timeline-marker">
+          <ServerCog
+            size={18}
+            strokeWidth={1.8}
+            aria-hidden="true"
+          />
+        </div>
+
         <article class="timeline-card">
-          <div class="timeline-meta"><span>Sistemas corporativos</span><span>ERP Sankhya</span></div>
-          <h3>Sustentação com leitura de negócio</h3>
-          <p>Atuação voltada à análise de incidentes, suporte a usuários e entendimento das dependências entre ERP, dados e operação.</p>
-          <ul><li>Análise de causa</li><li>Dados e regras de negócio</li><li>Resolução estruturada</li></ul>
+
+          <div class="timeline-meta">
+            <span>Experiência em tecnologia</span>
+            <span>TI e ERP Sankhya</span>
+          </div>
+
+          <h3>
+            Suporte, sistemas e regras de negócio
+          </h3>
+
+          <p>
+            Experiência com suporte de TI e sistemas corporativos,
+            incluindo ERP Sankhya, SQL e atendimento às necessidades
+            dos usuários e processos da empresa.
+          </p>
+
+          <ul>
+            <li>ERP Sankhya</li>
+            <li>SQL e dados</li>
+            <li>Suporte e usuários</li>
+          </ul>
+
         </article>
+
       </li>
+
+      <!-- Backend -->
       <li class="timeline-item">
-        <div class="timeline-marker"><BriefcaseBusiness size={18} strokeWidth={1.8} /></div>
+
+        <div class="timeline-marker">
+          <BriefcaseBusiness
+            size={18}
+            strokeWidth={1.8}
+            aria-hidden="true"
+          />
+        </div>
+
         <article class="timeline-card timeline-card-current">
-          <div class="timeline-meta"><span>Próximo passo</span><span>Backend C#/.NET</span></div>
-          <h3>Construir software confiável de ponta a ponta</h3>
-          <p>Direcionamento para desenvolvimento backend, unindo C#, .NET, APIs e arquitetura limpa à experiência prática de sistemas que sustentam operações.</p>
-          <ul><li>APIs e integrações</li><li>Clean Architecture</li><li>Qualidade e evolução contínua</li></ul>
-          <a href="/contato">Vamos conversar <ChevronRight size={15} strokeWidth={1.8} /></a>
+
+          <div class="timeline-meta">
+            <span>Direcionamento profissional</span>
+            <span>Backend C#/.NET</span>
+          </div>
+
+          <h3>
+            Desenvolvimento Backend
+          </h3>
+
+          <p>
+            Desenvolvimento de projetos com C#, .NET, APIs REST e SQL,
+            aplicando modelagem de dados, separação de responsabilidades
+            e boas práticas de desenvolvimento.
+          </p>
+
+          <ul>
+            <li>C# e .NET</li>
+            <li>APIs REST</li>
+            <li>SQL</li>
+          </ul>
+
+          <a href="/contato">
+            Vamos conversar
+
+            <ChevronRight
+              size={15}
+              strokeWidth={1.8}
+              aria-hidden="true"
+            />
+          </a>
+
         </article>
+
       </li>
+
     </ol>
+
   </div>
+
 </section>
