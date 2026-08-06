@@ -1,35 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getAboutData } from '../lib/supabase.js';
-import ContactFAQ from '../components/ContactFAQ.astro';
+import { siteConfig } from '../data/site';
 
-const aboutData = await getAboutData();
-
-// Dados padrão caso não haja dados no Supabase
-const defaultData = {
-	socialLinks: {
-		city: 'Patrocínio, MG'
-	}
-};
-
-// Usar dados do Supabase ou dados padrão
-const data = aboutData || defaultData;
 ---
 
 <Layout 
 	title="Contato - Thiago Dias" 
-	description="Entre em contato com Thiago Dias para projetos de desenvolvimento web, consultoria em ERP Sankhya, análise de dados com Power BI e soluções full stack."
+	description="Entre em contato com Thiago Dias para oportunidades Backend C#/.NET, sistemas corporativos, APIs REST, SQL e ERP Sankhya."
 	keywords={[
 		'contato thiago dias',
 		'contratar desenvolvedor',
-		'freelancer full stack',
-		'consultoria ERP Sankhya',
-		'desenvolvimento web sob medida',
-		'análise de dados',
-		'dashboard Power BI',
-		'projetos JavaScript',
-		'desenvolvimento React',
-		'orçamento projeto web',
+		'desenvolvedor backend c# .net',
+		'asp.net core',
+		'api rest',
+		'sql server',
+		'erp sankhya',
+		'regras de negócio',
 		'contato desenvolvedor'
 	]}
 	type="website"
@@ -53,7 +39,7 @@ const data = aboutData || defaultData;
 				<!-- Contact Form -->
 				<div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700/50">
 					<h2 class="text-2xl font-bold text-white mb-6">Envie uma Mensagem</h2>
-					<form id="contact-form" class="space-y-6">
+	<form id="email-form" action={`mailto:${siteConfig.contact.email}`} method="post" enctype="text/plain" class="space-y-6">
 						<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
 							<div>
 								<label for="name" class="block text-sm font-medium text-gray-300 mb-2">Nome</label>
@@ -114,7 +100,7 @@ const data = aboutData || defaultData;
 						</button>
 					</form>
 
-					<div id="form-message" class="mt-4 p-4 rounded-lg hidden"></div>
+	<p class="text-sm text-gray-400">O envio abrirá seu aplicativo de e-mail com a mensagem preenchida.</p>
 				</div>
 
 				<!-- Contact Info -->
@@ -130,8 +116,8 @@ const data = aboutData || defaultData;
 								</div>
 								<div>
 									<h3 class="text-lg font-semibold text-white mb-1">Email</h3>
-									<a href="mailto:contato@thiagodias.dev" class="text-primary-400 hover:text-primary-300 transition-colors duration-200">
-										contato@thiagodias.dev
+									<a href={`mailto:${siteConfig.contact.email}`} class="text-primary-400 hover:text-primary-300 transition-colors duration-200">
+										{siteConfig.contact.email}
 									</a>
 									<p class="text-gray-400 text-sm mt-1">Resposta em até 24 horas</p>
 								</div>
@@ -144,9 +130,9 @@ const data = aboutData || defaultData;
 									</svg>
 								</div>
 								<div>
-									<h3 class="text-lg font-semibold text-white mb-1">Telefone</h3>
-									<a href={`tel:${data.socialLinks?.phone || '+55 (11) 99999-9999'}`} class="text-primary-400 hover:text-primary-300 transition-colors duration-200">
-										{data.socialLinks?.phone || '+55 (11) 99999-9999'}
+									<h3 class="text-lg font-semibold text-white mb-1">LinkedIn</h3>
+									<a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" class="text-primary-400 hover:text-primary-300 transition-colors duration-200">
+										linkedin.com/in/thiago-batista-dias
 									</a>
 									<p class="text-gray-400 text-sm mt-1">Disponível para contato</p>
 								</div>
@@ -160,7 +146,7 @@ const data = aboutData || defaultData;
 								</div>
 								<div>
 									<h3 class="text-lg font-semibold text-white mb-1">GitHub</h3>
-									<a href="https://github.com/ThiagoBDias" target="_blank" rel="noopener" class="text-primary-400 hover:text-primary-300 transition-colors duration-200">
+									<a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer" class="text-primary-400 hover:text-primary-300 transition-colors duration-200">
 										github.com/ThiagoBDias
 									</a>
 									<p class="text-gray-400 text-sm mt-1">Veja meus projetos open source</p>
@@ -176,7 +162,7 @@ const data = aboutData || defaultData;
 								</div>
 								<div>
 									<h3 class="text-lg font-semibold text-white mb-1">Localização</h3>
-									<p class="text-gray-300">{data.socialLinks?.city || 'Patrocínio, MG'} - Brasil</p>
+									<p class="text-gray-300">{siteConfig.contact.location} - Brasil</p>
 									<p class="text-gray-400 text-sm mt-1">Disponível para projetos remotos</p>
 								</div>
 							</div>
@@ -190,46 +176,16 @@ const data = aboutData || defaultData;
 							<h3 class="text-lg font-semibold text-white">Disponibilidade</h3>
 						</div>
 						<p class="text-gray-300 mb-2">
-							<strong>Atualmente disponível</strong> para novos projetos e oportunidades.
+							Aberto a conversar sobre <strong>oportunidades Backend C#/.NET</strong>.
 						</p>
 						<p class="text-gray-400 text-sm">
-							Tempo de resposta: 24-48 horas • Preferência por projetos de médio/longo prazo
+							Prefira e-mail ou LinkedIn para o primeiro contato.
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-
-	<!-- This FAQ section was removed to avoid duplication with the ContactFAQ component -->
-
-	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			const form = document.getElementById('contact-form') as HTMLFormElement;
-			const messageDiv = document.getElementById('form-message');
-
-			if (form && messageDiv) {
-				form.addEventListener('submit', function(e) {
-					e.preventDefault();
-
-					const formData = new FormData(form);
-					const data = Object.fromEntries(formData);
-
-					// Simulate form submission (replace with actual form handling)
-					messageDiv.className = 'mt-4 p-4 rounded-lg bg-green-900/20 border border-green-700/30 text-green-400';
-					messageDiv.textContent = 'Mensagem enviada com sucesso! Entrarei em contato em breve.';
-					messageDiv.classList.remove('hidden');
-
-					form.reset();
-
-					// Hide message after 5 seconds
-					setTimeout(() => {
-						messageDiv.classList.add('hidden');
-					}, 5000);
-				});
-			}
-		});
-	</script>
 
 	<!-- CTA Section -->
 	<section class="py-16 bg-gradient-to-br from-gray-900 via-gray-950 to-gray-900">
@@ -246,34 +202,6 @@ const data = aboutData || defaultData;
 		</div>
 	</section>
 	
-	<!-- FAQ Section com o componente ContactFAQ -->
-	<section class="py-20 bg-gray-900/50">
-		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-			<ContactFAQ />
-		</div>
-	</section>
 </Layout>
 
-<style>
-	/* Estilos principais já estão no Tailwind, essa seção foi simplificada */
-	@keyframes gradient {
-		0% { background-position: 0% 50%; }
-		50% { background-position: 100% 50%; }
-		100% { background-position: 0% 50%; }
-	}
-</style>
 
-<script>
-	// Adicionar feedback visual ao envio do formulário
-	document.addEventListener('DOMContentLoaded', function() {
-		const form = document.querySelector('.contact-form');
-		const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
-		
-		if (form && submitBtn) {
-			form.addEventListener('submit', function() {
-				submitBtn.textContent = 'Enviando...';
-				submitBtn.disabled = true;
-			});
-		}
-	});
-</script>

@@ -33,6 +33,11 @@
   social: {
     github: "https://github.com/ThiagoBDias",
     linkedin: "https://www.linkedin.com/in/thiago-batista-dias/"
+  },
+
+  contact: {
+    email: "thiagobatistadiasss@gmail.com",
+    location: "Patrocínio, MG"
   }
 } as const;
 
