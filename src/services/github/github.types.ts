@@ -17,6 +17,22 @@ export interface Repository {
   updated_at: string;
 }
 
+export interface GitHubProfileResponse {
+  login: string;
+  name: string | null;
+  avatar_url: string;
+  html_url: string;
+  public_repos: number;
+}
+
+export interface GitHubProfile {
+  login: string;
+  name: string | null;
+  avatarUrl: string | null;
+  profileUrl: string;
+  publicRepos: number | null;
+}
+
 export interface Language {
   name: string;
   bytes: number;
@@ -70,6 +86,7 @@ export interface TechnologyData {
 }
 
 export interface GitHubPortfolioData {
+  profile: GitHubProfile;
   projects: GitHubProject[];
   technologies: TechnologyData;
 }

@@ -1,0 +1,46 @@
+.github-section { position: relative; overflow: hidden; background: #090d15; color: #e8eef9; isolation: isolate; }
+.github-section::before { position: absolute; top: 2rem; right: -11rem; z-index: -1; width: 28rem; height: 28rem; border-radius: 50%; background: radial-gradient(circle, rgba(37, 99, 235, .13), transparent 68%); content: ''; pointer-events: none; }
+.github-section__header { display: flex; align-items: end; justify-content: space-between; gap: 2rem; max-width: 54rem; margin-bottom: 2.6rem; }
+.github-section__eyebrow { display: flex; align-items: center; gap: .55rem; margin: 0; color: #7ea8e8; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.github-section__eyebrow span { width: 1.65rem; height: 1px; background: #4b8df8; }
+.github-section__header h2 { max-width: 15ch; margin: 1rem 0 .75rem; color: #f8fafc; font-size: clamp(2.2rem, 4vw, 3.7rem); letter-spacing: -.055em; line-height: 1.04; }
+.github-section__header > div > p:not(.github-section__eyebrow) { max-width: 42rem; margin: 0; color: #9cabc0; font-size: .95rem; line-height: 1.7; }
+.github-section__source { flex: 0 0 auto; gap: .4rem; white-space: nowrap; }
+.github-overview { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(10rem, .7fr) minmax(0, 1.1fr); gap: 1rem; }
+.github-identity, .github-signal { display: flex; align-items: center; gap: 1rem; }
+.github-identity__avatar { display: grid; flex: 0 0 auto; width: 4rem; height: 4rem; overflow: hidden; place-items: center; border: 1px solid rgba(96, 165, 250, .35); border-radius: 1rem; background: #10213b; color: #bfdbfe; font-size: 1.05rem; font-weight: 750; }
+.github-identity__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.github-identity__label, .github-signal p { margin: 0 0 .25rem; color: #7ea8e8; font-size: .67rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+.github-identity h3, .github-signal strong { margin: 0; color: #edf4ff; font-size: 1rem; letter-spacing: -.02em; }
+.github-identity a, .github-repositories-heading > a, .github-repository-card__link { display: inline-flex; align-items: center; gap: .2rem; color: #bfdbfe; font-size: .78rem; font-weight: 650; text-decoration: none; }
+.github-identity a { margin-top: .25rem; }
+.github-identity a:hover, .github-repositories-heading > a:hover, .github-repository-card__link:hover { color: #fff; }
+.github-identity a:focus-visible, .github-repositories-heading > a:focus-visible, .github-repository-card__link:focus-visible { outline: 2px solid #93c5fd; outline-offset: 4px; }
+.github-stat { display: grid; min-height: 100%; place-items: center; padding: 1rem; }
+.github-stat p:first-child { font-size: clamp(2rem, 4vw, 3rem); }
+.github-signal__icon, .github-subsection-heading__icon, .github-repository-card__icon { display: grid; flex: 0 0 auto; width: 2.35rem; height: 2.35rem; place-items: center; border-radius: .65rem; background: rgba(37, 99, 235, .14); color: #a9caff; }
+.github-divider { margin: 2.4rem 0; }
+.github-technology-block { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1.35rem 0; }
+.github-subsection-heading { display: flex; align-items: center; gap: .8rem; }
+.github-subsection-heading h3, .github-repositories-heading h3 { margin: 0; color: #e8f0fc; font-size: 1.08rem; letter-spacing: -.025em; }
+.github-subsection-heading p { max-width: 40rem; margin: .25rem 0 0; color: #8495ac; font-size: .78rem; line-height: 1.55; }
+.github-technology-list { display: flex; flex: 0 1 30rem; flex-wrap: wrap; justify-content: flex-end; gap: .45rem; }
+.github-technology-list :global(span) { font-size: .72rem; }
+.github-repositories-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin: 2.5rem 0 1rem; }
+.github-repositories-heading h3 { margin-top: .7rem; font-size: clamp(1.4rem, 2.2vw, 1.8rem); }
+.github-repository-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.github-repository-card { min-width: 0; }
+.github-repository-card__surface { display: flex; height: 100%; flex-direction: column; padding: 1.25rem; }
+.github-repository-card__header { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.github-repository-card__featured { font-size: .64rem; }
+.github-repository-card h3 { margin: 1.1rem 0 .55rem; color: #eef4ff; font-size: 1rem; letter-spacing: -.025em; }
+.github-repository-card p { display: -webkit-box; overflow: hidden; margin: 0; color: #94a4ba; font-size: .82rem; line-height: 1.62; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+.github-repository-card__meta { display: flex; align-items: baseline; justify-content: space-between; gap: .75rem; padding: .8rem 0; margin-top: auto; border-bottom: 1px solid rgba(148, 163, 184, .12); color: #71829b; font-size: .69rem; }
+.github-repository-card__meta strong { color: #b9c9dd; font-size: .72rem; font-weight: 650; }
+.github-repository-card__technologies { display: flex; flex-wrap: wrap; gap: .35rem; min-height: 2rem; padding-top: .8rem; }
+.github-repository-card__technologies :global(span) { padding: .23rem .45rem; font-size: .64rem; }
+.github-repository-card__link { width: max-content; margin-top: 1rem; }
+.github-empty-state { display: flex; align-items: center; gap: .6rem; color: #a8b7ca; font-size: .85rem; }
+.github-section__footnote { margin: 1.35rem 0 0; color: #64748b; font-size: .7rem; line-height: 1.5; }
+@media (max-width: 900px) { .github-overview { grid-template-columns: minmax(0, 1.3fr) minmax(10rem, .7fr); }.github-signal { grid-column: span 2; }.github-repository-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .github-section__header, .github-technology-block { align-items: flex-start; flex-direction: column; }.github-section__source { margin-top: -.8rem; }.github-overview, .github-repository-grid { grid-template-columns: 1fr; }.github-signal { grid-column: auto; }.github-stat { min-height: 8rem; }.github-technology-list { justify-content: flex-start; }.github-repositories-heading { align-items: flex-start; flex-direction: column; }.github-section__header h2 { font-size: clamp(2.2rem, 12vw, 3.3rem); } }

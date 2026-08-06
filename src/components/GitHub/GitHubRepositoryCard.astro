@@ -1,0 +1,47 @@
+---
+import { ArrowUpRight, Code2 } from '@lucide/astro';
+import { Badge, Card, TechBadge } from '../ui';
+import type { GitHubProject } from '../../services/github/github.types';
+
+export interface Props {
+  project: GitHubProject;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="github-repository-card">
+  <Card hover={true} class="github-repository-card__surface">
+    <div class="github-repository-card__header">
+      <span class="github-repository-card__icon" aria-hidden="true"><Code2 size={18} strokeWidth={1.8} /></span>
+      {project.featured && <Badge variant="primary" class="github-repository-card__featured">Em destaque</Badge>}
+    </div>
+
+    <h3>{project.title}</h3>
+    <p>{project.description}</p>
+
+    <div class="github-repository-card__meta" aria-label={`Linguagem principal: ${project.language ?? 'não informada'}`}>
+      <span>Linguagem principal</span>
+      <strong>{project.language ?? 'Não informada'}</strong>
+    </div>
+
+    {project.technologies.length > 0 && (
+      <div class="github-repository-card__technologies" aria-label="Tecnologias do repositório">
+        {project.technologies.map((technology) => <TechBadge name={technology} />)}
+      </div>
+    )}
+
+    <a
+      class="github-repository-card__link"
+      href={project.githubLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Abrir repositório ${project.title} no GitHub`}
+      data-track="project_github"
+      data-project-id={project.id}
+      data-project-name={project.title}
+    >
+      Ver repositório <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
+    </a>
+  </Card>
+</article>

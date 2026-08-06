@@ -5,6 +5,7 @@ import {
   Factory,
   ServerCog
 } from '@lucide/astro';
+import { timeline } from '../../data/timeline';
 
 import './Experience.css';
 ---
@@ -33,130 +34,40 @@ import './Experience.css';
     </header>
 
     <ol class="timeline">
-
-      <!-- Operação -->
-      <li class="timeline-item">
-
-        <div class="timeline-marker">
-          <Factory
-            size={18}
-            strokeWidth={1.8}
-            aria-hidden="true"
-          />
-        </div>
-
-        <article class="timeline-card">
-
-          <div class="timeline-meta">
-            <span>Experiência atual</span>
-            <span>Operação e mineração</span>
+      {timeline.map((item, index) => (
+        <li class="timeline-item">
+          <div class="timeline-marker">
+            {index === 0 ? (
+              <Factory size={18} strokeWidth={1.8} aria-hidden="true" />
+            ) : index === 1 ? (
+              <ServerCog size={18} strokeWidth={1.8} aria-hidden="true" />
+            ) : (
+              <BriefcaseBusiness size={18} strokeWidth={1.8} aria-hidden="true" />
+            )}
           </div>
 
-          <h3>
-            Controle operacional e informação
-          </h3>
+          <article class:list={['timeline-card', { 'timeline-card-current': item.highlight }]}>
+            <div class="timeline-meta">
+              <span>{item.year}</span>
+              <span>{item.company}</span>
+            </div>
 
-          <p>
-            Atuação próxima à operação de equipamentos e processos
-            da mineração, acompanhando informações utilizadas no
-            controle e na tomada de decisão operacional.
-          </p>
+            <h3>{item.role}</h3>
+            <p>{item.description}</p>
 
-          <ul>
-            <li>Controle operacional</li>
-            <li>Equipamentos e processos</li>
-            <li>Qualidade da informação</li>
-          </ul>
+            <ul>
+              {item.skills.map((skill) => <li>{skill}</li>)}
+            </ul>
 
-        </article>
-
-      </li>
-
-      <!-- Tecnologia -->
-      <li class="timeline-item">
-
-        <div class="timeline-marker">
-          <ServerCog
-            size={18}
-            strokeWidth={1.8}
-            aria-hidden="true"
-          />
-        </div>
-
-        <article class="timeline-card">
-
-          <div class="timeline-meta">
-            <span>Experiência em tecnologia</span>
-            <span>TI e ERP Sankhya</span>
-          </div>
-
-          <h3>
-            Suporte, sistemas e regras de negócio
-          </h3>
-
-          <p>
-            Experiência com suporte de TI e sistemas corporativos,
-            incluindo ERP Sankhya, SQL e atendimento às necessidades
-            dos usuários e processos da empresa.
-          </p>
-
-          <ul>
-            <li>ERP Sankhya</li>
-            <li>SQL e dados</li>
-            <li>Suporte e usuários</li>
-          </ul>
-
-        </article>
-
-      </li>
-
-      <!-- Backend -->
-      <li class="timeline-item">
-
-        <div class="timeline-marker">
-          <BriefcaseBusiness
-            size={18}
-            strokeWidth={1.8}
-            aria-hidden="true"
-          />
-        </div>
-
-        <article class="timeline-card timeline-card-current">
-
-          <div class="timeline-meta">
-            <span>Direcionamento profissional</span>
-            <span>Backend C#/.NET</span>
-          </div>
-
-          <h3>
-            Desenvolvimento Backend
-          </h3>
-
-          <p>
-            Desenvolvimento de projetos com C#, .NET, APIs REST e SQL,
-            aplicando modelagem de dados, separação de responsabilidades
-            e boas práticas de desenvolvimento.
-          </p>
-
-          <ul>
-            <li>C# e .NET</li>
-            <li>APIs REST</li>
-            <li>SQL</li>
-          </ul>
-
-          <a href="/contato">
-            Vamos conversar
-
-            <ChevronRight
-              size={15}
-              strokeWidth={1.8}
-              aria-hidden="true"
-            />
-          </a>
-
-        </article>
-
-      </li>
+            {item.highlight && (
+              <a href="/contato">
+                Vamos conversar
+                <ChevronRight size={15} strokeWidth={1.8} aria-hidden="true" />
+              </a>
+            )}
+          </article>
+        </li>
+      ))}
 
     </ol>
 

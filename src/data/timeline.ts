@@ -60,6 +60,7 @@ export const timeline = [
       ".NET",
       "SQL Server",
       "Clean Architecture"
-    ]
+    ],
+    highlight: true
   }
 ];

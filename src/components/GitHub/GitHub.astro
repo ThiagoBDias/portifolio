@@ -1,5 +1,104 @@
 ---
-import RealtimeTechSection from '../RealtimeTechSection.astro';
+import { ArrowUpRight, Database, LaptopMinimalCheck, Radio, Server } from '@lucide/astro';
+import { Badge, Card, Container, Divider, Section, StatCard, TechBadge } from '../ui';
+import { getGitHubPortfolioData } from '../../services/github/github.service';
+import GitHubRepositoryCard from './GitHubRepositoryCard.astro';
+import './GitHub.css';
+
+const { profile, projects, technologies } = await getGitHubPortfolioData();
+const isRealtime = technologies.metadata.source === 'github_api_realtime';
+const selectedProjects = projects
+  .filter((project) => project.featured || project.language === 'C#' || project.category === 'Backend')
+  .sort((first, second) => {
+    const score = (project: typeof first) => (project.featured ? 4 : 0) + (project.language === 'C#' ? 3 : 0) + (project.category === 'Backend' ? 2 : 0);
+    return score(second) - score(first) || new Date(second.updatedAt).getTime() - new Date(first.updatedAt).getTime();
+  })
+  .slice(0, 3);
+const detectedTechnologies = Object.values(technologies.techsByCategory)
+  .flat()
+  .sort((first, second) => (first.category === 'backend' ? -1 : 0) - (second.category === 'backend' ? -1 : 0) || second.repos - first.repos)
+  .slice(0, 6);
+const profileName = profile.name ?? profile.login;
+const profileInitials = profileName.slice(0, 2).toUpperCase();
 ---
 
-<RealtimeTechSection />
+<Section id="github" class="github-section">
+  <Container size="lg">
+    <header class="github-section__header">
+      <div>
+        <p class="github-section__eyebrow"><span></span> Engenharia em código aberto</p>
+        <h2>GitHub como extensão da prática técnica.</h2>
+        <p>Repositórios e tecnologias identificados a partir da integração oficial do portfólio com o GitHub.</p>
+      </div>
+
+      <Badge variant={isRealtime ? 'primary' : 'default'} class="github-section__source">
+        <Radio size={13} strokeWidth={2} aria-hidden="true" />
+        {isRealtime ? 'Dados do GitHub' : 'Dados em fallback'}
+      </Badge>
+    </header>
+
+    <div class="github-overview">
+      <Card class="github-identity">
+        <div class="github-identity__avatar" aria-hidden="true">
+          {profile.avatarUrl ? <img src={profile.avatarUrl} alt="" width="64" height="64" loading="lazy" /> : profileInitials}
+        </div>
+        <div>
+          <p class="github-identity__label">Perfil GitHub</p>
+          <h3>{profileName}</h3>
+          <a href={profile.profileUrl} target="_blank" rel="noopener noreferrer" aria-label={`Abrir perfil de ${profile.login} no GitHub`}>
+            @{profile.login} <ArrowUpRight size={15} strokeWidth={1.8} aria-hidden="true" />
+          </a>
+        </div>
+      </Card>
+
+      {profile.publicRepos !== null && <StatCard value={String(profile.publicRepos)} label="repositórios públicos" class="github-stat" />}
+
+      <Card class="github-signal">
+        <span class="github-signal__icon" aria-hidden="true"><Server size={19} strokeWidth={1.8} /></span>
+        <div>
+          <p>Foco técnico</p>
+          <strong>Backend C#/.NET, APIs e dados</strong>
+        </div>
+      </Card>
+    </div>
+
+    <Divider class="github-divider" />
+
+    <div class="github-technology-block">
+      <div class="github-subsection-heading">
+        <span class="github-subsection-heading__icon" aria-hidden="true"><Database size={18} strokeWidth={1.8} /></span>
+        <div>
+          <h3>Tecnologias detectadas</h3>
+          <p>{isRealtime ? 'Leitura consolidada dos repositórios públicos elegíveis.' : 'A API está indisponível; a seção usa os dados de contingência existentes.'}</p>
+        </div>
+      </div>
+      {detectedTechnologies.length > 0 ? (
+        <div class="github-technology-list">
+          {detectedTechnologies.map((technology) => <TechBadge name={`${technology.name} · ${technology.repos} ${technology.repos === 1 ? 'repositório' : 'repositórios'}`} />)}
+        </div>
+      ) : <p class="github-empty-state">Nenhuma tecnologia pôde ser identificada nos dados disponíveis.</p>}
+    </div>
+
+    <div class="github-repositories-heading">
+      <div>
+        <p class="github-section__eyebrow"><span></span> Seleção técnica</p>
+        <h3>Repositórios relevantes</h3>
+      </div>
+      <a href={profile.profileUrl} target="_blank" rel="noopener noreferrer" aria-label="Ver todos os repositórios no GitHub">
+        Ver perfil completo <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
+      </a>
+    </div>
+
+    {selectedProjects.length > 0 ? (
+      <div class="github-repository-grid">
+        {selectedProjects.map((project) => <GitHubRepositoryCard project={project} />)}
+      </div>
+    ) : (
+      <Card class="github-empty-state"><LaptopMinimalCheck size={20} strokeWidth={1.8} aria-hidden="true" /> Ainda não há repositórios elegíveis para esta seleção.</Card>
+    )}
+
+    <p class="github-section__footnote">
+      {isRealtime ? 'Fonte: GitHub API, com cache local e em memória para reduzir chamadas.' : 'Fonte: dados de fallback do portfólio. A atualização automática será retomada quando o GitHub estiver disponível.'}
+    </p>
+  </Container>
+</Section>

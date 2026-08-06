@@ -9,7 +9,7 @@ export async function readGitHubCache(): Promise<GitHubPortfolioData | null> {
   try {
     const cached = JSON.parse(await readFile(cachePath, 'utf8')) as CachedGitHubData;
     const age = Date.now() - new Date(cached.savedAt).getTime();
-    return age >= 0 && age < GITHUB_CACHE_TTL_MS ? cached.data : null;
+    return age >= 0 && age < GITHUB_CACHE_TTL_MS && cached.data.profile ? cached.data : null;
   } catch {
     return null;
   }

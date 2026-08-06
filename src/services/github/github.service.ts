@@ -2,7 +2,7 @@ import { PORTFOLIO_CONFIG } from '../../lib/portfolio-config.js';
 import { getAllPublishedProjectsMock } from '../../lib/projects-data.js';
 import { readGitHubCache, writeGitHubCache } from './github.cache';
 import { GITHUB_API_BASE_URL, GITHUB_REPOSITORIES_LIMIT, TECHNOLOGY_DETAILS } from './github.constants';
-import type { GitHubPortfolioData, GitHubProject, Repository, Technology, TechnologyData } from './github.types';
+import type { GitHubPortfolioData, GitHubProfile, GitHubProfileResponse, GitHubProject, Repository, Technology, TechnologyData } from './github.types';
 
 let portfolioDataPromise: Promise<GitHubPortfolioData> | undefined;
 
@@ -57,21 +57,48 @@ function technologiesFrom(repositories: Repository[]): TechnologyData {
   return { techsByCategory: groups, metadata: { source: 'github_api_realtime', lastUpdated: new Date().toISOString(), totalTechs: stats.size } };
 }
 
+function profileFrom(profile: GitHubProfileResponse): GitHubProfile {
+  return {
+    login: profile.login,
+    name: profile.name,
+    avatarUrl: profile.avatar_url,
+    profileUrl: profile.html_url,
+    publicRepos: profile.public_repos
+  };
+}
+
+function fallbackProfile(username: string): GitHubProfile {
+  return {
+    login: username,
+    name: null,
+    avatarUrl: null,
+    profileUrl: `https://github.com/${username}`,
+    publicRepos: null
+  };
+}
+
 async function fetchPortfolioData(): Promise<GitHubPortfolioData> {
   const cached = await readGitHubCache();
   if (cached) { log('Dados carregados do cache'); return cached; }
+  const username = import.meta.env.GITHUB_USERNAME || PORTFOLIO_CONFIG.github.username;
   try {
-    const username = import.meta.env.GITHUB_USERNAME || PORTFOLIO_CONFIG.github.username;
-    const response = await fetch(`${GITHUB_API_BASE_URL}/users/${username}/repos?sort=updated&per_page=${GITHUB_REPOSITORIES_LIMIT}`, { headers: getHeaders() });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const [profileResponse, repositoriesResponse] = await Promise.all([
+      fetch(`${GITHUB_API_BASE_URL}/users/${username}`, { headers: getHeaders() }),
+      fetch(`${GITHUB_API_BASE_URL}/users/${username}/repos?sort=updated&per_page=${GITHUB_REPOSITORIES_LIMIT}`, { headers: getHeaders() })
+    ]);
+    if (!profileResponse.ok || !repositoriesResponse.ok) throw new Error(`HTTP ${profileResponse.status}/${repositoriesResponse.status}`);
     log('GitHub conectado');
-    const repositories = filterRepositories(await response.json() as Repository[]);
-    const data = { projects: repositories.map(projectFrom), technologies: technologiesFrom(repositories) };
+    const [profile, repositoryResponse] = await Promise.all([
+      profileResponse.json() as Promise<GitHubProfileResponse>,
+      repositoriesResponse.json() as Promise<Repository[]>
+    ]);
+    const repositories = filterRepositories(repositoryResponse);
+    const data = { profile: profileFrom(profile), projects: repositories.map(projectFrom), technologies: technologiesFrom(repositories) };
     await writeGitHubCache(data);
     return data;
   } catch {
     log('Utilizando fallback');
-    return { projects: getAllPublishedProjectsMock() as GitHubProject[], technologies: fallbackTechnologies };
+    return { profile: fallbackProfile(username), projects: getAllPublishedProjectsMock() as GitHubProject[], technologies: fallbackTechnologies };
   }
 }
 
