@@ -11,27 +11,7 @@ const categories = {
   devops: techsByCategory.devops?.slice(0, 5) || []
 };
 
-// Função para obter cor do nível de experiência
-function getExperienceColor(experience: string): string {
-  switch (experience) {
-    case 'expert': return '#10b981'; // verde
-    case 'advanced': return '#3b82f6'; // azul
-    case 'intermediate': return '#f59e0b'; // amarelo
-    case 'beginner': return '#ef4444'; // vermelho
-    default: return '#6b7280'; // cinza
-  }
-}
-
-// Função para obter emoji do nível
-function getExperienceEmoji(experience: string): string {
-  switch (experience) {
-    case 'expert': return '';
-    case 'advanced': return '';
-    case 'intermediate': return '';
-    case 'beginner': return '';
-    default: return '';
-  }
-}
+const isRealtime = metadata.source === 'github_api_realtime';
 ---
 
 <section class="py-20 bg-gradient-to-br from-slate-800 to-slate-900" id="technologies">
@@ -42,8 +22,7 @@ function getExperienceEmoji(experience: string): string {
         Tecnologias & Ferramentas
       </h2>
       <p class="text-gray-400 text-lg max-w-3xl mx-auto mb-6">
-        Stack técnico atualizado automaticamente baseado nos meus repositórios GitHub. 
-        Percentuais calculados com base em linhas de código e atividade recente.
+        Tecnologias detectadas nos repositórios públicos elegíveis. As barras indicam a proporção de repositórios em que cada linguagem é a principal.
       </p>
       
       <!-- Status da atualização -->
@@ -90,18 +69,10 @@ function getExperienceEmoji(experience: string): string {
                 <div class="flex items-center gap-2">
                   <span class="text-lg">{skill.icon}</span>
                   <span class="text-white font-medium">{skill.name}</span>
-                  {skill.experience && (
-                    <span 
-                      class="text-xs px-2 py-1 rounded-full text-white"
-                      style={`background-color: ${getExperienceColor(skill.experience)}40; border: 1px solid ${getExperienceColor(skill.experience)}`}
-                    >
-                      {getExperienceEmoji(skill.experience)} {skill.experience}
-                    </span>
-                  )}
                 </div>
-                <span class="text-gray-400 text-sm font-mono">{skill.percentage}%</span>
+                {isRealtime && <span class="text-gray-400 text-sm font-mono">{skill.percentage}%</span>}
               </div>
-              <div class="w-full bg-slate-700/50 rounded-full h-2.5 overflow-hidden">
+              {isRealtime && <div class="w-full bg-slate-700/50 rounded-full h-2.5 overflow-hidden">
                 <div 
                   class="h-full rounded-full transition-all duration-1000 ease-out skill-bar group-hover/skill:shadow-lg"
                   style={`
@@ -113,8 +84,8 @@ function getExperienceEmoji(experience: string): string {
                   data-delay={index * 150}
                   data-color={skill.color}
                 ></div>
-              </div>
-              {skill.repos && (
+              </div>}
+              {isRealtime && skill.repos && (
                 <div class="text-xs text-gray-500 mt-1">
                   📦 {skill.repos} {skill.repos === 1 ? 'repositório' : 'repositórios'}
                 </div>
@@ -145,18 +116,10 @@ function getExperienceEmoji(experience: string): string {
                 <div class="flex items-center gap-2">
                   <span class="text-lg">{skill.icon}</span>
                   <span class="text-white font-medium">{skill.name}</span>
-                  {skill.experience && (
-                    <span 
-                      class="text-xs px-2 py-1 rounded-full text-white"
-                      style={`background-color: ${getExperienceColor(skill.experience)}40; border: 1px solid ${getExperienceColor(skill.experience)}`}
-                    >
-                      {getExperienceEmoji(skill.experience)} {skill.experience}
-                    </span>
-                  )}
                 </div>
-                <span class="text-gray-400 text-sm font-mono">{skill.percentage}%</span>
+                {isRealtime && <span class="text-gray-400 text-sm font-mono">{skill.percentage}%</span>}
               </div>
-              <div class="w-full bg-slate-700/50 rounded-full h-2.5 overflow-hidden">
+              {isRealtime && <div class="w-full bg-slate-700/50 rounded-full h-2.5 overflow-hidden">
                 <div 
                   class="h-full rounded-full transition-all duration-1000 ease-out skill-bar group-hover/skill:shadow-lg"
                   style={`
@@ -168,8 +131,8 @@ function getExperienceEmoji(experience: string): string {
                   data-delay={(index + 5) * 150}
                   data-color={skill.color}
                 ></div>
-              </div>
-              {skill.repos && (
+              </div>}
+              {isRealtime && skill.repos && (
                 <div class="text-xs text-gray-500 mt-1">
                   📦 {skill.repos} {skill.repos === 1 ? 'repositório' : 'repositórios'}
                 </div>
@@ -200,18 +163,10 @@ function getExperienceEmoji(experience: string): string {
                 <div class="flex items-center gap-2">
                   <span class="text-lg">{skill.icon}</span>
                   <span class="text-white font-medium">{skill.name}</span>
-                  {skill.experience && (
-                    <span 
-                      class="text-xs px-2 py-1 rounded-full text-white"
-                      style={`background-color: ${getExperienceColor(skill.experience)}40; border: 1px solid ${getExperienceColor(skill.experience)}`}
-                    >
-                      {getExperienceEmoji(skill.experience)} {skill.experience}
-                    </span>
-                  )}
                 </div>
-                <span class="text-gray-400 text-sm font-mono">{skill.percentage}%</span>
+                {isRealtime && <span class="text-gray-400 text-sm font-mono">{skill.percentage}%</span>}
               </div>
-              <div class="w-full bg-slate-700/50 rounded-full h-2.5 overflow-hidden">
+              {isRealtime && <div class="w-full bg-slate-700/50 rounded-full h-2.5 overflow-hidden">
                 <div 
                   class="h-full rounded-full transition-all duration-1000 ease-out skill-bar group-hover/skill:shadow-lg"
                   style={`
@@ -223,8 +178,8 @@ function getExperienceEmoji(experience: string): string {
                   data-delay={(index + 10) * 150}
                   data-color={skill.color}
                 ></div>
-              </div>
-              {skill.repos && (
+              </div>}
+              {isRealtime && skill.repos && (
                 <div class="text-xs text-gray-500 mt-1">
                   📦 {skill.repos} {skill.repos === 1 ? 'repositório' : 'repositórios'}
                 </div>

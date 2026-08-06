@@ -6,7 +6,7 @@
   title: "Thiago Dias | Desenvolvedor Backend C#/.NET",
 
   description:
-    "Desenvolvedor Backend com foco em C#, .NET, APIs REST e SQL, aplicando boas práticas de arquitetura para construir soluções confiáveis.",
+    "Desenvolvedor Backend C#/.NET com foco em ASP.NET Core, APIs REST, SQL e arquitetura limpa para construir soluções confiáveis.",
 
   author: "Thiago Dias",
 
@@ -25,7 +25,9 @@
     "SQL",
     "SQL Server",
     "Entity Framework Core",
-    "Sankhya ERP"
+    "Clean Architecture",
+    "ERP Sankhya",
+    "Regras de negócio"
   ],
 
   social: {
